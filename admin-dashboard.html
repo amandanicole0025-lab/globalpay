@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>GlobalPay Admin Dashboard</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h2>🌍 GlobalPay</h2>
+
+<p>Admin Panel</p>
+
+</div>
+
+<ul>
+
+<li class="active">
+
+<i class="fa fa-home"></i>
+
+Dashboard
+
+</li>
+
+<li onclick="location.href='create-receipt.html'">
+
+<i class="fa fa-file-invoice"></i>
+
+Create Receipt
+
+</li>
+
+<li onclick="location.href='customer_database.html'">
+
+<i class="fa fa-database"></i>
+
+Customer Database
+
+</li>
+
+<li>
+
+<i class="fa fa-list"></i>
+
+All Receipts
+
+</li>
+
+<li>
+
+<i class="fa fa-user"></i>
+
+Profile
+
+</li>
+
+<li id="logoutBtn">
+
+<i class="fa fa-right-from-bracket"></i>
+
+Logout
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<header>
+
+<div>
+
+<h1>Dashboard</h1>
+
+<p>Welcome back, Administrator</p>
+
+</div>
+
+<button onclick="location.href='create-receipt.html'">
+
+<i class="fa fa-plus"></i>
+
+New Receipt
+
+</button>
+
+</header>
+
+<div class="cards">
+
+<div class="card green">
+
+<h2 id="totalReceipts">
+
+0
+
+</h2>
+
+<p>Total Receipts</p>
+
+</div>
+
+<div class="card blue">
+
+<h2 id="pendingReceipts">
+
+0
+
+</h2>
+
+<p>Pending</p>
+
+</div>
+
+<div class="card orange">
+
+<h2 id="completedReceipts">
+
+0
+
+</h2>
+
+<p>Completed</p>
+
+</div>
+
+<div class="card red">
+
+<h2 id="cancelledReceipts">
+
+0
+
+</h2>
+
+<p>Cancelled</p>
+
+</div>
+
+</div>
+
+<div class="tableCard">
+
+<div class="tableHeader">
+
+<h2>Recent Receipts</h2>
+
+<input
+type="text"
+id="search"
+placeholder="Search tracking code...">
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Tracking</th>
+
+<th>Receiver</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="receiptTable">
+
+<tr>
+
+<td colspan="6">
+
+No receipts yet
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script type="module" src="js/admin.js"></script>
+
+</body>
+
+</html>

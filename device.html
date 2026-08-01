@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noones — Confirm sign in</title>
+<style>
+  :root{
+    --bg: #1c1c1c;
+    --card: #2a2a2a;
+    --card-border: rgba(255,255,255,0.06);
+    --green: #3ecf7e;
+    --green-dim: #2f9e63;
+    --text-primary: #f2f2f2;
+    --text-secondary: #9a9a9a;
+    --text-muted: #6f6f6f;
+    --btn-bg: #3a3a3a;
+    --btn-bg-disabled: #333333;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+  }
+
+  .phone {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px 6px;
+    font-size: 13px;
+    color: #f2f2f2;
+  }
+  .status-left { font-weight: 600; }
+  .status-right { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .status-right svg { display:block; }
+  .battery {
+    display:flex;
+    align-items:center;
+    gap:2px;
+    background:#c98a2c;
+    padding:1px 4px;
+    border-radius:3px;
+    font-size:10px;
+    font-weight:700;
+    color:#1c1c1c;
+  }
+
+  /* Address bar */
+  .address-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px 16px;
+  }
+  .home-icon {
+    color: #d8d8d8;
+    flex-shrink: 0;
+  }
+  .url-pill {
+    flex: 1;
+    background: #3a3a3a;
+    border-radius: 20px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d8d8d8;
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .url-pill svg { flex-shrink: 0; opacity: 0.8; }
+  .browser-icons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #d8d8d8;
+    flex-shrink: 0;
+  }
+  .tab-count {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid #d8d8d8;
+    border-radius: 5px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  /* Content */
+  .content {
+    flex: 1;
+    padding: 28px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--green);
+    margin: 20px 0 36px;
+    letter-spacing: -1px;
+    position: relative;
+    user-select: none;
+  }
+
+  .card {
+    width: 100%;
+    background: var(--card);
+    border-radius: 20px;
+    padding: 32px 24px 28px;
+    text-align: center;
+  }
+
+  .card h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 18px;
+    color: var(--text-primary);
+  }
+
+  .card p.desc {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 6px;
+  }
+
+  .card .email {
+    font-weight: 700;
+    color: #d0d0d0;
+  }
+
+  .device-illustration {
+    margin: 28px auto;
+    width: 160px;
+    height: 100px;
+    position: relative;
+    opacity: 0.5;
+  }
+  .device-illustration .laptop {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 90px;
+    height: 65px;
+    background: #4a4a4a;
+    border-radius: 6px;
+  }
+  .device-illustration .laptop::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    bottom: -8px;
+    height: 8px;
+    background: #454545;
+    border-radius: 3px;
+  }
+  .device-illustration .tablet {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 55px;
+    height: 70px;
+    background: #3a3a3a;
+    border-radius: 6px;
+  }
+  .device-illustration .phone-shape {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 32px;
+    height: 48px;
+    background: #444;
+    border-radius: 5px;
+  }
+
+  .not-recognized {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #d8d8d8;
+    margin: 8px 0 24px;
+  }
+
+  .btn {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 17px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 14px;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+
+  .btn-disabled {
+    background: var(--btn-bg-disabled);
+    color: var(--text-muted);
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background: var(--btn-bg);
+    color: #ececec;
+  }
+  .btn-secondary:hover { background: #444; }
+
+  .cancel-link {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--green);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  .cancel-link:hover { color: var(--green-dim); }
+
+  /* Footer */
+  .footer {
+    margin-top: 28px;
+    padding: 0 20px 24px;
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .theme-toggle svg { color: var(--green); }
+
+  .switch {
+    width: 46px;
+    height: 26px;
+    background: var(--green);
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+  .switch .knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: left 0.2s ease;
+  }
+  .switch.dark .knob { left: 23px; }
+
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--green);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .home-indicator {
+    width: 130px;
+    height: 5px;
+    background: #6f6f6f;
+    border-radius: 3px;
+    margin: 0 auto 10px;
+  }
+
+  @media (max-width: 380px) {
+    .card { padding: 26px 18px 22px; }
+    .logo { font-size: 34px; }
+  }
+</style>
+
+<style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
+</head>
+<body>
+<div class="phone">
+
+  <div class="content" style="padding-top: 60px;">
+    <div class="logo">no<span style="position:relative;">o<span style="position:absolute;top:-14px;left:6px;font-size:16px;">°</span></span>nes</div>
+
+    <div class="card">
+      <h1>New device detected</h1>
+      <p class="desc">Confirm this is your device from the email we just sent to</p>
+      <p class="email" id="userEmail">Loading...</p>
+
+      <div class="device-illustration">
+<svg width="170" height="110" viewBox="0 0 170 110">
+<rect x="20" y="20" width="90" height="55" fill="#202020"/><rect x="27" y="27" width="70" height="41" fill="#444"/><rect x="62" y="27" width="35" height="41" fill="#3a3a3a"/><rect x="55" y="75" width="12" height="10" fill="#202020"/><rect x="45" y="84" width="32" height="6" fill="#202020"/>
+<rect x="90" y="40" width="40" height="55" fill="#222"/><rect x="96" y="46" width="28" height="43" fill="#3d3d3d"/>
+<rect x="125" y="66" width="35" height="24" fill="#202020"/><rect x="130" y="71" width="24" height="14" fill="#3b3b3b"/>
+</svg></div>
+
+      <p class="not-recognized">We don't recognize this device</p>
+
+      <button class="btn btn-disabled" id="resendBtn" disabled>Resend email (<span id="timer">23</span> sec.)</button>
+      <button class="btn btn-secondary">Try another way</button>
+      <button class="cancel-link">Cancel signing in</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="theme-toggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.5"/></svg>
+      <button class="switch" id="themeSwitch"><div class="knob"></div></button>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+    <div class="lang">English <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg></div>
+  </div>
+
+  <div class="home-indicator"></div>
+
+</div>
+
+<script>
+  // Countdown timer for resend button
+  let seconds = 23;
+  const timerEl = document.getElementById('timer');
+  const resendBtn = document.getElementById('resendBtn');
+  const interval = setInterval(() => {
+    seconds--;
+    if (seconds <= 0) {
+      clearInterval(interval);
+      resendBtn.disabled = false;
+      resendBtn.textContent = "Continue";
+      resendBtn.style.background = "var(--green)";
+      resendBtn.style.color = "#fff";
+      resendBtn.classList.remove("btn-disabled");
+      resendBtn.onclick = function() {
+          window.location.href = "verification-link.html";
+      };
+    } else {
+      timerEl.textContent = seconds;
+    }
+  }, 1000);
+
+  const savedEmail=localStorage.getItem("loginEmail");
+if(savedEmail&&savedEmail.trim()!==""){document.getElementById("userEmail").textContent=savedEmail;}else{document.getElementById("userEmail").textContent="No email provided";}
+
+  // Theme toggle
+  document.getElementById('themeSwitch').addEventListener('click', function() {
+    this.classList.toggle('dark');
+  });
+</script>
+
+</body>
+</html>

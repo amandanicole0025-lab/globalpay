@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Payment Receipt</title>
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Arial,Helvetica,sans-serif;
+
+}
+
+body{
+
+background:#f4f1df;
+
+padding:20px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+min-height:100vh;
+
+}
+
+.card{
+
+width:100%;
+
+max-width:560px;
+
+background:#f8f2de;
+
+border-radius:15px;
+
+padding:24px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+text-align:center;
+
+font-size:34px;
+
+margin-bottom:5px;
+
+}
+
+h1{
+
+text-align:center;
+
+color:#11834b;
+
+font-size:34px;
+
+margin-bottom:20px;
+
+}
+
+.track{
+
+text-align:center;
+
+font-size:22px;
+
+font-weight:bold;
+
+margin-bottom:25px;
+
+word-break:break-all;
+
+}
+
+.section{
+
+margin-top:20px;
+
+}
+
+.section h2{
+
+color:#11834b;
+
+font-size:23px;
+
+padding-bottom:8px;
+
+border-bottom:2px solid #d7eadf;
+
+margin-bottom:10px;
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:13px 0;
+
+border-bottom:1px solid #e8ddc2;
+
+font-size:20px;
+
+gap:20px;
+
+}
+
+.row span:last-child{
+
+font-weight:bold;
+
+text-align:right;
+
+word-break:break-word;
+
+}
+
+.status{
+
+padding:5px 14px;
+
+border-radius:30px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+.note{
+
+margin-top:25px;
+
+background:#fff1bf;
+
+border:1px solid #efd88a;
+
+border-radius:12px;
+
+padding:18px;
+
+font-size:18px;
+
+line-height:1.6;
+
+color:#7b5b00;
+
+}
+
+.buttons{
+
+margin-top:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+button{
+
+padding:16px;
+
+border:none;
+
+border-radius:10px;
+
+font-size:20px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#acceptBtn{
+
+background:#00a651;
+
+color:white;
+
+}
+
+#printBtn{
+
+background:#333;
+
+color:white;
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+@media(max-width:600px){
+
+.card{
+
+padding:18px;
+
+}
+
+.row{
+
+font-size:17px;
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.row span:last-child{
+
+text-align:left;
+
+}
+
+h1{
+
+font-size:28px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">
+
+🧾
+
+</div>
+
+<h1>PAYMENT RECEIPT</h1>
+
+<div class="track">
+
+Tracking #:
+<span id="tracking">Loading...</span>
+
+</div>
+<div class="section">
+
+<h2>Transaction Details</h2>
+
+<div class="row">
+
+<span>Amount</span>
+
+<span id="amount">Loading...</span>
+
+</div>
+
+<div class="row">
+
+<span>Method</span>
+
+<span id="method">Loading...</span>
+
+</div>
+
+<div class="row">
+
+<span>Status</span>
+
+<span id="status" class="status">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span>Date</span>
+
+<span id="date">Loading...</span>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Receiver's Information</h2>
+
+<div class="row">
+
+<span>Name</span>
+
+<span id="receiver">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span>Account Number</span>
+
+<span id="account">
+
+Loading...
+
+</span>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Reference</h2>
+
+<div class="row">
+
+<span>Transaction ID</span>
+
+<span id="txid">
+
+Loading...
+
+</span>
+
+</div>
+
+</div>
+
+<div class="note">
+
+<b>Action Required:</b>
+
+<br><br>
+
+<span id="action">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="buttons">
+
+<button id="acceptBtn">
+
+✅ Accept Payment
+
+</button>
+
+<button id="printBtn">
+
+🖨 Print Receipt
+
+</button>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+
+collection,
+
+query,
+
+where,
+
+getDocs
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const trackingCode=new URLSearchParams(window.location.search).get("tracking");
+
+if(!trackingCode){
+
+document.body.innerHTML="<h2 style='text-align:center;margin-top:60px'>No Tracking Code Provided</h2>";
+
+throw new Error("Tracking code missing");
+
+}
+
+const q=query(
+
+collection(db,"receipts"),
+
+where("trackingCode","==",trackingCode)
+
+);
+
+const snap=await getDocs(q);
+
+if(snap.empty){
+
+document.body.innerHTML="<h2 style='text-align:center;margin-top:60px'>Receipt Not Found</h2>";
+
+throw new Error("Receipt not found");
+
+}
+
+const receipt=snap.docs[0].data();
+// ---------- Populate Receipt ----------
+
+document.getElementById("tracking").textContent =
+receipt.trackingCode || "-";
+
+document.getElementById("amount").textContent =
+(receipt.currency || "") + " " +
+Number(receipt.amount || 0).toLocaleString();
+
+document.getElementById("method").textContent =
+receipt.paymentMethod || "-";
+
+document.getElementById("receiver").textContent =
+receipt.receiverName || "-";
+
+document.getElementById("account").textContent =
+receipt.accountNumber || "-";
+
+document.getElementById("txid").textContent =
+receipt.transactionID || "-";
+
+document.getElementById("action").textContent =
+receipt.actionText ||
+"No action required.";
+
+if(receipt.createdAt){
+
+document.getElementById("date").textContent =
+receipt.createdAt
+.toDate()
+.toLocaleString();
+
+}else{
+
+document.getElementById("date").textContent="-";
+
+}
+
+// ---------- Status Badge ----------
+
+const status=document.getElementById("status");
+
+status.textContent=receipt.status || "Unknown";
+
+switch(receipt.status){
+
+case "Payment Completed":
+
+status.style.background="#16a34a";
+
+break;
+
+case "Payment Pending":
+
+status.style.background="#d18b00";
+
+break;
+
+case "Payment Cancelled":
+
+status.style.background="#dc2626";
+
+break;
+
+default:
+
+status.style.background="#6b7280";
+
+}
+
+status.style.color="#fff";
+
+// ---------- Accept Payment ----------
+
+document
+.getElementById("acceptBtn")
+.addEventListener("click",()=>{
+
+if(receipt.buttonLink){
+
+window.location.href=receipt.buttonLink;
+
+}else{
+
+alert("No payment link has been configured.");
+
+}
+
+});
+
+// ---------- Print Receipt ----------
+
+document
+.getElementById("printBtn")
+.addEventListener("click",()=>{
+
+window.print();
+
+});
+
+// ---------- Print Styling ----------
+
+const printStyle=document.createElement("style");
+
+printStyle.textContent=`
+
+@media print{
+
+body{
+
+background:#fff;
+
+padding:0;
+
+}
+
+.card{
+
+box-shadow:none;
+
+border-radius:0;
+
+max-width:100%;
+
+}
+
+.buttons{
+
+display:none;
+
+}
+
+}
+
+`;
+
+document.head.appendChild(printStyle);
+
+</script>
+
+</body>
+
+</html>

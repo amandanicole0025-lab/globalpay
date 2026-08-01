@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Create Receipt</title>
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Arial,Helvetica,sans-serif;
+
+}
+
+body{
+
+background:#eef2f7;
+
+padding:30px;
+
+}
+
+.container{
+
+display:grid;
+
+grid-template-columns:1fr 420px;
+
+gap:30px;
+
+max-width:1400px;
+
+margin:auto;
+
+}
+
+.card{
+
+background:#fff;
+
+border-radius:12px;
+
+padding:25px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+
+}
+
+h1{
+
+margin-bottom:20px;
+
+color:#0f8a43;
+
+}
+
+label{
+
+display:block;
+
+margin-top:18px;
+
+margin-bottom:8px;
+
+font-weight:bold;
+
+}
+
+input,select,textarea{
+
+width:100%;
+
+padding:12px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:15px;
+
+}
+
+textarea{
+
+height:90px;
+
+resize:none;
+
+}
+
+button{
+
+margin-top:25px;
+
+width:100%;
+
+padding:15px;
+
+background:#0f8a43;
+
+color:white;
+
+border:none;
+
+border-radius:8px;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#0c6d35;
+
+}
+
+.preview{
+
+background:#fafafa;
+
+border-radius:10px;
+
+padding:20px;
+
+border:1px solid #ddd;
+
+}
+
+.preview h2{
+
+margin-bottom:15px;
+
+color:#0f8a43;
+
+}
+
+.preview table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+.preview td{
+
+padding:10px;
+
+border-bottom:1px solid #eee;
+
+}
+
+.title{
+
+font-weight:bold;
+
+width:160px;
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Create Receipt</h1>
+
+<label>Amount</label>
+
+<input
+type="number"
+id="amount"
+placeholder="Enter Amount">
+
+<label>Currency</label>
+
+<select id="currency">
+
+<option value="USD">USD</option>
+
+<option value="EUR">EUR</option>
+
+<option value="GBP">GBP</option>
+
+<option value="KES">KES</option>
+
+</select>
+
+<label>Payment Method</label>
+
+<select id="paymentMethod">
+
+<option>Bank Transfer</option>
+
+<option>Debit Card</option>
+
+<option>Credit Card</option>
+
+<option>Crypto</option>
+
+<option>Mobile Money</option>
+
+</select>
+
+<label>Status</label>
+
+<select id="status">
+
+<option>Payment Pending</option>
+
+<option>Payment Completed</option>
+
+<option>Payment Cancelled</option>
+
+</select>
+
+<label>Receiver Name</label>
+
+<input
+id="receiverName"
+type="text">
+
+<label>Account Number</label>
+
+<input
+id="accountNumber"
+type="text">
+<label>Action Required</label>
+
+<textarea
+id="actionText"
+placeholder="Example: Complete identity verification before payment can be released."></textarea>
+
+<label>Button Destination</label>
+
+<input
+type="text"
+id="buttonLink"
+placeholder="Example: splash.html">
+
+<button id="saveReceipt">
+
+Generate Receipt
+
+</button>
+
+</div>
+
+<!-- Preview Panel -->
+
+<div class="card">
+
+<div class="preview">
+
+<h2>Receipt Preview</h2>
+
+<table>
+
+<tr>
+
+<td class="title">Amount</td>
+
+<td id="pAmount">USD 0.00</td>
+
+</tr>
+
+<tr>
+
+<td class="title">Payment Method</td>
+
+<td id="pMethod">Bank Transfer</td>
+
+</tr>
+
+<tr>
+
+<td class="title">Status</td>
+
+<td id="pStatus">Payment Pending</td>
+
+</tr>
+
+<tr>
+
+<td class="title">Receiver</td>
+
+<td id="pReceiver">Receiver Name</td>
+
+</tr>
+
+<tr>
+
+<td class="title">Account Number</td>
+
+<td id="pAccount">0000000000</td>
+
+</tr>
+
+<tr>
+
+<td class="title">Action Required</td>
+
+<td id="pAction">
+
+Complete verification before payment can be released.
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module" src="js/receipt.js"></script>
+
+<script>
+
+const amount=document.getElementById("amount");
+const currency=document.getElementById("currency");
+const paymentMethod=document.getElementById("paymentMethod");
+const status=document.getElementById("status");
+const receiverName=document.getElementById("receiverName");
+const accountNumber=document.getElementById("accountNumber");
+const actionText=document.getElementById("actionText");
+
+function updatePreview(){
+
+document.getElementById("pAmount").textContent=
+currency.value+" "+(amount.value||"0.00");
+
+document.getElementById("pMethod").textContent=
+paymentMethod.value;
+
+document.getElementById("pStatus").textContent=
+status.value;
+
+document.getElementById("pReceiver").textContent=
+receiverName.value||"Receiver Name";
+
+document.getElementById("pAccount").textContent=
+accountNumber.value||"0000000000";
+
+document.getElementById("pAction").textContent=
+actionText.value||
+"Complete verification before payment can be released.";
+
+}
+
+amount.addEventListener("input",updatePreview);
+
+currency.addEventListener("change",updatePreview);
+
+paymentMethod.addEventListener("change",updatePreview);
+
+status.addEventListener("change",updatePreview);
+
+receiverName.addEventListener("input",updatePreview);
+
+accountNumber.addEventListener("input",updatePreview);
+
+actionText.addEventListener("input",updatePreview);
+
+updatePreview();
+// ---------- Form Validation ----------
+
+const saveBtn = document.getElementById("saveReceipt");
+
+saveBtn.addEventListener("click", function(e){
+
+if(amount.value.trim()==""){
+
+alert("Please enter the amount.");
+
+e.preventDefault();
+
+return;
+
+}
+
+if(receiverName.value.trim()==""){
+
+alert("Please enter the receiver name.");
+
+e.preventDefault();
+
+return;
+
+}
+
+if(accountNumber.value.trim()==""){
+
+alert("Please enter the account number.");
+
+e.preventDefault();
+
+return;
+
+}
+
+saveBtn.disabled=true;
+
+saveBtn.innerHTML="Generating Receipt...";
+
+});
+
+// ---------- Auto Preview Refresh ----------
+
+window.addEventListener("load",updatePreview);
+
+// ---------- Restore Button if Save Fails ----------
+
+window.addEventListener("error",function(){
+
+saveBtn.disabled=false;
+
+saveBtn.innerHTML="Generate Receipt";
+
+});
+
+// ---------- Keyboard Shortcut ----------
+
+document.addEventListener("keydown",function(e){
+
+if(e.ctrlKey && e.key==="Enter"){
+
+e.preventDefault();
+
+saveBtn.click();
+
+}
+
+});
+
+// ---------- Close ----------
+
+</script>
+
+</body>
+
+</html>

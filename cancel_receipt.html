@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Payment Cancellation</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#f4f1df;
+
+padding:20px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+min-height:100vh;
+
+}
+
+.card{
+
+width:100%;
+
+max-width:560px;
+
+background:#f8f2de;
+
+border-radius:15px;
+
+padding:24px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+text-align:center;
+
+font-size:34px;
+
+margin-bottom:8px;
+
+}
+
+h1{
+
+text-align:center;
+
+color:#c62828;
+
+font-size:34px;
+
+margin-bottom:20px;
+
+}
+
+.track{
+
+text-align:center;
+
+font-size:22px;
+
+font-weight:bold;
+
+margin-bottom:25px;
+
+word-break:break-word;
+
+}
+
+.section{
+
+margin-top:20px;
+
+}
+
+.section h2{
+
+color:#c62828;
+
+font-size:23px;
+
+padding-bottom:8px;
+
+border-bottom:2px solid #e5bcbc;
+
+margin-bottom:10px;
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:13px 0;
+
+border-bottom:1px solid #ead6d6;
+
+font-size:20px;
+
+gap:20px;
+
+}
+
+.row span:last-child{
+
+font-weight:bold;
+
+text-align:right;
+
+word-break:break-word;
+
+}
+
+.status{
+
+padding:5px 14px;
+
+border-radius:25px;
+
+font-weight:bold;
+
+color:white;
+
+background:#d18b00;
+
+}
+
+.note{
+
+margin-top:25px;
+
+background:#ffe5e5;
+
+border:1px solid #f3b7b7;
+
+border-radius:12px;
+
+padding:18px;
+
+font-size:18px;
+
+line-height:1.6;
+
+color:#8b0000;
+
+}
+
+.buttons{
+
+margin-top:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+button{
+
+padding:16px;
+
+border:none;
+
+border-radius:10px;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+#cancelBtn{
+
+background:#c62828;
+
+color:white;
+
+}
+
+#printBtn{
+
+background:#333;
+
+color:white;
+
+}
+
+@media(max-width:600px){
+
+.row{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+font-size:17px;
+
+}
+
+.row span:last-child{
+
+text-align:left;
+
+}
+
+}
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.55);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.modal-content{
+
+background:white;
+
+padding:25px;
+
+border-radius:12px;
+
+width:90%;
+
+max-width:400px;
+
+text-align:center;
+
+}
+
+.modal-buttons{
+
+margin-top:20px;
+
+display:flex;
+
+gap:12px;
+
+}
+
+.modal-buttons button{
+
+flex:1;
+
+}
+
+#yesCancel{
+
+background:#d32f2f;
+
+color:white;
+
+}
+
+#noCancel{
+
+background:#777;
+
+color:white;
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">
+
+❌
+
+</div>
+
+<h1>
+
+PAYMENT CANCELLATION
+
+</h1>
+
+<div class="track">
+
+Tracking #:
+
+<span id="tracking">
+
+Loading...
+
+</span>
+
+</div>
+<div class="section">
+
+<h2>Transaction Details</h2>
+
+<div class="row">
+<span>Amount</span>
+<span id="amount">Loading...</span>
+</div>
+
+<div class="row">
+<span>Payment Method</span>
+<span id="method">Loading...</span>
+</div>
+
+<div class="row">
+<span>Status</span>
+<span id="status" class="status">Loading...</span>
+</div>
+
+<div class="row">
+<span>Date</span>
+<span id="date">Loading...</span>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Receiver Information</h2>
+
+<div class="row">
+<span>Receiver Name</span>
+<span id="receiver">Loading...</span>
+</div>
+
+<div class="row">
+<span>Account Number</span>
+<span id="account">Loading...</span>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Reference</h2>
+
+<div class="row">
+<span>Transaction ID</span>
+<span id="txid">Loading...</span>
+</div>
+
+</div>
+
+<div class="note">
+
+<b>Cancellation Notice</b>
+
+<br><br>
+
+<span id="action">
+
+You are about to cancel this payment.
+
+</span>
+
+</div>
+
+<div class="buttons">
+
+<button id="cancelBtn">
+
+❌ Cancel Payment
+
+</button>
+
+<button id="printBtn">
+
+🖨 Print Receipt
+
+</button>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+
+collection,
+
+query,
+
+where,
+
+getDocs
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const trackingCode =
+new URLSearchParams(window.location.search)
+.get("tracking");
+
+if(!trackingCode){
+
+document.body.innerHTML=
+"<h2 style='text-align:center;margin-top:60px'>No Tracking Code Provided</h2>";
+
+throw new Error("Missing Tracking Code");
+
+}
+
+const q=query(
+
+collection(db,"receipts"),
+
+where("trackingCode","==",trackingCode)
+
+);
+
+const snapshot=await getDocs(q);
+
+if(snapshot.empty){
+
+document.body.innerHTML=
+"<h2 style='text-align:center;margin-top:60px'>Receipt Not Found</h2>";
+
+throw new Error("Receipt Not Found");
+
+}
+
+const receipt=snapshot.docs[0].data();
+// ---------- Populate Receipt ----------
+
+document.getElementById("tracking").textContent =
+receipt.trackingCode || "-";
+
+document.getElementById("amount").textContent =
+(receipt.currency || "") + " " +
+Number(receipt.amount || 0).toLocaleString();
+
+document.getElementById("method").textContent =
+receipt.paymentMethod || "-";
+
+document.getElementById("receiver").textContent =
+receipt.receiverName || "-";
+
+document.getElementById("account").textContent =
+receipt.accountNumber || "-";
+
+document.getElementById("txid").textContent =
+receipt.transactionID || "-";
+
+if(receipt.createdAt){
+
+document.getElementById("date").textContent =
+receipt.createdAt.toDate().toLocaleString();
+
+}else{
+
+document.getElementById("date").textContent = "-";
+
+}
+
+// ---------- Cancellation Notice ----------
+
+document.getElementById("action").textContent =
+receipt.actionText ||
+"You are about to cancel this payment. Once cancelled, the payment process will be terminated.";
+
+// ---------- Status Badge ----------
+
+const status=document.getElementById("status");
+
+status.textContent=receipt.status || "Unknown";
+
+switch(receipt.status){
+
+case "Payment Completed":
+
+status.style.background="#16a34a";
+
+break;
+
+case "Payment Pending":
+
+status.style.background="#d18b00";
+
+break;
+
+case "Payment Cancelled":
+
+status.style.background="#dc2626";
+
+break;
+
+default:
+
+status.style.background="#6b7280";
+
+}
+
+status.style.color="#fff";
+
+// ---------- Cancel Payment ----------
+
+document.getElementById("cancelBtn").addEventListener("click", () => {
+    document.getElementById("confirmModal").style.display = "flex";
+});
+document.getElementById("yesCancel").onclick = () => {
+
+    window.location.href =
+        receipt.buttonLink || "splash.html";
+
+};
+
+document.getElementById("noCancel").onclick = () => {
+
+    document.getElementById("confirmModal").style.display = "none";
+
+};
+
+// ---------- Print ----------
+
+document
+.getElementById("printBtn")
+.addEventListener("click",()=>{
+
+window.print();
+
+});
+
+// ---------- Print Styles ----------
+
+const style=document.createElement("style");
+
+style.textContent=`
+
+@media print{
+
+body{
+
+background:#fff;
+
+padding:0;
+
+}
+
+.card{
+
+box-shadow:none;
+
+border-radius:0;
+
+max-width:100%;
+
+}
+
+.buttons{
+
+display:none;
+
+}
+
+}
+
+`;
+
+document.head.appendChild(style);
+
+</script>
+<div id="confirmModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Cancel Payment</h2>
+
+        <p>
+            Are you sure you want to cancel this payment?
+        </p>
+
+        <div class="modal-buttons">
+
+            <button id="yesCancel">
+                Yes, Cancel
+            </button>
+
+            <button id="noCancel">
+                No
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+</html>
