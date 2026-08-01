@@ -6,7 +6,7 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// ---------- ADMIN LOGIN ----------
+// ---------------- ADMIN LOGIN ----------------
 
 const loginBtn = document.getElementById("loginBtn");
 
@@ -22,7 +22,7 @@ if (loginBtn) {
 
         if (!email || !password) {
 
-            error.textContent = "Enter email and password.";
+            error.textContent = "Please enter your email and password.";
             return;
 
         }
@@ -43,16 +43,14 @@ if (loginBtn) {
 
 }
 
-// ---------- PAGE PROTECTION ----------
+// ---------------- PROTECT ADMIN PAGES ----------------
 
 const protectedPages = [
-
     "admin-dashboard.html",
     "create-receipt.html",
     "customer_database.html",
     "all-receipts.html",
     "profile.html"
-
 ];
 
 const currentPage = window.location.pathname.split("/").pop();
@@ -63,7 +61,7 @@ if (protectedPages.includes(currentPage)) {
 
         if (!user) {
 
-            window.location.replace("admin-login.html");
+            window.location.href = "admin-login.html";
 
         }
 
@@ -71,12 +69,23 @@ if (protectedPages.includes(currentPage)) {
 
 }
 
-// ---------- LOGOUT ----------
+// ---------------- LOGOUT ----------------
 
-window.adminLogout = async function () {
+async function adminLogout() {
 
-    await signOut(auth);
+    try {
 
-    window.location.replace("admin-login.html");
+        await signOut(auth);
 
-};
+    } catch (error) {
+
+        console.error("Logout Error:", error);
+
+    }
+
+    window.location.href = "admin-login.html";
+
+}
+
+// Make available to onclick=""
+window.adminLogout = adminLogout;
