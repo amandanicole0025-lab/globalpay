@@ -9,12 +9,28 @@ body{font-family:Arial,sans-serif;background:#f4f7fb;display:flex;justify-conten
 .card{background:#fff;padding:30px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.12);width:380px}
 input,button{width:100%;padding:12px;margin-top:12px}
 button{background:#11834b;color:#fff;border:none;border-radius:8px;cursor:pointer}
+  #errorMessage{
+
+margin-top:10px;
+
+color:#dc2626;
+
+font-size:14px;
+
+font-weight:600;
+
+text-align:center;
+
+display:none;
+
+}
 </style>
 </head>
 <body>
 <div class="card">
 <h2>Track Your Payment</h2>
 <input id="trackingCode" placeholder="Enter Tracking Code">
+  <div id="errorMessage"></div>
 <button id="trackBtn">Track Payment</button>
 </div>
 <script type="module" src="js/tracking.js"></script>
