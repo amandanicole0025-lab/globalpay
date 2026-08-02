@@ -8,54 +8,72 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const btn = document.getElementById("trackBtn");
+const input = document.getElementById("trackingCode");
+const error = document.getElementById("errorMessage");
 
-btn.addEventListener("click", async () => {
+btn.addEventListener("click", searchReceipt);
+input.addEventListener("keydown", e => {
+    if (e.key === "Enter") searchReceipt();
+});
 
-    const trackingCode = document
-        .getElementById("trackingCode")
-        .value
-        .trim();
+async function searchReceipt(){
 
-    if (!trackingCode) {
+    error.style.display="none";
+    error.textContent="";
 
-        alert("Please enter a tracking code.");
+    const trackingCode=input.value.trim();
 
+    if(!trackingCode){
+
+        error.textContent="Please enter a tracking code.";
+        error.style.display="block";
         return;
 
     }
 
-    try {
+    btn.disabled=true;
+    btn.textContent="Searching...";
 
-        const q = query(
+    try{
 
-            collection(db, "receipts"),
+        const q=query(
 
-            where("trackingCode", "==", trackingCode)
+            collection(db,"receipts"),
+
+            where("trackingCode","==",trackingCode)
 
         );
 
-        const snapshot = await getDocs(q);
+        const snapshot=await getDocs(q);
 
-        if (snapshot.empty) {
+        if(snapshot.empty){
 
-            alert("Tracking code not found.");
+            btn.disabled=false;
+            btn.textContent="Track Payment";
+
+            error.textContent="Tracking code not found.";
+            error.style.display="block";
 
             return;
 
         }
 
-        window.location.href =
-            "payment_receipt_style.html?tracking=" +
-            encodeURIComponent(trackingCode);
+        window.location.href=
+        "payment_receipt_style.html?tracking="+
+        encodeURIComponent(trackingCode);
 
     }
 
-    catch (error) {
+    catch(err){
 
-        console.error(error);
+        console.error(err);
 
-        alert(error.message);
+        btn.disabled=false;
+        btn.textContent="Track Payment";
+
+        error.textContent="Unable to search right now. Please try again.";
+        error.style.display="block";
 
     }
 
-});
+}
