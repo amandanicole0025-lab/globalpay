@@ -6,7 +6,7 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// ---------------- ADMIN LOGIN ----------------
+// ---------------- LOGIN ----------------
 
 const loginBtn = document.getElementById("loginBtn");
 
@@ -18,24 +18,17 @@ if (loginBtn) {
         const password = document.getElementById("password").value;
         const error = document.getElementById("error");
 
-        error.textContent = "";
-
-        if (!email || !password) {
-
-            error.textContent = "Please enter your email and password.";
-            return;
-
-        }
+        if (error) error.textContent = "";
 
         try {
 
             await signInWithEmailAndPassword(auth, email, password);
 
-            window.location.href = "admin-dashboard.html";
+            window.location.replace("admin-dashboard.html");
 
-        } catch (e) {
+        } catch (err) {
 
-            error.textContent = e.message;
+            if (error) error.textContent = err.message;
 
         }
 
@@ -47,9 +40,12 @@ if (loginBtn) {
 
 const protectedPages = [
     "admin-dashboard.html",
-    "create-receipt.html",
+    "create_receipt.html",
     "customer_database.html",
-    "all-receipts.html",
+    "payment_receipt_style.html",
+    "cancel_receipt.html",
+    "cancel_tracking.html",
+    "all_receipts.html",
     "profile.html"
 ];
 
@@ -61,7 +57,7 @@ if (protectedPages.includes(currentPage)) {
 
         if (!user) {
 
-            window.location.href = "admin-login.html";
+            window.location.replace("admin-login.html");
 
         }
 
@@ -77,15 +73,14 @@ async function adminLogout() {
 
         await signOut(auth);
 
-    } catch (error) {
+    } catch (e) {
 
-        console.error("Logout Error:", error);
+        console.error(e);
 
     }
 
-    window.location.href = "admin-login.html";
+    window.location.replace("admin-login.html");
 
 }
 
-// Make available to onclick=""
 window.adminLogout = adminLogout;
