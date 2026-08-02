@@ -6,19 +6,23 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// ---------------- LOGIN ----------------
+// ================= ADMIN LOGIN =================
 
 const loginBtn = document.getElementById("loginBtn");
 
 if (loginBtn) {
-
     loginBtn.addEventListener("click", async () => {
 
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
         const error = document.getElementById("error");
 
-        if (error) error.textContent = "";
+        error.textContent = "";
+
+        if (!email || !password) {
+            error.textContent = "Please enter your email and password.";
+            return;
+        }
 
         try {
 
@@ -26,46 +30,64 @@ if (loginBtn) {
 
             window.location.replace("admin-dashboard.html");
 
-        } catch (err) {
+        } catch (e) {
 
-            if (error) error.textContent = err.message;
+            error.textContent = e.message;
 
         }
 
     });
-
 }
 
-// ---------------- PROTECT ADMIN PAGES ----------------
+
+// ================= PAGE PROTECTION =================
+
+// Hide page until authentication check finishes
+document.documentElement.style.visibility = "hidden";
 
 const protectedPages = [
+    "admin-dashboard",
     "admin-dashboard.html",
+    "create_receipt",
     "create_receipt.html",
+    "customer_database",
     "customer_database.html",
-    "payment_receipt_style.html",
-    "cancel_receipt.html",
-    "cancel_tracking.html",
-    "all_receipts.html",
+    "all-receipts",
+    "all-receipts.html",
+    "profile",
     "profile.html"
 ];
 
-const currentPage = window.location.pathname.split("/").pop();
+const currentPage = window.location.pathname.toLowerCase();
 
-if (protectedPages.includes(currentPage)) {
+const requiresLogin = protectedPages.some(page =>
+    currentPage.endsWith(page)
+);
+
+if (requiresLogin) {
 
     onAuthStateChanged(auth, (user) => {
 
         if (!user) {
 
             window.location.replace("admin-login.html");
+            return;
 
         }
 
+        // Authenticated
+        document.documentElement.style.visibility = "visible";
+
     });
+
+} else {
+
+    document.documentElement.style.visibility = "visible";
 
 }
 
-// ---------------- LOGOUT ----------------
+
+// ================= LOGOUT =================
 
 async function adminLogout() {
 
@@ -73,9 +95,9 @@ async function adminLogout() {
 
         await signOut(auth);
 
-    } catch (e) {
+    } catch (error) {
 
-        console.error(e);
+        console.error("Logout Error:", error);
 
     }
 
