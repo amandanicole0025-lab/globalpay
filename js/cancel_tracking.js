@@ -8,54 +8,80 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const button = document.getElementById("cancelTrackBtn");
+const input = document.getElementById("trackingCode");
+const error = document.getElementById("errorMessage");
 
-button.addEventListener("click", async () => {
+button.addEventListener("click", searchReceipt);
 
-    const trackingCode = document
-        .getElementById("trackingCode")
-        .value
-        .trim();
+input.addEventListener("keydown",(e)=>{
 
-    if (!trackingCode) {
+    if(e.key==="Enter"){
 
-        alert("Please enter a tracking code.");
+        searchReceipt();
+
+    }
+
+});
+
+async function searchReceipt(){
+
+    error.style.display="none";
+    error.textContent="";
+
+    const trackingCode=input.value.trim();
+
+    if(!trackingCode){
+
+        error.textContent="Please enter a tracking code.";
+        error.style.display="block";
 
         return;
 
     }
 
-    try {
+    button.disabled=true;
+    button.textContent="Searching...";
 
-        const q = query(
+    try{
 
-            collection(db, "receipts"),
+        const q=query(
 
-            where("trackingCode", "==", trackingCode)
+            collection(db,"receipts"),
+
+            where("trackingCode","==",trackingCode)
 
         );
 
-        const snapshot = await getDocs(q);
+        const snapshot=await getDocs(q);
 
-        if (snapshot.empty) {
+        if(snapshot.empty){
 
-            alert("Tracking code not found.");
+            button.disabled=false;
+            button.textContent="Search Payment";
+
+            error.textContent="Tracking code not found.";
+            error.style.display="block";
 
             return;
 
         }
 
-        window.location.href =
-            "cancel_receipt.html?tracking=" +
-            encodeURIComponent(trackingCode);
+        window.location.href=
+        "cancel_receipt.html?tracking="+
+        encodeURIComponent(trackingCode);
 
     }
 
-    catch (error) {
+    catch(err){
 
-        console.error(error);
+        console.error(err);
 
-        alert("Error: " + error.message);
+        button.disabled=false;
+        button.textContent="Search Payment";
+
+        error.textContent="Unable to search right now. Please try again.";
+        error.style.display="block";
 
     }
 
-});
+}
