@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Payment Accepted | Noones</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+background:#f3f6fa;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+padding:30px;
+
+color:#1f2937;
+
+}
+
+/* ==========================
+CONTAINER
+========================== */
+
+.container{
+
+width:100%;
+
+max-width:760px;
+
+}
+
+/* ==========================
+CARD
+========================== */
+
+.card{
+
+background:#fff;
+
+border-radius:22px;
+
+overflow:hidden;
+
+box-shadow:
+
+0 18px 45px rgba(0,0,0,.08);
+
+}
+
+/* ==========================
+HEADER
+========================== */
+
+.header{
+
+background:linear-gradient(135deg,#16a34a,#0b7d43);
+
+padding:45px 30px;
+
+text-align:center;
+
+color:#fff;
+
+}
+
+.logo{
+
+font-size:42px;
+
+font-weight:800;
+
+letter-spacing:-1px;
+
+margin-bottom:18px;
+
+}
+
+.check{
+
+width:90px;
+
+height:90px;
+
+margin:auto;
+
+background:white;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+margin-bottom:20px;
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.check svg{
+
+width:48px;
+
+height:48px;
+
+stroke:#16a34a;
+
+stroke-width:4;
+
+fill:none;
+
+}
+
+.header h1{
+
+font-size:34px;
+
+font-weight:800;
+
+margin-bottom:12px;
+
+}
+
+.header p{
+
+font-size:16px;
+
+opacity:.95;
+
+line-height:1.7;
+
+}
+
+/* ==========================
+BODY
+========================== */
+
+.content{
+
+padding:35px;
+
+}
+
+/* ==========================
+SUCCESS ALERT
+========================== */
+
+.success{
+
+background:#ecfdf3;
+
+border:1px solid #16a34a;
+
+border-left:6px solid #16a34a;
+
+border-radius:14px;
+
+padding:18px;
+
+margin-bottom:30px;
+
+}
+
+.success strong{
+
+display:block;
+
+font-size:18px;
+
+color:#047857;
+
+margin-bottom:8px;
+
+}
+
+.success span{
+
+color:#065f46;
+
+line-height:1.7;
+
+}
+
+/* ==========================
+RECEIPT
+========================== */
+
+.receipt{
+
+border:1px solid #e5e7eb;
+
+border-radius:16px;
+
+overflow:hidden;
+
+}
+
+.receipt-title{
+
+background:#f8fafc;
+
+padding:18px 22px;
+
+font-size:20px;
+
+font-weight:800;
+
+color:#0b7d43;
+
+border-bottom:1px solid #e5e7eb;
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+padding:18px 22px;
+
+border-bottom:1px solid #edf2f7;
+
+gap:20px;
+
+}
+
+.row:last-child{
+
+border-bottom:none;
+
+}
+
+.label{
+
+font-weight:600;
+
+color:#6b7280;
+
+}
+
+.value{
+
+font-weight:700;
+
+text-align:right;
+
+word-break:break-word;
+
+}
+
+/* ==========================
+FOOTER
+========================== */
+
+.footer{
+
+padding:28px;
+
+text-align:center;
+
+font-size:13px;
+
+color:#9ca3af;
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+body{
+
+padding:14px;
+
+}
+
+.content{
+
+padding:20px;
+
+}
+
+.header{
+
+padding:35px 20px;
+
+}
+
+.logo{
+
+font-size:34px;
+
+}
+
+.header h1{
+
+font-size:28px;
+
+}
+
+.row{
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.value{
+
+text-align:left;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+    <!-- ==========================
+    HEADER
+    ========================== -->
+
+    <div class="header">
+
+        <div class="logo">
+            noones.
+        </div>
+
+        <div class="check">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M5 13l4 4L19 7"></path>
+
+            </svg>
+
+        </div>
+
+        <h1>Device Verified Successfully</h1>
+
+        <p>
+
+            Your device has been successfully verified and your payment has been accepted.
+
+        </p>
+
+    </div>
+
+
+    <!-- ==========================
+    CONTENT
+    ========================== -->
+
+    <div class="content">
+
+        <div class="success">
+
+            <strong>
+
+                Payment Accepted Successfully
+
+            </strong>
+
+            <span>
+
+                Your transaction has been successfully verified and processed.
+                Below are your payment details.
+
+            </span>
+
+        </div>
+
+
+        <!-- ==========================
+        RECEIPT
+        ========================== -->
+
+        <div class="receipt">
+
+            <div class="receipt-title">
+
+                Payment Receipt
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Amount
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="amount">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Receiver
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="receiver">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Payment Method
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="method">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Status
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="status">
+
+                    Payment Accepted
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Tracking Code
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="tracking">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Transaction ID
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="transaction">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="label">
+
+                    Date
+
+                </div>
+
+                <div
+
+                class="value"
+
+                id="date">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================
+    FOOTER
+    ========================== -->
+
+    <div class="footer">
+
+        © 2026 Noones. All rights reserved.
+
+    </div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+/* =====================================
+FIREBASE
+===================================== */
+
+import { db }
+
+from "./js/firebase.js";
+
+import {
+
+collection,
+
+query,
+
+where,
+
+getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================
+GET TRACKING CODE
+===================================== */
+
+const trackingCode =
+localStorage.getItem("trackingCode");
+/* =====================================
+LOAD RECEIPT
+===================================== */
+
+if(!trackingCode){
+
+document.body.innerHTML=`
+
+<div style="padding:60px;text-align:center;font-family:Inter,sans-serif;">
+
+<h2>Receipt Not Found</h2>
+
+<p>No tracking code was supplied.</p>
+
+</div>
+
+`;
+
+throw new Error("Missing tracking code");
+
+}
+
+
+/* =====================================
+GET RECEIPT FROM FIRESTORE
+===================================== */
+
+const q=query(
+
+collection(db,"receipts"),
+
+where("trackingCode","==",trackingCode)
+
+);
+
+const snapshot=await getDocs(q);
+
+
+if(snapshot.empty){
+
+document.body.innerHTML=`
+
+<div style="padding:60px;text-align:center;font-family:Inter,sans-serif;">
+
+<h2>Receipt Not Found</h2>
+
+<p>The payment receipt could not be located.</p>
+
+</div>
+
+`;
+
+throw new Error("Receipt not found");
+
+}
+
+
+/* =====================================
+RECEIPT DATA
+===================================== */
+
+const receipt=
+
+snapshot.docs[0].data();
+
+
+/* =====================================
+FORMAT DATE
+===================================== */
+
+let paymentDate="";
+
+if(receipt.transactionDate){
+
+paymentDate=
+
+new Date(
+
+receipt.transactionDate
+
+).toLocaleString();
+
+}else{
+
+paymentDate=
+
+new Date().toLocaleString();
+
+}
+
+
+/* =====================================
+POPULATE RECEIPT
+===================================== */
+
+document.getElementById("amount").textContent=
+
+`${receipt.currency} ${Number(receipt.amount).toLocaleString()}`;
+
+document.getElementById("receiver").textContent=
+
+receipt.receiverName || "-";
+
+document.getElementById("method").textContent=
+
+receipt.paymentMethod || "-";
+
+document.getElementById("tracking").textContent=
+
+receipt.trackingCode || "-";
+
+document.getElementById("transaction").textContent=
+
+receipt.transactionID || "-";
+
+document.getElementById("date").textContent=
+
+paymentDate;
+
+
+/* =====================================
+STATUS
+===================================== */
+
+const statusElement=
+
+document.getElementById("status");
+
+statusElement.textContent=
+
+receipt.status || "Payment Accepted";
+
+if(
+
+receipt.status &&
+
+receipt.status.toLowerCase().includes("completed")
+
+){
+
+statusElement.style.color="#16a34a";
+
+statusElement.style.fontWeight="800";
+
+}
+/* =====================================
+SUCCESS ANIMATION
+===================================== */
+
+const card = document.querySelector(".card");
+
+card.animate(
+
+[
+{transform:"scale(.96)",opacity:.5},
+
+{transform:"scale(1)",opacity:1}
+
+],
+
+{
+
+duration:600,
+
+easing:"ease-out"
+
+}
+
+);
+
+
+/* =====================================
+BUTTONS
+===================================== */
+
+const buttonArea=document.createElement("div");
+
+buttonArea.style.marginTop="35px";
+
+buttonArea.style.display="grid";
+
+buttonArea.style.gridTemplateColumns="1fr 1fr";
+
+buttonArea.style.gap="15px";
+
+
+const downloadBtn=document.createElement("button");
+
+downloadBtn.innerHTML="Download Receipt";
+
+downloadBtn.style.padding="15px";
+
+downloadBtn.style.border="none";
+
+downloadBtn.style.borderRadius="12px";
+
+downloadBtn.style.background="#16a34a";
+
+downloadBtn.style.color="#fff";
+
+downloadBtn.style.fontWeight="700";
+
+downloadBtn.style.cursor="pointer";
+
+
+downloadBtn.onclick=()=>{
+
+window.print();
+
+};
+
+
+const homeBtn=document.createElement("button");
+
+homeBtn.innerHTML="Return Home";
+
+homeBtn.style.padding="15px";
+
+homeBtn.style.border="none";
+
+homeBtn.style.borderRadius="12px";
+
+homeBtn.style.background="#1f2937";
+
+homeBtn.style.color="#fff";
+
+homeBtn.style.fontWeight="700";
+
+homeBtn.style.cursor="pointer";
+
+
+homeBtn.onclick=()=>{
+
+window.location.href="index.html";
+
+};
+
+
+buttonArea.appendChild(downloadBtn);
+
+buttonArea.appendChild(homeBtn);
+
+document.querySelector(".content").appendChild(buttonArea);
+
+
+/* =====================================
+MOBILE BUTTONS
+===================================== */
+
+if(window.innerWidth<700){
+
+buttonArea.style.gridTemplateColumns="1fr";
+
+}
+
+
+/* =====================================
+PRINT TITLE
+===================================== */
+
+document.title=
+
+"Payment Receipt - "+receipt.trackingCode;
+
+
+/* =====================================
+AUTO SCROLL TOP
+===================================== */
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+</script>
+
+</body>
+
+</html>
