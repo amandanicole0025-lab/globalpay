@@ -58,9 +58,18 @@ async function searchReceipt(){
 
         }
 
-        window.location.href=
-        "payment_receipt_style.html?tracking="+
-        encodeURIComponent(trackingCode);
+        /* Save tracking code for later pages */
+
+localStorage.setItem(
+    "trackingCode",
+    trackingCode
+);
+
+/* Go to receipt */
+
+window.location.href =
+"payment_receipt_style.html?tracking=" +
+encodeURIComponent(trackingCode);
 
     }
 
