@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>GlobalPay | Create Receipt</title>
 
-<title>Create Receipt | GlobalPay Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -22,148 +25,94 @@ font-family:'Inter',sans-serif;
 }
 
 body{
-
-background:#eef3f7;
-
-color:#1f2937;
-
+background:#eef3f8;
 padding:30px;
-
-min-height:100vh;
-
+color:#1f2937;
 }
-
-/* ==========================
-CONTAINER
-========================== */
 
 .container{
-
-max-width:1450px;
-
+max-width:1100px;
 margin:auto;
-
-display:grid;
-
-grid-template-columns:
-
-1.15fr .85fr;
-
-gap:30px;
-
-align-items:start;
-
 }
-
-/* ==========================
-CARDS
-========================== */
 
 .card{
-
-background:white;
-
-border-radius:22px;
-
-padding:30px;
-
-box-shadow:
-
-0 15px 40px rgba(0,0,0,.08);
-
+background:#fff;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 20px 50px rgba(0,0,0,.08);
 }
-
-/* ==========================
-HEADER
-========================== */
 
 .header{
-
-margin-bottom:28px;
-
+background:linear-gradient(135deg,#16a34a,#0b7d43);
+color:#fff;
+padding:35px;
+text-align:center;
 }
 
-.header h1{
-
-font-size:30px;
-
+.logo{
+font-size:38px;
 font-weight:800;
-
-color:#0b7d43;
-
-margin-bottom:8px;
-
 }
 
-.header span{
-
-color:#6b7280;
-
-font-size:15px;
-
+.subtitle{
+margin-top:10px;
+font-size:18px;
 }
 
-/* ==========================
-GRID
-========================== */
+.sponsor{
+display:inline-block;
+margin-top:15px;
+padding:8px 18px;
+border-radius:30px;
+background:rgba(255,255,255,.18);
+font-size:13px;
+font-weight:600;
+}
+
+.content{
+padding:35px;
+}
+
+.section-title{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:20px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.section-title i{
+color:#16a34a;
+}
 
 .grid{
-
 display:grid;
-
-grid-template-columns:
-
-repeat(2,minmax(0,1fr));
-
-gap:22px;
-
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-bottom:20px;
 }
 
-.full{
-
-grid-column:1/-1;
-
+.form-group{
+display:flex;
+flex-direction:column;
 }
-
-/* ==========================
-LABEL
-========================== */
 
 label{
-
-display:block;
-
 margin-bottom:8px;
-
-font-weight:700;
-
-font-size:14px;
-
-color:#374151;
-
+font-weight:600;
 }
-
-/* ==========================
-INPUTS
-========================== */
 
 input,
 select,
 textarea{
 
 width:100%;
-
-padding:15px;
-
+padding:14px;
 border:1px solid #d1d5db;
-
 border-radius:12px;
-
 font-size:15px;
-
-transition:.25s;
-
-background:white;
+outline:none;
 
 }
 
@@ -171,251 +120,46 @@ input:focus,
 select:focus,
 textarea:focus{
 
-outline:none;
-
-border-color:#0b7d43;
-
-box-shadow:
-
-0 0 0 3px rgba(11,125,67,.12);
+border-color:#16a34a;
 
 }
 
 textarea{
 
 resize:vertical;
-
-min-height:110px;
-
-}
-
-/* ==========================
-SEARCHABLE DROPDOWN
-========================== */
-
-.search-select{
-
-position:relative;
+min-height:120px;
 
 }
 
-.dropdown{
+.actions{
 
-position:absolute;
-
-left:0;
-
-right:0;
-
-top:100%;
-
-background:white;
-
-border:1px solid #ddd;
-
-border-radius:12px;
-
-max-height:240px;
-
-overflow-y:auto;
-
-display:none;
-
-z-index:500;
-
-box-shadow:
-
-0 10px 25px rgba(0,0,0,.08);
+display:flex;
+gap:15px;
+margin-top:30px;
 
 }
-
-.dropdown div{
-
-padding:13px 15px;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-.dropdown div:hover{
-
-background:#eef8f1;
-
-}
-
-/* ==========================
-BUTTON
-========================== */
 
 button{
 
-width:100%;
-
+padding:15px 24px;
 border:none;
-
-padding:17px;
-
 border-radius:12px;
-
-background:#11a857;
-
-color:white;
-
-font-size:16px;
-
 font-weight:700;
-
+font-size:15px;
 cursor:pointer;
 
-transition:.25s;
+}
+
+.primary{
+
+background:#16a34a;
+color:white;
 
 }
 
-button:hover{
+.secondary{
 
-background:#0b7d43;
-
-transform:translateY(-2px);
-
-}
-
-/* ==========================
-ERROR
-========================== */
-
-.error{
-
-display:none;
-
-margin-top:6px;
-
-color:#dc2626;
-
-font-size:13px;
-
-font-weight:600;
-
-}
-
-/* ==========================
-SUCCESS
-========================== */
-
-.success{
-
-display:none;
-
-margin-top:20px;
-
-padding:15px;
-
-border-radius:12px;
-
-background:#ecfdf3;
-
-border:1px solid #10b981;
-
-color:#047857;
-
-font-weight:700;
-
-}
-
-/* ==========================
-PREVIEW PANEL
-========================== */
-
-.preview{
-
-position:sticky;
-
-top:25px;
-
-}
-
-.preview-card{
-
-background:white;
-
-border-radius:22px;
-
-padding:30px;
-
-box-shadow:
-
-0 15px 40px rgba(0,0,0,.08);
-
-}
-
-.preview-card h2{
-
-margin-bottom:25px;
-
-font-size:24px;
-
-color:#0b7d43;
-
-font-weight:800;
-
-}
-
-.preview-row{
-
-display:flex;
-
-justify-content:space-between;
-
-gap:20px;
-
-padding:16px 0;
-
-border-bottom:1px solid #eef2f7;
-
-}
-
-.preview-row:last-child{
-
-border-bottom:none;
-
-}
-
-.preview-label{
-
-color:#6b7280;
-
-font-weight:600;
-
-}
-
-.preview-value{
-
-font-weight:700;
-
-text-align:right;
-
-word-break:break-word;
-
-}
-
-/* ==========================
-RESPONSIVE
-========================== */
-
-@media(max-width:1000px){
-
-.container{
-
-grid-template-columns:1fr;
-
-}
-
-.preview{
-
-position:static;
-
-}
+background:#eef2f7;
 
 }
 
@@ -423,16 +167,7 @@ position:static;
 
 body{
 
-padding:14px;
-
-}
-
-.card,
-.preview-card{
-
-padding:20px;
-
-border-radius:16px;
+padding:15px;
 
 }
 
@@ -440,19 +175,11 @@ border-radius:16px;
 
 grid-template-columns:1fr;
 
-gap:18px;
-
 }
 
-.header h1{
+.actions{
 
-font-size:24px;
-
-}
-
-button{
-
-padding:15px;
+flex-direction:column;
 
 }
 
@@ -465,258 +192,552 @@ padding:15px;
 <body>
 
 <div class="container">
-    <!-- ==========================
-LEFT PANEL
-========================== -->
 
 <div class="card">
 
 <div class="header">
 
-<h1>Create Payment Receipt</h1>
+<div class="logo">
 
-<span>Create professional payment receipts for customers worldwide.</span>
+GlobalPay
 
 </div>
 
+<div class="subtitle">
+
+Professional Receipt Generator
+
+</div>
+
+<div class="sponsor">
+
+Sponsored by Noones
+
+</div>
+
+</div>
+
+<div class="content">
+
 <form id="receiptForm">
+    <!-- ==============================
+PAYMENT INFORMATION
+============================== -->
+
+<h2 class="section-title">
+<i class="fa-solid fa-money-check-dollar"></i>
+Payment Information
+</h2>
 
 <div class="grid">
 
-<!-- Amount -->
+<div class="form-group">
 
-<div>
-
-<label>Payment Amount</label>
+<label for="amount">Payment Amount</label>
 
 <input
 type="number"
 id="amount"
-placeholder="0.00"
+step="0.01"
+placeholder="2500.00"
 required>
 
-<div class="error" id="amountError"></div>
-
 </div>
 
-<!-- Currency -->
+<div class="form-group">
 
-<div>
+<label for="currency">Currency</label>
 
-<label>Currency</label>
+<select id="currency" required>
 
-<div class="search-select">
+<option value="">Select Currency</option>
 
-<input
-type="text"
-id="currencySearch"
-placeholder="Search currency..."
-autocomplete="off">
+<option value="USD">USD - US Dollar</option>
 
-<div
-class="dropdown"
-id="currencyDropdown">
+<option value="EUR">EUR - Euro</option>
 
-</div>
+<option value="GBP">GBP - British Pound</option>
 
-</div>
+<option value="KES">KES - Kenyan Shilling</option>
 
-<input
-type="hidden"
-id="currency">
+<option value="UGX">UGX - Ugandan Shilling</option>
 
-<div
-class="error"
-id="currencyError">
+<option value="TZS">TZS - Tanzanian Shilling</option>
 
-</div>
+<option value="NGN">NGN - Nigerian Naira</option>
 
-</div>
+<option value="INR">INR - Indian Rupee</option>
 
-<!-- Payment Method -->
+<option value="AED">AED - UAE Dirham</option>
 
-<div>
+<option value="SAR">SAR - Saudi Riyal</option>
 
-<label>Payment Method</label>
+<option value="CAD">CAD - Canadian Dollar</option>
 
-<div class="search-select">
+<option value="AUD">AUD - Australian Dollar</option>
 
-<input
-type="text"
-id="paymentMethodSearch"
-placeholder="Search payment method..."
-autocomplete="off">
-
-<div
-class="dropdown"
-id="paymentMethodDropdown">
-
-</div>
-
-</div>
-
-<input
-type="hidden"
-id="paymentMethod">
-
-<div
-class="error"
-id="paymentMethodError">
-
-</div>
-
-</div>
-
-<!-- Status -->
-
-<div>
-
-<label>Status</label>
-
-<select id="status">
-
-<option>Payment Completed</option>
-
-<option>Payment Pending</option>
-
-<option>Payment Processing</option>
-
-<option>Awaiting Confirmation</option>
-
-<option>Payment Failed</option>
-
-<option>Payment Cancelled</option>
-
-<option>Refunded</option>
-
-<option>On Hold</option>
+<option value="JPY">JPY - Japanese Yen</option>
 
 </select>
 
 </div>
 
-<!-- Receiver -->
+</div>
 
-<div>
+<div class="grid">
 
-<label>Receiver Name</label>
+<div class="form-group">
+
+<label for="paymentMethod">Payment Method</label>
+
+<select id="paymentMethod" required>
+
+<option value="">Select Payment Method</option>
+
+<optgroup label="Bank">
+
+<option>Bank Transfer</option>
+
+<option>Wire Transfer</option>
+
+<option>SWIFT</option>
+
+<option>SEPA</option>
+
+<option>ACH</option>
+
+</optgroup>
+
+<optgroup label="Digital Wallet">
+
+<option>PayPal</option>
+
+<option>Wise</option>
+
+<option>Payoneer</option>
+
+<option>Skrill</option>
+
+<option>Cash App</option>
+
+<option>Venmo</option>
+
+<option>Apple Pay</option>
+
+<option>Google Pay</option>
+
+<option>UPI</option>
+
+</optgroup>
+
+<optgroup label="Cryptocurrency">
+
+<option>Bitcoin</option>
+
+<option>Ethereum</option>
+
+<option>USDT (TRC20)</option>
+
+<option>USDT (ERC20)</option>
+
+<option>BNB</option>
+
+<option>Solana</option>
+
+</optgroup>
+
+<optgroup label="Mobile Money">
+
+<option>M-Pesa</option>
+
+<option>Airtel Money</option>
+
+<option>MTN Mobile Money</option>
+
+</optgroup>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label for="status">Payment Status</label>
+
+<select id="status" required>
+
+<option value="Payment Pending" selected>
+Payment Pending
+</option>
+
+<option value="Awaiting Verification">
+Awaiting Verification
+</option>
+
+<option value="Processing">
+Processing
+</option>
+
+<option value="Payment Accepted">
+Payment Accepted
+</option>
+
+<option value="Completed">
+Completed
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<hr style="margin:35px 0;border:none;border-top:1px solid #e5e7eb;">
+<!-- =====================================
+RECEIVER INFORMATION
+===================================== -->
+
+<h2 class="section-title">
+<i class="fa-solid fa-user"></i>
+Receiver Information
+</h2>
+
+<div class="grid">
+
+<div class="form-group">
+
+<label for="receiverName">
+
+Receiver Full Name
+
+</label>
 
 <input
 type="text"
 id="receiverName"
-placeholder="John Doe">
+placeholder="Pradeep Singh"
+required>
 
 </div>
 
-<div>
+<div class="form-group">
 
-<label>Account Number</label>
+<label id="accountLabel" for="accountValue">
+
+Account Number
+
+</label>
 
 <input
 type="text"
-id="accountNumber"
-placeholder="123456789">
+id="accountValue"
+placeholder="Enter account number"
+required>
 
 </div>
 
-<!-- Transaction -->
+</div>
 
-<div>
+<!-- =====================================
+ACTION REQUIRED
+===================================== -->
 
-<label>Transaction ID</label>
+<h2 class="section-title">
+<i class="fa-solid fa-circle-info"></i>
+Action Required
+</h2>
+
+<div class="form-group">
+
+<label for="actionText">
+
+Instruction Message
+
+</label>
+
+<textarea
+id="actionText"
+required>Please verify your device by clicking the button below to complete this payment.</textarea>
+
+</div>
+
+<div class="form-group">
+
+<label for="buttonLink">
+
+Verification Page
+
+</label>
 
 <input
 type="text"
-id="transactionID"
-placeholder="Generated automatically">
+id="buttonLink"
+value="splash.html"
+required>
 
 </div>
 
-<div>
+<hr style="margin:35px 0;border:none;border-top:1px solid #e5e7eb;">
+
+<script>
+
+const paymentMethod=document.getElementById("paymentMethod");
+const accountLabel=document.getElementById("accountLabel");
+const accountValue=document.getElementById("accountValue");
+
+function updateReceiverField(){
+
+let label="Account Number";
+let placeholder="Enter account number";
+
+switch(paymentMethod.value){
+
+case "UPI":
+label="UPI ID";
+placeholder="example@ybl";
+break;
+
+case "PayPal":
+label="PayPal Email";
+placeholder="customer@example.com";
+break;
+
+case "Wise":
+label="Wise Email";
+placeholder="customer@example.com";
+break;
+
+case "Payoneer":
+label="Payoneer Email";
+placeholder="customer@example.com";
+break;
+
+case "Skrill":
+label="Skrill Email";
+placeholder="customer@example.com";
+break;
+
+case "Cash App":
+label="Cash App Tag";
+placeholder="$username";
+break;
+
+case "Venmo":
+label="Venmo Username";
+placeholder="@username";
+break;
+
+case "Google Pay":
+label="Google Pay Email";
+placeholder="user@gmail.com";
+break;
+
+case "Apple Pay":
+label="Apple ID";
+placeholder="user@icloud.com";
+break;
+
+case "Bitcoin":
+case "Ethereum":
+case "BNB":
+case "Solana":
+case "USDT (TRC20)":
+case "USDT (ERC20)":
+label="Wallet Address";
+placeholder="Paste wallet address";
+break;
+
+case "M-Pesa":
+case "Airtel Money":
+case "MTN Mobile Money":
+label="Phone Number";
+placeholder="+254712345678";
+break;
+
+case "SEPA":
+label="IBAN";
+placeholder="Enter IBAN";
+break;
+
+case "SWIFT":
+label="IBAN / Account Number";
+placeholder="Enter IBAN";
+break;
+
+default:
+label="Account Number";
+placeholder="Enter account number";
+
+}
+
+accountLabel.textContent=label;
+accountValue.placeholder=placeholder;
+
+}
+
+paymentMethod.addEventListener("change",updateReceiverField);
+
+updateReceiverField();
+
+</script>
+<!-- =====================================
+SYSTEM GENERATED DETAILS
+===================================== -->
+
+<h2 class="section-title">
+<i class="fa-solid fa-shield-halved"></i>
+System Generated Details
+</h2>
+
+<div class="grid">
+
+<div class="form-group">
 
 <label>Tracking Code</label>
 
 <input
 type="text"
 id="trackingCode"
-placeholder="Generated automatically">
+readonly>
 
 </div>
 
-<!-- Date -->
+<div class="form-group">
 
-<div>
-
-<label>Transaction Date</label>
-
-<input
-type="datetime-local"
-id="transactionDate">
-
-</div>
-
-<!-- Button -->
-
-<div>
-
-<label>Button Destination</label>
+<label>Transaction ID</label>
 
 <input
 type="text"
-id="buttonLink"
-value="splash.html"
-placeholder="splash.html">
+id="transactionID"
+readonly>
 
 </div>
 
-<!-- Action -->
+</div>
 
-<div class="full">
+<div class="grid">
 
-<label>Action Required</label>
+<div class="form-group">
 
-<textarea
-id="actionText"
-placeholder="Example: Please complete identity verification before funds are released."></textarea>
+<label>Receipt Date</label>
+
+<input
+type="text"
+id="receiptDate"
+readonly>
 
 </div>
 
-<!-- Notes -->
+<div class="form-group">
 
-<div class="full">
+<label>Security</label>
 
-<label>Internal Notes (Optional)</label>
-
-<textarea
-id="notes"
-placeholder="Visible only to administrators."></textarea>
+<input
+type="text"
+value="Protected by GlobalPay Security"
+readonly>
 
 </div>
 
-<!-- Save -->
+</div>
 
-<div class="full">
+<hr style="margin:35px 0;border:none;border-top:1px solid #e5e7eb;">
+
+<!-- =====================================
+LIVE RECEIPT PREVIEW
+===================================== -->
+
+<h2 class="section-title">
+<i class="fa-solid fa-receipt"></i>
+Receipt Preview
+</h2>
+
+<div style="border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;">
+
+<div style="background:#16a34a;color:#fff;padding:25px;text-align:center;">
+
+<h2 style="font-size:30px;font-weight:800;">
+GlobalPay
+</h2>
+
+<div style="margin-top:8px;">
+Sponsored by Noones
+</div>
+
+</div>
+
+<div style="padding:30px;text-align:center;">
+
+<div style="font-size:14px;color:#6b7280;">
+Payment Amount
+</div>
+
+<div
+id="previewAmount"
+style="font-size:38px;font-weight:800;margin-top:10px;">
+
+USD 0.00
+
+</div>
+
+<div
+id="previewStatus"
+style="display:inline-block;margin-top:20px;padding:8px 18px;border-radius:30px;background:#FEF3C7;color:#92400E;font-weight:700;">
+
+Payment Pending
+
+</div>
+
+</div>
+
+<hr style="border:none;border-top:1px solid #e5e7eb;">
+
+<div style="padding:25px;">
+
+<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+<span>Receiver</span>
+<strong id="previewReceiver">-</strong>
+</div>
+
+<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+<span id="previewAccountLabel">Account Number</span>
+<strong id="previewAccountValue">-</strong>
+</div>
+
+<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+<span>Tracking #</span>
+<strong id="previewTracking">------</strong>
+</div>
+
+<div style="display:flex;justify-content:space-between;">
+<span>Transaction ID</span>
+<strong id="previewTransaction">------</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
 
 <button
 type="submit"
-id="saveReceipt">
+id="createReceiptBtn"
+class="primary">
 
-Create Receipt
+<i class="fa-solid fa-plus"></i>
+
+Generate Receipt
 
 </button>
 
-</div>
+<button
+type="reset"
+class="secondary">
 
-<div
-class="full">
+Reset
 
-<div
-class="success"
-id="messageBox">
-
-</div>
-
-</div>
+</button>
 
 </div>
 
@@ -724,915 +745,198 @@ id="messageBox">
 
 </div>
 
-<!-- ==========================
-RIGHT PANEL
-========================== -->
-
-<div class="preview">
-
-<div class="preview-card">
-
-<h2>Receipt Preview</h2>
-
-<div class="preview-row">
-
-<div class="preview-label">
-
-Amount
-
 </div>
 
-<div
-class="preview-value"
-id="previewAmount">
-
-USD 0.00
-
-</div>
-
-</div>
-
-<div class="preview-row">
-
-<div class="preview-label">
-
-Status
-
-</div>
-
-<div
-class="preview-value"
-id="previewStatus">
-
-Payment Completed
-
-</div>
-
-</div>
-
-<div class="preview-row">
-
-<div class="preview-label">
-
-Receiver
-
-</div>
-
-<div
-class="preview-value"
-id="previewReceiver">
-
-—
-
-</div>
-
-</div>
-
-<div class="preview-row">
-
-<div class="preview-label">
-
-Payment Method
-
-</div>
-
-<div
-class="preview-value"
-id="previewMethod">
-
-—
-
-</div>
-
-</div>
-
-<div class="preview-row">
-
-<div class="preview-label">
-
-Tracking Code
-
-</div>
-
-<div
-class="preview-value"
-id="previewTracking">
-
-—
-
-</div>
-
-</div>
-
-<div class="preview-row">
-
-<div class="preview-label">
-
-Button Destination
-
-</div>
-
-<div
-class="preview-value"
-id="previewButton">
-
-splash.html
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script type="module">
-    /* =====================================
-WORLD CURRENCIES
-===================================== */
-
-const currencies = [
-
-"USD - United States Dollar",
-"EUR - Euro",
-"GBP - British Pound Sterling",
-"CAD - Canadian Dollar",
-"AUD - Australian Dollar",
-"NZD - New Zealand Dollar",
-"CHF - Swiss Franc",
-"JPY - Japanese Yen",
-"CNY - Chinese Yuan",
-"HKD - Hong Kong Dollar",
-"SGD - Singapore Dollar",
-"INR - Indian Rupee",
-"PKR - Pakistani Rupee",
-"BDT - Bangladeshi Taka",
-"NPR - Nepalese Rupee",
-"LKR - Sri Lankan Rupee",
-
-"AED - UAE Dirham",
-"SAR - Saudi Riyal",
-"QAR - Qatari Riyal",
-"KWD - Kuwaiti Dinar",
-"BHD - Bahraini Dinar",
-"OMR - Omani Rial",
-"IQD - Iraqi Dinar",
-"JOD - Jordanian Dinar",
-"ILS - Israeli New Shekel",
-
-"KES - Kenyan Shilling",
-"UGX - Ugandan Shilling",
-"TZS - Tanzanian Shilling",
-"RWF - Rwandan Franc",
-"BIF - Burundi Franc",
-"ETB - Ethiopian Birr",
-"DJF - Djiboutian Franc",
-"SOS - Somali Shilling",
-"SSP - South Sudanese Pound",
-"SDG - Sudanese Pound",
-"NGN - Nigerian Naira",
-"GHS - Ghanaian Cedi",
-"ZAR - South African Rand",
-"EGP - Egyptian Pound",
-"MAD - Moroccan Dirham",
-"DZD - Algerian Dinar",
-"TND - Tunisian Dinar",
-"XOF - West African CFA Franc",
-"XAF - Central African CFA Franc",
-
-"BRL - Brazilian Real",
-"ARS - Argentine Peso",
-"CLP - Chilean Peso",
-"COP - Colombian Peso",
-"PEN - Peruvian Sol",
-"BOB - Bolivian Boliviano",
-"PYG - Paraguayan Guarani",
-"UYU - Uruguayan Peso",
-"MXN - Mexican Peso",
-
-"RUB - Russian Ruble",
-"UAH - Ukrainian Hryvnia",
-"TRY - Turkish Lira",
-
-"SEK - Swedish Krona",
-"NOK - Norwegian Krone",
-"DKK - Danish Krone",
-"ISK - Icelandic Krona",
-"PLN - Polish Zloty",
-"CZK - Czech Koruna",
-"HUF - Hungarian Forint",
-"RON - Romanian Leu",
-"BGN - Bulgarian Lev",
-"HRK - Croatian Kuna",
-
-"THB - Thai Baht",
-"MYR - Malaysian Ringgit",
-"IDR - Indonesian Rupiah",
-"PHP - Philippine Peso",
-"VND - Vietnamese Dong",
-"KRW - South Korean Won",
-"TWD - Taiwan Dollar",
-"MOP - Macanese Pataca",
-"BND - Brunei Dollar",
-"LAK - Lao Kip",
-"KHR - Cambodian Riel",
-"MMK - Myanmar Kyat"
-
-];
+<script>
 
 /* =====================================
-CURRENCY ELEMENTS
+DOM ELEMENTS
 ===================================== */
 
-const currencySearch =
-document.getElementById("currencySearch");
-
-const currencyHidden =
-document.getElementById("currency");
-
-const currencyDropdown =
-document.getElementById("currencyDropdown");
-/* =====================================
-WORLDWIDE PAYMENT METHODS
-===================================== */
-
-const paymentMethods = [
-
-/* BANK TRANSFERS */
-
-"Bank Transfer",
-"Wire Transfer",
-"SWIFT Transfer",
-"SEPA Transfer",
-"ACH Transfer",
-"RTGS",
-"NEFT",
-"IMPS",
-"UPI",
-"BACS",
-"CHAPS",
-"FPS",
-"NPP",
-"PIX",
-"Interac e-Transfer",
-
-/* DEBIT & CREDIT CARDS */
-
-"Visa Debit",
-"Visa Credit",
-"Mastercard Debit",
-"Mastercard Credit",
-"American Express",
-"Discover",
-"UnionPay",
-"JCB",
-"Diners Club",
-"Maestro",
-"RuPay",
-
-/* DIGITAL WALLETS */
-
-"PayPal",
-"Apple Pay",
-"Google Pay",
-"Samsung Wallet",
-"Amazon Pay",
-
-/* USA */
-
-"Cash App",
-"Venmo",
-"Zelle",
-
-/* AFRICA */
-
-"M-Pesa",
-"Airtel Money",
-"MTN Mobile Money",
-"Orange Money",
-"Tigo Pesa",
-"Vodafone Cash",
-"EcoCash",
-
-/* MONEY TRANSFER */
-
-"Wise",
-"Western Union",
-"MoneyGram",
-"RIA Money Transfer",
-"WorldRemit",
-"Remitly",
-"Paysend",
-"Xoom",
-
-/* CRYPTO */
-
-"Bitcoin (BTC)",
-"Ethereum (ETH)",
-"Tether (USDT)",
-"USD Coin (USDC)",
-"Binance Pay",
-"Coinbase Pay",
-"Litecoin",
-"Dogecoin",
-"Solana",
-"XRP",
-
-/* ASIA */
-
-"Alipay",
-"WeChat Pay",
-"Kakao Pay",
-"LINE Pay",
-"GCash",
-"Maya",
-"GrabPay",
-
-/* CASH */
-
-"Cash Deposit",
-"Cash Pickup",
-"Cheque",
-"Money Order",
-"Bank Draft",
-
-/* PAYMENT GATEWAYS */
-
-"Stripe",
-"Square",
-"Adyen",
-"Braintree",
-"Authorize.Net",
-"Payoneer",
-"Skrill",
-"Neteller",
-"Perfect Money",
-"Payeer",
-
-"Other"
-
-];
-
-
-/* =====================================
-PAYMENT ELEMENTS
-===================================== */
-
-const paymentSearch =
-document.getElementById("paymentMethodSearch");
-
-const paymentHidden =
-document.getElementById("paymentMethod");
-
-const paymentDropdown =
-document.getElementById("paymentMethodDropdown");
-
-
-/* =====================================
-COMMON ELEMENTS
-===================================== */
-
-const amount =
-document.getElementById("amount");
-
-const receiver =
-document.getElementById("receiverName");
-
-const tracking =
-document.getElementById("trackingCode");
-
-const status =
-document.getElementById("status");
-
-const buttonLink =
-document.getElementById("buttonLink");
-/* =====================================
-SEARCHABLE DROPDOWNS
-===================================== */
-
-function buildDropdown(input, hidden, dropdown, data){
-
-    function render(filter=""){
-
-        dropdown.innerHTML="";
-
-        const results=data.filter(item=>
-
-            item.toLowerCase().includes(filter.toLowerCase())
-
-        );
-
-        if(results.length===0){
-
-            dropdown.style.display="none";
-
-            return;
-
-        }
-
-        results.forEach(item=>{
-
-            const option=document.createElement("div");
-
-            option.textContent=item;
-
-            option.onclick=()=>{
-
-                input.value=item;
-
-                hidden.value=item;
-
-                dropdown.style.display="none";
-
-                updatePreview();
-
-            };
-
-            dropdown.appendChild(option);
-
-        });
-
-        dropdown.style.display="block";
-
-    }
-
-    input.addEventListener("focus",()=>{
-
-        render(input.value);
-
-    });
-
-    input.addEventListener("input",()=>{
-
-        render(input.value);
-
-    });
-
-}
-
-/* Build Currency Dropdown */
-
-buildDropdown(
-
-currencySearch,
-
-currencyHidden,
-
-currencyDropdown,
-
-currencies
-
-);
-
-/* Build Payment Dropdown */
-
-buildDropdown(
-
-paymentSearch,
-
-paymentHidden,
-
-paymentDropdown,
-
-paymentMethods
-
-);
-
-
-/* =====================================
-CLOSE DROPDOWNS
-===================================== */
-
-document.addEventListener("click",(e)=>{
-
-if(!e.target.closest(".search-select")){
-
-currencyDropdown.style.display="none";
-
-paymentDropdown.style.display="none";
-
-}
-
-});
-/* =====================================
-FIREBASE IMPORTS
-===================================== */
-
-import { db } from "./js/firebase.js";
-
-import {
-
-collection,
-addDoc,
-serverTimestamp
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
+const amount=document.getElementById("amount");
+const currency=document.getElementById("currency");
+const status=document.getElementById("status");
+const receiverName=document.getElementById("receiverName");
+
+const trackingCode=document.getElementById("trackingCode");
+const transactionID=document.getElementById("transactionID");
+const receiptDate=document.getElementById("receiptDate");
 
 /* =====================================
 GENERATORS
 ===================================== */
 
-function generateTrackingCode(){
+function randomCode(length){
 
-return "GP"
+const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-+
+let code="";
 
-Math.random()
+for(let i=0;i<length;i++){
 
-.toString(36)
-
-.substring(2,8)
-
-.toUpperCase()
-
-+
-
-Date.now()
-
-.toString()
-
-.slice(-4);
+code+=chars[Math.floor(Math.random()*chars.length)];
 
 }
 
-
-function generateTransactionID(){
-
-return "TXN"
-
-+
-
-Date.now()
-
-+
-
-Math.floor(
-
-Math.random()*900+100
-
-);
+return code;
 
 }
 
+trackingCode.value=randomCode(6);
+
+transactionID.value=
+"TXN"+Date.now().toString().slice(-8)+randomCode(4);
+
+receiptDate.value=
+new Date().toLocaleString();
 
 /* =====================================
-DEFAULT VALUES
+LIVE PREVIEW
 ===================================== */
 
-tracking.value=
+function updatePreview(){
 
-generateTrackingCode();
+document.getElementById("previewAmount").textContent=
+(currency.value||"USD")+" "+(amount.value||"0.00");
 
-document
+document.getElementById("previewStatus").textContent=
+status.value;
 
-.getElementById("transactionID")
+document.getElementById("previewReceiver").textContent=
+receiverName.value||"-";
 
-.value=
+document.getElementById("previewAccountLabel").textContent=
+accountLabel.textContent;
 
-generateTransactionID();
+document.getElementById("previewAccountValue").textContent=
+accountValue.value||"-";
 
+document.getElementById("previewTracking").textContent=
+trackingCode.value;
+
+document.getElementById("previewTransaction").textContent=
+transactionID.value;
+
+}
+
+amount.addEventListener("input",updatePreview);
+currency.addEventListener("change",updatePreview);
+status.addEventListener("change",updatePreview);
+receiverName.addEventListener("input",updatePreview);
+accountValue.addEventListener("input",updatePreview);
+
+updatePreview();
+
+</script>
+<script type="module">
+
+import { db } from "./js/firebase.js";
+
+import {
+doc,
+setDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 /* =====================================
-SUCCESS BOX
+FORM SUBMIT
 ===================================== */
 
-const messageBox=
+const receiptForm=document.getElementById("receiptForm");
 
-document.getElementById("messageBox");
-
-
-/* =====================================
-SAVE
-===================================== */
-
-const form=
-
-document.getElementById("receiptForm");
-
-form.addEventListener(
-
-"submit",
-
-async(e)=>{
+receiptForm.addEventListener("submit",async(e)=>{
 
 e.preventDefault();
 
-messageBox.style.display="none";
+const createReceiptBtn=
+document.getElementById("createReceiptBtn");
 
-const saveBtn=
+createReceiptBtn.disabled=true;
 
-document.getElementById("saveReceipt");
-
-saveBtn.disabled=true;
-
-saveBtn.textContent=
-
-"Creating Receipt...";
-
-const receipt={
-
-amount:Number(
-
-amount.value
-
-),
-
-currency:
-
-currencyHidden.value,
-
-paymentMethod:
-
-paymentHidden.value,
-
-status:
-
-status.value,
-
-receiverName:
-
-receiver.value.trim(),
-
-accountNumber:
-
-document
-
-.getElementById(
-
-"accountNumber"
-
-).value.trim(),
-
-transactionID:
-
-document
-
-.getElementById(
-
-"transactionID"
-
-).value.trim(),
-
-trackingCode:
-
-tracking.value.trim(),
-
-transactionDate:
-
-document
-
-.getElementById(
-
-"transactionDate"
-
-).value,
-
-actionText:
-
-document
-
-.getElementById(
-
-"actionText"
-
-).value.trim(),
-
-notes:
-
-document
-
-.getElementById(
-
-"notes"
-
-).value.trim(),
-
-buttonLink:
-
-buttonLink.value.trim()
-
-||
-
-"splash.html",
-
-createdAt:
-
-serverTimestamp()
-
-};
+createReceiptBtn.innerHTML=
+'<i class="fa-solid fa-spinner fa-spin"></i> Creating Receipt...';
 
 try{
 
-await addDoc(
+const receipt={
 
-collection(
+trackingCode:trackingCode.value,
 
-db,
+transactionID:transactionID.value,
 
-"receipts"
+amount:Number(amount.value),
 
-),
+currency:currency.value,
 
-receipt
+paymentMethod:paymentMethod.value,
 
-);
-await addDoc(
+receiverName:receiverName.value.trim(),
 
-collection(
+accountLabel:accountLabel.textContent,
 
-db,
+accountValue:accountValue.value.trim(),
 
-"receipts"
+status:status.value,
 
-),
+actionText:actionText.value.trim(),
 
-receipt
+buttonLink:buttonLink.value.trim(),
 
-);
+transactionDate:receiptDate.value,
+
+createdAt:serverTimestamp()
+
+};
+
 /* =====================================
-SUCCESS
+SAVE RECEIPT
 ===================================== */
 
-messageBox.style.display = "block";
+await setDoc(
 
-messageBox.style.background = "#ECFDF3";
+doc(db,"receipts",trackingCode.value),
 
-messageBox.style.border = "1px solid #10B981";
+receipt
 
-messageBox.style.color = "#047857";
+);
 
-messageBox.innerHTML = `
+/* =====================================
+SAVE TRACKING CODE
+===================================== */
 
-<strong>Receipt Created Successfully</strong>
+localStorage.setItem(
 
-<br><br>
+"trackingCode",
 
-Tracking Code:
+trackingCode.value
 
-<b>${receipt.trackingCode}</b>
+);
 
-<br><br>
-
-Redirecting to receipt...
-
-`;
-
-saveBtn.textContent = "Receipt Created ✓";
-
-
-setTimeout(()=>{
+/* =====================================
+GO TO RECEIPT
+===================================== */
 
 window.location.href=
+"payment_receipt_style.html?tracking="+
+encodeURIComponent(trackingCode.value);
 
-"payment_receipt_style.html?tracking="
-
-+
-
-encodeURIComponent(
-
-receipt.trackingCode
-
-);
-
-},1800);
-
-}
-
-
-/* =====================================
-ERROR
-===================================== */
-
-catch(error){
+}catch(error){
 
 console.error(error);
 
-messageBox.style.display="block";
+alert(
+"Failed to create receipt.\n\n"+
+error.message
+);
 
-messageBox.style.background="#FEF2F2";
+createReceiptBtn.disabled=false;
 
-messageBox.style.border="1px solid #EF4444";
-
-messageBox.style.color="#B91C1C";
-
-messageBox.innerHTML=`
-
-<strong>Unable to create receipt.</strong>
-
-<br>
-
-Please check your Firebase configuration and try again.
-
-`;
-
-saveBtn.disabled=false;
-
-saveBtn.textContent="Create Receipt";
+createReceiptBtn.innerHTML=
+'<i class="fa-solid fa-plus"></i> Generate Receipt';
 
 }
 
 });
-/* =====================================
-HELPER BUTTONS
-===================================== */
-
-function copyTrackingCode(){
-
-navigator.clipboard.writeText(
-
-tracking.value
-
-);
-
-messageBox.style.display="block";
-
-messageBox.style.background="#ECFDF3";
-
-messageBox.style.border="1px solid #10B981";
-
-messageBox.style.color="#047857";
-
-messageBox.innerHTML=
-
-"<strong>Tracking code copied.</strong>";
-
-}
-
-
-function resetReceiptForm(){
-
-form.reset();
-
-currencySearch.value="";
-
-currencyHidden.value="";
-
-paymentSearch.value="";
-
-paymentHidden.value="";
-
-tracking.value=
-
-generateTrackingCode();
-
-document
-
-.getElementById("transactionID")
-
-.value=
-
-generateTransactionID();
-
-buttonLink.value="splash.html";
-
-updatePreview();
-
-messageBox.style.display="none";
-
-}
-
-
-/* =====================================
-KEYBOARD SHORTCUT
-CTRL + ENTER
-===================================== */
-
-document.addEventListener(
-
-"keydown",
-
-(e)=>{
-
-if(
-
-e.ctrlKey &&
-
-e.key==="Enter"
-
-){
-
-e.preventDefault();
-
-form.requestSubmit();
-
-}
-
-}
-
-);
-
-
-/* =====================================
-INITIALIZE
-===================================== */
-
-updatePreview();
 
 </script>
 
