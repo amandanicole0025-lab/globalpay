@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GlobalPay | Create Receipt</title>
+<title>GlobalPay | Professional Receipt Generator</title>
 
+<!-- Google Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- Font Awesome -->
+
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 
 <style>
 
@@ -24,83 +28,156 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
+html{
+
+scroll-behavior:smooth;
+
+}
+
 body{
+
 background:#eef3f8;
+
 padding:30px;
+
 color:#1f2937;
+
 }
 
 .container{
-max-width:1100px;
+
+max-width:1250px;
+
 margin:auto;
+
 }
 
 .card{
+
 background:#fff;
+
 border-radius:20px;
+
 overflow:hidden;
-box-shadow:0 20px 50px rgba(0,0,0,.08);
+
+box-shadow:0 25px 60px rgba(0,0,0,.08);
+
 }
 
 .header{
+
 background:linear-gradient(135deg,#16a34a,#0b7d43);
-color:#fff;
-padding:35px;
+
+padding:45px;
+
 text-align:center;
+
+color:white;
+
 }
 
 .logo{
-font-size:38px;
+
+font-size:42px;
+
 font-weight:800;
+
+letter-spacing:.5px;
+
 }
 
 .subtitle{
+
 margin-top:10px;
+
 font-size:18px;
+
+opacity:.95;
+
 }
 
 .sponsor{
+
 display:inline-block;
-margin-top:15px;
-padding:8px 18px;
+
+margin-top:18px;
+
+padding:9px 22px;
+
 border-radius:30px;
+
 background:rgba(255,255,255,.18);
+
 font-size:13px;
+
 font-weight:600;
+
 }
 
 .content{
+
 padding:35px;
+
+}
+
+.section{
+
+margin-bottom:40px;
+
 }
 
 .section-title{
+
 display:flex;
+
 align-items:center;
+
 gap:10px;
-font-size:20px;
+
+font-size:22px;
+
 font-weight:700;
-margin-bottom:20px;
+
+margin-bottom:25px;
+
+color:#111827;
+
 }
 
 .section-title i{
+
 color:#16a34a;
+
 }
 
 .grid{
+
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:22px;
+
 margin-bottom:20px;
+
 }
 
 .form-group{
+
 display:flex;
+
 flex-direction:column;
+
 }
 
 label{
+
 margin-bottom:8px;
+
 font-weight:600;
+
+font-size:15px;
+
 }
 
 input,
@@ -108,11 +185,20 @@ select,
 textarea{
 
 width:100%;
-padding:14px;
+
+padding:15px;
+
 border:1px solid #d1d5db;
+
 border-radius:12px;
+
 font-size:15px;
+
 outline:none;
+
+transition:.25s;
+
+background:white;
 
 }
 
@@ -122,38 +208,125 @@ textarea:focus{
 
 border-color:#16a34a;
 
+box-shadow:0 0 0 3px rgba(22,163,74,.15);
+
 }
 
 textarea{
 
 resize:vertical;
+
 min-height:120px;
+
+}
+
+.preview{
+
+margin-top:25px;
+
+border:1px solid #e5e7eb;
+
+border-radius:18px;
+
+overflow:hidden;
+
+background:white;
+
+}
+
+.preview-header{
+
+background:#16a34a;
+
+padding:25px;
+
+text-align:center;
+
+color:white;
+
+}
+
+.preview-body{
+
+padding:25px;
+
+}
+
+.preview-row{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:12px 0;
+
+border-bottom:1px solid #f3f4f6;
+
+}
+
+.preview-row:last-child{
+
+border-bottom:none;
+
+}
+
+.status{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+background:#FEF3C7;
+
+color:#92400E;
+
+font-weight:700;
+
+margin-top:18px;
 
 }
 
 .actions{
 
 display:flex;
+
 gap:15px;
-margin-top:30px;
+
+margin-top:35px;
 
 }
 
 button{
 
-padding:15px 24px;
+padding:15px 25px;
+
 border:none;
+
 border-radius:12px;
-font-weight:700;
+
 font-size:15px;
+
+font-weight:700;
+
 cursor:pointer;
+
+transition:.3s;
 
 }
 
 .primary{
 
 background:#16a34a;
+
 color:white;
+
+}
+
+.primary:hover{
+
+background:#11803b;
 
 }
 
@@ -163,11 +336,33 @@ background:#eef2f7;
 
 }
 
-@media(max-width:768px){
+.secondary:hover{
+
+background:#dfe8f3;
+
+}
+
+hr{
+
+margin:40px 0;
+
+border:none;
+
+border-top:1px solid #e5e7eb;
+
+}
+
+@media(max-width:900px){
 
 body{
 
 padding:15px;
+
+}
+
+.content{
+
+padding:20px;
 
 }
 
@@ -205,7 +400,7 @@ GlobalPay
 
 <div class="subtitle">
 
-Professional Receipt Generator
+Professional Worldwide Receipt Generator
 
 </div>
 
@@ -220,20 +415,29 @@ Sponsored by Noones
 <div class="content">
 
 <form id="receiptForm">
-    <!-- ==============================
+    <!-- =======================================================
 PAYMENT INFORMATION
-============================== -->
+======================================================= -->
+
+<div class="section">
 
 <h2 class="section-title">
+
 <i class="fa-solid fa-money-check-dollar"></i>
+
 Payment Information
+
 </h2>
 
 <div class="grid">
 
 <div class="form-group">
 
-<label for="amount">Payment Amount</label>
+<label for="amount">
+
+Payment Amount
+
+</label>
 
 <input
 type="number"
@@ -246,113 +450,366 @@ required>
 
 <div class="form-group">
 
-<label for="currency">Currency</label>
+<label for="currency">
+
+Currency
+
+</label>
 
 <select id="currency" required>
 
 <option value="">Select Currency</option>
 
-<option value="USD">USD - US Dollar</option>
+<!-- ==============================
+NORTH AMERICA
+============================== -->
+
+<optgroup label="North America">
+
+<option value="USD">USD - United States Dollar</option>
+<option value="CAD">CAD - Canadian Dollar</option>
+<option value="MXN">MXN - Mexican Peso</option>
+
+</optgroup>
+
+<!-- ==============================
+EUROPE
+============================== -->
+
+<optgroup label="Europe">
 
 <option value="EUR">EUR - Euro</option>
-
 <option value="GBP">GBP - British Pound</option>
+<option value="CHF">CHF - Swiss Franc</option>
+<option value="SEK">SEK - Swedish Krona</option>
+<option value="NOK">NOK - Norwegian Krone</option>
+<option value="DKK">DKK - Danish Krone</option>
+<option value="PLN">PLN - Polish Zloty</option>
+<option value="CZK">CZK - Czech Koruna</option>
+<option value="HUF">HUF - Hungarian Forint</option>
+<option value="RON">RON - Romanian Leu</option>
+<option value="BGN">BGN - Bulgarian Lev</option>
+<option value="ISK">ISK - Icelandic Krona</option>
+<option value="UAH">UAH - Ukrainian Hryvnia</option>
+<option value="RUB">RUB - Russian Ruble</option>
 
-<option value="KES">KES - Kenyan Shilling</option>
+</optgroup>
 
-<option value="UGX">UGX - Ugandan Shilling</option>
+<!-- ==============================
+ASIA
+============================== -->
 
-<option value="TZS">TZS - Tanzanian Shilling</option>
+<optgroup label="Asia">
 
-<option value="NGN">NGN - Nigerian Naira</option>
-
+<option value="PHP">PHP - Philippine Peso</option>
+<option value="JPY">JPY - Japanese Yen</option>
+<option value="CNY">CNY - Chinese Yuan</option>
+<option value="HKD">HKD - Hong Kong Dollar</option>
+<option value="TWD">TWD - Taiwan Dollar</option>
+<option value="KRW">KRW - South Korean Won</option>
+<option value="SGD">SGD - Singapore Dollar</option>
+<option value="MYR">MYR - Malaysian Ringgit</option>
+<option value="THB">THB - Thai Baht</option>
+<option value="VND">VND - Vietnamese Dong</option>
+<option value="IDR">IDR - Indonesian Rupiah</option>
 <option value="INR">INR - Indian Rupee</option>
+<option value="PKR">PKR - Pakistani Rupee</option>
+<option value="BDT">BDT - Bangladeshi Taka</option>
+<option value="LKR">LKR - Sri Lankan Rupee</option>
+<option value="NPR">NPR - Nepalese Rupee</option>
+<option value="MMK">MMK - Myanmar Kyat</option>
+
+</optgroup>
+
+<!-- ==============================
+MIDDLE EAST
+============================== -->
+
+<optgroup label="Middle East">
 
 <option value="AED">AED - UAE Dirham</option>
-
 <option value="SAR">SAR - Saudi Riyal</option>
+<option value="QAR">QAR - Qatari Riyal</option>
+<option value="KWD">KWD - Kuwaiti Dinar</option>
+<option value="BHD">BHD - Bahraini Dinar</option>
+<option value="OMR">OMR - Omani Rial</option>
+<option value="JOD">JOD - Jordanian Dinar</option>
+<option value="ILS">ILS - Israeli Shekel</option>
+<option value="IQD">IQD - Iraqi Dinar</option>
 
-<option value="CAD">CAD - Canadian Dollar</option>
+</optgroup>
+
+<!-- ==============================
+AFRICA
+============================== -->
+
+<optgroup label="Africa">
+
+<option value="KES">KES - Kenyan Shilling</option>
+<option value="UGX">UGX - Ugandan Shilling</option>
+<option value="TZS">TZS - Tanzanian Shilling</option>
+<option value="RWF">RWF - Rwandan Franc</option>
+<option value="BIF">BIF - Burundian Franc</option>
+<option value="ETB">ETB - Ethiopian Birr</option>
+<option value="SOS">SOS - Somali Shilling</option>
+<option value="DJF">DJF - Djiboutian Franc</option>
+<option value="EGP">EGP - Egyptian Pound</option>
+<option value="MAD">MAD - Moroccan Dirham</option>
+<option value="NGN">NGN - Nigerian Naira</option>
+<option value="GHS">GHS - Ghanaian Cedi</option>
+<option value="ZAR">ZAR - South African Rand</option>
+<option value="ZMW">ZMW - Zambian Kwacha</option>
+<option value="MWK">MWK - Malawi Kwacha</option>
+<option value="MZN">MZN - Mozambican Metical</option>
+
+</optgroup>
+
+<!-- ==============================
+OCEANIA
+============================== -->
+
+<optgroup label="Oceania">
 
 <option value="AUD">AUD - Australian Dollar</option>
+<option value="NZD">NZD - New Zealand Dollar</option>
+<option value="FJD">FJD - Fiji Dollar</option>
+<option value="PGK">PGK - Papua New Guinea Kina</option>
 
-<option value="JPY">JPY - Japanese Yen</option>
+</optgroup>
+
+<!-- ==============================
+SOUTH AMERICA
+============================== -->
+
+<optgroup label="South America">
+
+<option value="BRL">BRL - Brazilian Real</option>
+<option value="ARS">ARS - Argentine Peso</option>
+<option value="CLP">CLP - Chilean Peso</option>
+<option value="COP">COP - Colombian Peso</option>
+<option value="PEN">PEN - Peruvian Sol</option>
+<option value="UYU">UYU - Uruguayan Peso</option>
+<option value="PYG">PYG - Paraguayan Guarani</option>
+<option value="VES">VES - Venezuelan Bolívar</option>
+
+</optgroup>
 
 </select>
 
 </div>
 
 </div>
-
 <div class="grid">
 
 <div class="form-group">
 
-<label for="paymentMethod">Payment Method</label>
+<label for="paymentMethod">
+
+Payment Method
+
+</label>
 
 <select id="paymentMethod" required>
 
 <option value="">Select Payment Method</option>
 
-<optgroup label="Bank">
+<!-- =======================================
+BANK TRANSFERS
+======================================= -->
+
+<optgroup label="Bank Transfer">
 
 <option>Bank Transfer</option>
-
 <option>Wire Transfer</option>
-
 <option>SWIFT</option>
-
 <option>SEPA</option>
-
 <option>ACH</option>
+<option>RTGS</option>
+<option>NEFT</option>
+<option>IMPS</option>
+<option>UPI Bank</option>
+<option>FPS</option>
+<option>FAST Transfer</option>
+<option>Interac e-Transfer</option>
+<option>Zelle</option>
 
 </optgroup>
 
-<optgroup label="Digital Wallet">
+<!-- =======================================
+CARDS
+======================================= -->
+
+<optgroup label="Credit / Debit Cards">
+
+<option>Visa</option>
+<option>Visa Debit</option>
+<option>Mastercard</option>
+<option>Maestro</option>
+<option>American Express</option>
+<option>Discover</option>
+<option>JCB</option>
+<option>UnionPay</option>
+<option>Diners Club</option>
+
+</optgroup>
+
+<!-- =======================================
+DIGITAL WALLETS
+======================================= -->
+
+<optgroup label="Digital Wallets">
 
 <option>PayPal</option>
-
 <option>Wise</option>
-
 <option>Payoneer</option>
-
 <option>Skrill</option>
-
+<option>Neteller</option>
+<option>Perfect Money</option>
+<option>WebMoney</option>
 <option>Cash App</option>
-
 <option>Venmo</option>
-
 <option>Apple Pay</option>
-
 <option>Google Pay</option>
-
-<option>UPI</option>
+<option>Samsung Pay</option>
+<option>Amazon Pay</option>
+<option>Revolut</option>
 
 </optgroup>
+
+<!-- =======================================
+PHILIPPINES
+======================================= -->
+
+<optgroup label="Philippines">
+
+<option>GCash</option>
+<option>Maya</option>
+<option>Coins.ph</option>
+<option>DragonPay</option>
+<option>Cebuana Lhuillier</option>
+<option>Palawan Express</option>
+
+</optgroup>
+
+<!-- =======================================
+INDIA
+======================================= -->
+
+<optgroup label="India">
+
+<option>UPI</option>
+<option>PhonePe</option>
+<option>Paytm</option>
+<option>Google Pay India</option>
+<option>BHIM</option>
+
+</optgroup>
+
+<!-- =======================================
+CHINA
+======================================= -->
+
+<optgroup label="China">
+
+<option>Alipay</option>
+<option>WeChat Pay</option>
+
+</optgroup>
+
+<!-- =======================================
+SOUTHEAST ASIA
+======================================= -->
+
+<optgroup label="Southeast Asia">
+
+<option>GrabPay</option>
+<option>ShopeePay</option>
+<option>Touch 'n Go eWallet</option>
+<option>TrueMoney</option>
+<option>DANA</option>
+<option>OVO</option>
+<option>GoPay</option>
+<option>Boost</option>
+
+</optgroup>
+
+<!-- =======================================
+AFRICA
+======================================= -->
+
+<optgroup label="Africa Mobile Money">
+
+<option>M-Pesa</option>
+<option>Airtel Money</option>
+<option>MTN Mobile Money</option>
+<option>Orange Money</option>
+<option>MoMo</option>
+<option>Tigo Pesa</option>
+<option>HaloPesa</option>
+<option>EcoCash</option>
+<option>Vodafone Cash</option>
+
+</optgroup>
+
+<!-- =======================================
+MONEY TRANSFER
+======================================= -->
+
+<optgroup label="Money Transfer">
+
+<option>Western Union</option>
+<option>MoneyGram</option>
+<option>Remitly</option>
+<option>WorldRemit</option>
+<option>Xoom</option>
+<option>Ria Money Transfer</option>
+
+</optgroup>
+
+<!-- =======================================
+CRYPTO
+======================================= -->
 
 <optgroup label="Cryptocurrency">
 
-<option>Bitcoin</option>
-
-<option>Ethereum</option>
-
-<option>USDT (TRC20)</option>
-
-<option>USDT (ERC20)</option>
-
+<option>Bitcoin (BTC)</option>
+<option>Ethereum (ETH)</option>
+<option>Tether USDT (TRC20)</option>
+<option>Tether USDT (ERC20)</option>
+<option>USDC</option>
 <option>BNB</option>
-
-<option>Solana</option>
+<option>Solana (SOL)</option>
+<option>XRP</option>
+<option>Litecoin (LTC)</option>
+<option>Dogecoin (DOGE)</option>
 
 </optgroup>
 
-<optgroup label="Mobile Money">
+<!-- =======================================
+CRYPTO EXCHANGES
+======================================= -->
 
-<option>M-Pesa</option>
+<optgroup label="Crypto Platforms">
 
-<option>Airtel Money</option>
+<option>Binance Pay</option>
+<option>OKX Pay</option>
+<option>Bybit Pay</option>
+<option>KuCoin Pay</option>
+<option>Bitget Pay</option>
+<option>Noones</option>
+<option>Paxful</option>
 
-<option>MTN Mobile Money</option>
+</optgroup>
+
+<!-- =======================================
+BUSINESS PAYMENTS
+======================================= -->
+
+<optgroup label="Business">
+
+<option>Stripe</option>
+<option>Square</option>
+<option>Adyen</option>
 
 </optgroup>
 
@@ -362,7 +819,11 @@ required>
 
 <div class="form-group">
 
-<label for="status">Payment Status</label>
+<label for="status">
+
+Payment Status
+
+</label>
 
 <select id="status" required>
 
@@ -374,16 +835,40 @@ Payment Pending
 Awaiting Verification
 </option>
 
-<option value="Processing">
-Processing
+<option value="Verification In Progress">
+Verification In Progress
+</option>
+
+<option value="Payment Processing">
+Payment Processing
+</option>
+
+<option value="Payment Approved">
+Payment Approved
 </option>
 
 <option value="Payment Accepted">
 Payment Accepted
 </option>
 
-<option value="Completed">
-Completed
+<option value="Payment Completed">
+Payment Completed
+</option>
+
+<option value="Funds Released">
+Funds Released
+</option>
+
+<option value="Cancelled">
+Cancelled
+</option>
+
+<option value="Refunded">
+Refunded
+</option>
+
+<option value="Failed">
+Failed
 </option>
 
 </select>
@@ -392,14 +877,19 @@ Completed
 
 </div>
 
-<hr style="margin:35px 0;border:none;border-top:1px solid #e5e7eb;">
-<!-- =====================================
+<hr>
+<!-- =======================================================
 RECEIVER INFORMATION
-===================================== -->
+======================================================= -->
+
+<div class="section">
 
 <h2 class="section-title">
+
 <i class="fa-solid fa-user"></i>
+
 Receiver Information
+
 </h2>
 
 <div class="grid">
@@ -415,14 +905,77 @@ Receiver Full Name
 <input
 type="text"
 id="receiverName"
-placeholder="Pradeep Singh"
+placeholder="John Smith"
 required>
 
 </div>
 
 <div class="form-group">
 
-<label id="accountLabel" for="accountValue">
+<label for="receiverCountry">
+
+Receiver Country
+
+</label>
+
+<select id="receiverCountry" required>
+
+<option value="">Select Country</option>
+
+<option>United States</option>
+<option>Canada</option>
+<option>United Kingdom</option>
+<option>Philippines</option>
+<option>Singapore</option>
+<option>Malaysia</option>
+<option>Indonesia</option>
+<option>Thailand</option>
+<option>Vietnam</option>
+<option>India</option>
+<option>Pakistan</option>
+<option>Bangladesh</option>
+<option>Nepal</option>
+<option>Sri Lanka</option>
+<option>China</option>
+<option>Hong Kong</option>
+<option>Taiwan</option>
+<option>Japan</option>
+<option>South Korea</option>
+<option>United Arab Emirates</option>
+<option>Saudi Arabia</option>
+<option>Qatar</option>
+<option>Kuwait</option>
+<option>Bahrain</option>
+<option>Oman</option>
+<option>Jordan</option>
+<option>Kenya</option>
+<option>Uganda</option>
+<option>Tanzania</option>
+<option>Rwanda</option>
+<option>Nigeria</option>
+<option>Ghana</option>
+<option>South Africa</option>
+<option>Egypt</option>
+<option>Morocco</option>
+<option>Australia</option>
+<option>New Zealand</option>
+<option>Brazil</option>
+<option>Argentina</option>
+<option>Chile</option>
+<option>Colombia</option>
+<option>Mexico</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="form-group">
+
+<label id="accountLabel">
 
 Account Number
 
@@ -436,15 +989,121 @@ required>
 
 </div>
 
+<div class="form-group">
+
+<label for="receiverEmail">
+
+Email Address (Optional)
+
+</label>
+
+<input
+type="email"
+id="receiverEmail"
+placeholder="customer@example.com">
+
 </div>
 
-<!-- =====================================
+</div>
+
+<div class="grid">
+
+<div class="form-group">
+
+<label for="receiverPhone">
+
+Phone Number (Optional)
+
+</label>
+
+<input
+type="text"
+id="receiverPhone"
+placeholder="+639123456789">
+
+</div>
+
+<div class="form-group">
+
+<label for="bankName">
+
+Bank / Wallet Name
+
+</label>
+
+<input
+type="text"
+id="bankName"
+placeholder="Example: BDO, GCash, Wise, Chase Bank">
+
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="form-group">
+
+<label for="referenceNumber">
+
+Reference Number (Optional)
+
+</label>
+
+<input
+type="text"
+id="referenceNumber"
+placeholder="Reference Number">
+
+</div>
+
+<div class="form-group">
+
+<label for="senderName">
+
+Sender Name
+
+</label>
+
+<input
+type="text"
+id="senderName"
+placeholder="Sender Name">
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="receiverAddress">
+
+Receiver Address (Optional)
+
+</label>
+
+<textarea
+id="receiverAddress"
+placeholder="Street, City, State, ZIP Code, Country"></textarea>
+
+</div>
+
+</div>
+
+<hr>
+
+<!-- =======================================================
 ACTION REQUIRED
-===================================== -->
+======================================================= -->
+
+<div class="section">
 
 <h2 class="section-title">
+
 <i class="fa-solid fa-circle-info"></i>
+
 Action Required
+
 </h2>
 
 <div class="form-group">
@@ -461,139 +1120,66 @@ required>Please verify your device by clicking the button below to complete this
 
 </div>
 
+<div class="grid">
+
+<div class="form-group">
+
+<label for="buttonText">
+
+Button Text
+
+</label>
+
+<input
+type="text"
+id="buttonText"
+value="Verify Device">
+
+</div>
+
 <div class="form-group">
 
 <label for="buttonLink">
 
-Verification Page
+Verification Link
 
 </label>
 
 <input
 type="text"
 id="buttonLink"
-value="splash.html"
-required>
+value="splash.html">
 
 </div>
 
-<hr style="margin:35px 0;border:none;border-top:1px solid #e5e7eb;">
+</div>
 
-<script>
+</div>
 
-const paymentMethod=document.getElementById("paymentMethod");
-const accountLabel=document.getElementById("accountLabel");
-const accountValue=document.getElementById("accountValue");
-
-function updateReceiverField(){
-
-let label="Account Number";
-let placeholder="Enter account number";
-
-switch(paymentMethod.value){
-
-case "UPI":
-label="UPI ID";
-placeholder="example@ybl";
-break;
-
-case "PayPal":
-label="PayPal Email";
-placeholder="customer@example.com";
-break;
-
-case "Wise":
-label="Wise Email";
-placeholder="customer@example.com";
-break;
-
-case "Payoneer":
-label="Payoneer Email";
-placeholder="customer@example.com";
-break;
-
-case "Skrill":
-label="Skrill Email";
-placeholder="customer@example.com";
-break;
-
-case "Cash App":
-label="Cash App Tag";
-placeholder="$username";
-break;
-
-case "Venmo":
-label="Venmo Username";
-placeholder="@username";
-break;
-
-case "Google Pay":
-label="Google Pay Email";
-placeholder="user@gmail.com";
-break;
-
-case "Apple Pay":
-label="Apple ID";
-placeholder="user@icloud.com";
-break;
-
-case "Bitcoin":
-case "Ethereum":
-case "BNB":
-case "Solana":
-case "USDT (TRC20)":
-case "USDT (ERC20)":
-label="Wallet Address";
-placeholder="Paste wallet address";
-break;
-
-case "M-Pesa":
-case "Airtel Money":
-case "MTN Mobile Money":
-label="Phone Number";
-placeholder="+254712345678";
-break;
-
-case "SEPA":
-label="IBAN";
-placeholder="Enter IBAN";
-break;
-
-case "SWIFT":
-label="IBAN / Account Number";
-placeholder="Enter IBAN";
-break;
-
-default:
-label="Account Number";
-placeholder="Enter account number";
-
-}
-
-accountLabel.textContent=label;
-accountValue.placeholder=placeholder;
-
-}
-
-paymentMethod.addEventListener("change",updateReceiverField);
-
-updateReceiverField();
-
-</script>
-<!-- =====================================
+<hr>
+<!-- =======================================================
 SYSTEM GENERATED DETAILS
-===================================== -->
+======================================================= -->
+
+<div class="section">
 
 <h2 class="section-title">
+
 <i class="fa-solid fa-shield-halved"></i>
+
 System Generated Details
+
 </h2>
 
 <div class="grid">
 
 <div class="form-group">
 
-<label>Tracking Code</label>
+<label>
+
+Tracking Code
+
+</label>
 
 <input
 type="text"
@@ -604,7 +1190,11 @@ readonly>
 
 <div class="form-group">
 
-<label>Transaction ID</label>
+<label>
+
+Transaction ID
+
+</label>
 
 <input
 type="text"
@@ -619,7 +1209,11 @@ readonly>
 
 <div class="form-group">
 
-<label>Receipt Date</label>
+<label>
+
+Receipt Date
+
+</label>
 
 <input
 type="text"
@@ -630,7 +1224,11 @@ readonly>
 
 <div class="form-group">
 
-<label>Security</label>
+<label>
+
+Security
+
+</label>
 
 <input
 type="text"
@@ -641,40 +1239,62 @@ readonly>
 
 </div>
 
-<hr style="margin:35px 0;border:none;border-top:1px solid #e5e7eb;">
+</div>
 
-<!-- =====================================
+<hr>
+
+<!-- =======================================================
 LIVE RECEIPT PREVIEW
-===================================== -->
+======================================================= -->
+
+<div class="section">
 
 <h2 class="section-title">
+
 <i class="fa-solid fa-receipt"></i>
+
 Receipt Preview
+
 </h2>
 
-<div style="border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;">
+<div class="preview">
 
-<div style="background:#16a34a;color:#fff;padding:25px;text-align:center;">
+<div class="preview-header">
 
-<h2 style="font-size:30px;font-weight:800;">
+<h2 style="font-size:32px;font-weight:800;">
+
 GlobalPay
+
 </h2>
 
 <div style="margin-top:8px;">
+
 Sponsored by Noones
-</div>
 
 </div>
 
-<div style="padding:30px;text-align:center;">
+</div>
 
-<div style="font-size:14px;color:#6b7280;">
+<div class="preview-body">
+
+<div
+style="text-align:center;
+margin-bottom:30px;">
+
+<div
+style="font-size:14px;
+color:#6b7280;">
+
 Payment Amount
+
 </div>
 
 <div
 id="previewAmount"
-style="font-size:38px;font-weight:800;margin-top:10px;">
+style="
+font-size:40px;
+font-weight:800;
+margin-top:10px;">
 
 USD 0.00
 
@@ -682,7 +1302,7 @@ USD 0.00
 
 <div
 id="previewStatus"
-style="display:inline-block;margin-top:20px;padding:8px 18px;border-radius:30px;background:#FEF3C7;color:#92400E;font-weight:700;">
+class="status">
 
 Payment Pending
 
@@ -690,33 +1310,129 @@ Payment Pending
 
 </div>
 
-<hr style="border:none;border-top:1px solid #e5e7eb;">
+<div class="preview-row">
 
-<div style="padding:25px;">
+<span>
 
-<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-<span>Receiver</span>
-<strong id="previewReceiver">-</strong>
-</div>
+Receiver
 
-<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-<span id="previewAccountLabel">Account Number</span>
-<strong id="previewAccountValue">-</strong>
-</div>
+</span>
 
-<div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-<span>Tracking #</span>
-<strong id="previewTracking">------</strong>
-</div>
+<strong id="previewReceiver">
 
-<div style="display:flex;justify-content:space-between;">
-<span>Transaction ID</span>
-<strong id="previewTransaction">------</strong>
-</div>
+-
+
+</strong>
 
 </div>
 
+<div class="preview-row">
+
+<span>
+
+Country
+
+</span>
+
+<strong id="previewCountry">
+
+-
+
+</strong>
+
 </div>
+
+<div class="preview-row">
+
+<span id="previewAccountLabel">
+
+Account Number
+
+</span>
+
+<strong id="previewAccountValue">
+
+-
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Payment Method
+
+</span>
+
+<strong id="previewMethod">
+
+-
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Tracking Code
+
+</span>
+
+<strong id="previewTracking">
+
+------
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Transaction ID
+
+</span>
+
+<strong id="previewTransaction">
+
+------
+
+</strong>
+
+</div>
+
+<div class="preview-row">
+
+<span>
+
+Receipt Date
+
+</span>
+
+<strong id="previewDate">
+
+------
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<!-- =======================================================
+BUTTONS
+======================================================= -->
 
 <div class="actions">
 
@@ -725,7 +1441,7 @@ type="submit"
 id="createReceiptBtn"
 class="primary">
 
-<i class="fa-solid fa-plus"></i>
+<i class="fa-solid fa-circle-check"></i>
 
 Generate Receipt
 
@@ -733,9 +1449,12 @@ Generate Receipt
 
 <button
 type="reset"
+id="resetBtn"
 class="secondary">
 
-Reset
+<i class="fa-solid fa-rotate-left"></i>
+
+Reset Form
 
 </button>
 
@@ -747,24 +1466,56 @@ Reset
 
 </div>
 
+</div>
+
+<!-- JavaScript starts in Part 5 -->
 <script>
+    /* ==========================================================
+   GLOBALPAY RECEIPT GENERATOR
+   PART 5A
+   INITIALIZATION + GENERATORS
+========================================================== */
 
-/* =====================================
+/* ==========================================================
 DOM ELEMENTS
-===================================== */
+========================================================== */
 
-const amount=document.getElementById("amount");
-const currency=document.getElementById("currency");
-const status=document.getElementById("status");
-const receiverName=document.getElementById("receiverName");
+const amount = document.getElementById("amount");
+const currency = document.getElementById("currency");
+const paymentMethod = document.getElementById("paymentMethod");
+const status = document.getElementById("status");
 
-const trackingCode=document.getElementById("trackingCode");
-const transactionID=document.getElementById("transactionID");
-const receiptDate=document.getElementById("receiptDate");
+const receiverName = document.getElementById("receiverName");
+const receiverCountry = document.getElementById("receiverCountry");
+const accountLabel = document.getElementById("accountLabel");
+const accountValue = document.getElementById("accountValue");
 
-/* =====================================
-GENERATORS
-===================================== */
+const receiverEmail = document.getElementById("receiverEmail");
+const receiverPhone = document.getElementById("receiverPhone");
+const bankName = document.getElementById("bankName");
+
+const trackingCode = document.getElementById("trackingCode");
+const transactionID = document.getElementById("transactionID");
+const receiptDate = document.getElementById("receiptDate");
+
+/* ==========================================================
+PREVIEW ELEMENTS
+========================================================== */
+
+const previewAmount = document.getElementById("previewAmount");
+const previewStatus = document.getElementById("previewStatus");
+const previewReceiver = document.getElementById("previewReceiver");
+const previewCountry = document.getElementById("previewCountry");
+const previewAccountLabel = document.getElementById("previewAccountLabel");
+const previewAccountValue = document.getElementById("previewAccountValue");
+const previewMethod = document.getElementById("previewMethod");
+const previewTracking = document.getElementById("previewTracking");
+const previewTransaction = document.getElementById("previewTransaction");
+const previewDate = document.getElementById("previewDate");
+
+/* ==========================================================
+RANDOM CODE GENERATOR
+========================================================== */
 
 function randomCode(length){
 
@@ -774,7 +1525,9 @@ let code="";
 
 for(let i=0;i<length;i++){
 
-code+=chars[Math.floor(Math.random()*chars.length)];
+code += chars.charAt(
+Math.floor(Math.random()*chars.length)
+);
 
 }
 
@@ -782,74 +1535,617 @@ return code;
 
 }
 
-trackingCode.value=randomCode(6);
+/* ==========================================================
+GENERATE TRACKING CODE
+========================================================== */
+
+function generateTrackingCode(){
+
+trackingCode.value=randomCode(8);
+
+previewTracking.textContent=trackingCode.value;
+
+}
+
+/* ==========================================================
+GENERATE TRANSACTION ID
+========================================================== */
+
+function generateTransactionID(){
+
+const time=Date.now().toString().slice(-8);
 
 transactionID.value=
-"TXN"+Date.now().toString().slice(-8)+randomCode(4);
+"TXN-"+time+"-"+randomCode(4);
 
-receiptDate.value=
-new Date().toLocaleString();
-
-/* =====================================
-LIVE PREVIEW
-===================================== */
-
-function updatePreview(){
-
-document.getElementById("previewAmount").textContent=
-(currency.value||"USD")+" "+(amount.value||"0.00");
-
-document.getElementById("previewStatus").textContent=
-status.value;
-
-document.getElementById("previewReceiver").textContent=
-receiverName.value||"-";
-
-document.getElementById("previewAccountLabel").textContent=
-accountLabel.textContent;
-
-document.getElementById("previewAccountValue").textContent=
-accountValue.value||"-";
-
-document.getElementById("previewTracking").textContent=
-trackingCode.value;
-
-document.getElementById("previewTransaction").textContent=
+previewTransaction.textContent=
 transactionID.value;
 
 }
 
-amount.addEventListener("input",updatePreview);
-currency.addEventListener("change",updatePreview);
-status.addEventListener("change",updatePreview);
-receiverName.addEventListener("input",updatePreview);
-accountValue.addEventListener("input",updatePreview);
+/* ==========================================================
+RECEIPT DATE
+========================================================== */
+
+function generateReceiptDate(){
+
+const now=new Date();
+
+receiptDate.value=
+now.toLocaleString();
+
+previewDate.textContent=
+receiptDate.value;
+
+}
+
+/* ==========================================================
+INITIAL PAGE LOAD
+========================================================== */
+
+generateTrackingCode();
+
+generateTransactionID();
+
+generateReceiptDate();
+
+/* ==========================================================
+AUTO GENERATE NEW CODES AFTER RESET
+========================================================== */
+
+const resetBtn=document.getElementById("resetBtn");
+
+resetBtn.addEventListener("click",()=>{
+
+setTimeout(()=>{
+
+generateTrackingCode();
+
+generateTransactionID();
+
+generateReceiptDate();
 
 updatePreview();
 
+},50);
+
+});
+/* ==========================================================
+PART 5B
+SMART ACCOUNT LABELS
+========================================================== */
+
+function updateAccountField(){
+
+let label="Account Number";
+let placeholder="Enter account number";
+
+switch(paymentMethod.value){
+
+/* ===========================
+BANKS
+=========================== */
+
+case "Bank Transfer":
+case "Wire Transfer":
+case "ACH":
+case "RTGS":
+case "NEFT":
+case "IMPS":
+
+label="Account Number";
+placeholder="Enter account number";
+break;
+
+case "SWIFT":
+
+label="IBAN / Account Number";
+placeholder="Enter IBAN";
+break;
+
+case "SEPA":
+
+label="IBAN";
+placeholder="Enter IBAN";
+break;
+
+/* ===========================
+CARDS
+=========================== */
+
+case "Visa":
+case "Visa Debit":
+case "Mastercard":
+case "Maestro":
+case "American Express":
+case "Discover":
+case "JCB":
+case "UnionPay":
+
+label="Card Number";
+placeholder="1234 5678 9012 3456";
+break;
+
+/* ===========================
+PAYPAL / WISE
+=========================== */
+
+case "PayPal":
+
+label="PayPal Email";
+placeholder="customer@example.com";
+break;
+
+case "Wise":
+
+label="Wise Email";
+placeholder="customer@example.com";
+break;
+
+case "Payoneer":
+
+label="Payoneer Email";
+placeholder="customer@example.com";
+break;
+
+case "Skrill":
+
+label="Skrill Email";
+placeholder="customer@example.com";
+break;
+
+case "Neteller":
+
+label="Neteller Email";
+placeholder="customer@example.com";
+break;
+
+case "Perfect Money":
+
+label="Perfect Money ID";
+placeholder="U1234567";
+break;
+
+case "WebMoney":
+
+label="WMID";
+placeholder="123456789012";
+break;
+
+/* ===========================
+DIGITAL WALLETS
+=========================== */
+
+case "Cash App":
+
+label="Cash App Tag";
+placeholder="$username";
+break;
+
+case "Venmo":
+
+label="Venmo Username";
+placeholder="@username";
+break;
+
+case "Apple Pay":
+
+label="Apple ID";
+placeholder="user@icloud.com";
+break;
+
+case "Google Pay":
+
+label="Google Pay Email";
+placeholder="user@gmail.com";
+break;
+
+case "Samsung Pay":
+
+label="Samsung Account";
+placeholder="Samsung account";
+break;
+
+case "Amazon Pay":
+
+label="Amazon Account";
+placeholder="Amazon email";
+break;
+
+case "Revolut":
+
+label="Revolut Username";
+placeholder="@username";
+break;
+
+/* ===========================
+PHILIPPINES
+=========================== */
+
+case "GCash":
+
+label="GCash Mobile Number";
+placeholder="09XXXXXXXXX";
+break;
+
+case "Maya":
+
+label="Maya Mobile Number";
+placeholder="09XXXXXXXXX";
+break;
+
+case "Coins.ph":
+
+label="Coins.ph Email";
+placeholder="customer@example.com";
+break;
+
+case "DragonPay":
+
+label="DragonPay Reference";
+placeholder="Reference Number";
+break;
+
+case "Cebuana Lhuillier":
+
+label="Reference Number";
+placeholder="Reference Number";
+break;
+
+case "Palawan Express":
+
+label="Reference Number";
+placeholder="Reference Number";
+break;
+
+/* ===========================
+INDIA
+=========================== */
+
+case "UPI":
+case "PhonePe":
+case "Google Pay India":
+case "BHIM":
+
+label="UPI ID";
+placeholder="example@upi";
+break;
+
+case "Paytm":
+
+label="Paytm Mobile Number";
+placeholder="+91XXXXXXXXXX";
+break;
+
+/* ===========================
+CHINA
+=========================== */
+
+case "Alipay":
+
+label="Alipay ID";
+placeholder="Alipay Account";
+break;
+
+case "WeChat Pay":
+
+label="WeChat ID";
+placeholder="WeChat ID";
+break;
+
+/* ===========================
+SEA
+=========================== */
+
+case "GrabPay":
+case "ShopeePay":
+case "Touch 'n Go eWallet":
+case "TrueMoney":
+case "DANA":
+case "OVO":
+case "GoPay":
+case "Boost":
+
+label="Mobile Number";
+placeholder="Registered mobile number";
+break;
+
+/* ===========================
+AFRICA
+=========================== */
+
+case "M-Pesa":
+case "Airtel Money":
+case "MTN Mobile Money":
+case "Orange Money":
+case "MoMo":
+case "Tigo Pesa":
+case "HaloPesa":
+case "EcoCash":
+case "Vodafone Cash":
+
+label="Phone Number";
+placeholder="+254712345678";
+break;
+
+/* ===========================
+REMITTANCE
+=========================== */
+
+case "Western Union":
+case "MoneyGram":
+case "Remitly":
+case "WorldRemit":
+case "Xoom":
+case "Ria Money Transfer":
+
+label="Reference Number";
+placeholder="Reference Number";
+break;
+
+/* ===========================
+CRYPTO
+=========================== */
+
+case "Bitcoin (BTC)":
+case "Ethereum (ETH)":
+case "Tether USDT (TRC20)":
+case "Tether USDT (ERC20)":
+case "USDC":
+case "BNB":
+case "Solana (SOL)":
+case "XRP":
+case "Litecoin (LTC)":
+case "Dogecoin (DOGE)":
+
+label="Wallet Address";
+placeholder="Paste wallet address";
+break;
+
+/* ===========================
+CRYPTO PLATFORMS
+=========================== */
+
+case "Binance Pay":
+
+label="Binance Pay ID";
+placeholder="Binance ID";
+break;
+
+case "OKX Pay":
+
+label="OKX UID";
+placeholder="OKX UID";
+break;
+
+case "Bybit Pay":
+
+label="Bybit UID";
+placeholder="Bybit UID";
+break;
+
+case "KuCoin Pay":
+
+label="KuCoin UID";
+placeholder="KuCoin UID";
+break;
+
+case "Bitget Pay":
+
+label="Bitget UID";
+placeholder="Bitget UID";
+break;
+
+case "Noones":
+
+label="Noones Username";
+placeholder="@username";
+break;
+
+case "Paxful":
+
+label="Paxful Username";
+placeholder="@username";
+break;
+
+default:
+
+label="Account Number";
+placeholder="Enter account number";
+
+}
+
+accountLabel.textContent=label;
+accountValue.placeholder=placeholder;
+
+if(previewAccountLabel){
+
+previewAccountLabel.textContent=label;
+
+}
+
+}
+
+paymentMethod.addEventListener("change",updateAccountField);
+
+updateAccountField();
+/* ==========================================================
+PART 5C
+LIVE RECEIPT PREVIEW
+========================================================== */
+
+function updatePreview(){
+
+/* --------------------------
+AMOUNT
+-------------------------- */
+
+const amountValue =
+amount.value.trim()===""
+? "0.00"
+: Number(amount.value).toLocaleString(undefined,{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+});
+
+previewAmount.textContent =
+(currency.value || "USD") + " " + amountValue;
+
+/* --------------------------
+STATUS
+-------------------------- */
+
+previewStatus.textContent =
+status.value || "Payment Pending";
+
+/* --------------------------
+STATUS COLORS
+-------------------------- */
+
+switch(status.value){
+
+case "Payment Completed":
+case "Funds Released":
+
+previewStatus.style.background="#DCFCE7";
+previewStatus.style.color="#166534";
+break;
+
+case "Payment Accepted":
+case "Payment Approved":
+
+previewStatus.style.background="#DBEAFE";
+previewStatus.style.color="#1D4ED8";
+break;
+
+case "Cancelled":
+case "Failed":
+
+previewStatus.style.background="#FEE2E2";
+previewStatus.style.color="#B91C1C";
+break;
+
+case "Refunded":
+
+previewStatus.style.background="#F3E8FF";
+previewStatus.style.color="#7E22CE";
+break;
+
+default:
+
+previewStatus.style.background="#FEF3C7";
+previewStatus.style.color="#92400E";
+
+}
+
+/* --------------------------
+RECEIVER
+-------------------------- */
+
+previewReceiver.textContent =
+receiverName.value || "-";
+
+/* --------------------------
+COUNTRY
+-------------------------- */
+
+previewCountry.textContent =
+receiverCountry.value || "-";
+
+/* --------------------------
+ACCOUNT LABEL
+-------------------------- */
+
+previewAccountLabel.textContent =
+accountLabel.textContent;
+
+/* --------------------------
+ACCOUNT VALUE
+-------------------------- */
+
+previewAccountValue.textContent =
+accountValue.value || "-";
+
+/* --------------------------
+PAYMENT METHOD
+-------------------------- */
+
+previewMethod.textContent =
+paymentMethod.value || "-";
+
+/* --------------------------
+TRACKING
+-------------------------- */
+
+previewTracking.textContent =
+trackingCode.value;
+
+/* --------------------------
+TRANSACTION
+-------------------------- */
+
+previewTransaction.textContent =
+transactionID.value;
+
+/* --------------------------
+DATE
+-------------------------- */
+
+previewDate.textContent =
+receiptDate.value;
+
+}
+
+/* ==========================================================
+EVENT LISTENERS
+========================================================== */
+
+amount.addEventListener("input",updatePreview);
+
+currency.addEventListener("change",updatePreview);
+
+paymentMethod.addEventListener("change",updatePreview);
+
+status.addEventListener("change",updatePreview);
+
+receiverName.addEventListener("input",updatePreview);
+
+receiverCountry.addEventListener("change",updatePreview);
+
+accountValue.addEventListener("input",updatePreview);
+
+receiverEmail.addEventListener("input",updatePreview);
+
+receiverPhone.addEventListener("input",updatePreview);
+
+bankName.addEventListener("input",updatePreview);
+
+/* ==========================================================
+INITIAL PREVIEW
+========================================================== */
+
+updatePreview();
 </script>
+
 <script type="module">
 
 import { db } from "./js/firebase.js";
 
 import {
+
 doc,
 setDoc,
 serverTimestamp
+
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-/* =====================================
-FORM SUBMIT
-===================================== */
-
 const receiptForm=document.getElementById("receiptForm");
+
+const createReceiptBtn=document.getElementById("createReceiptBtn");
 
 receiptForm.addEventListener("submit",async(e)=>{
 
 e.preventDefault();
-
-const createReceiptBtn=
-document.getElementById("createReceiptBtn");
 
 createReceiptBtn.disabled=true;
 
@@ -870,17 +2166,39 @@ currency:currency.value,
 
 paymentMethod:paymentMethod.value,
 
+status:status.value,
+
 receiverName:receiverName.value.trim(),
+
+receiverCountry:receiverCountry.value,
+
+receiverEmail:receiverEmail.value.trim(),
+
+receiverPhone:receiverPhone.value.trim(),
+
+bankName:bankName.value.trim(),
 
 accountLabel:accountLabel.textContent,
 
 accountValue:accountValue.value.trim(),
 
-status:status.value,
+referenceNumber:
+document.getElementById("referenceNumber").value.trim(),
 
-actionText:actionText.value.trim(),
+senderName:
+document.getElementById("senderName").value.trim(),
 
-buttonLink:buttonLink.value.trim(),
+receiverAddress:
+document.getElementById("receiverAddress").value.trim(),
+
+actionText:
+document.getElementById("actionText").value.trim(),
+
+buttonText:
+document.getElementById("buttonText").value.trim(),
+
+buttonLink:
+document.getElementById("buttonLink").value.trim(),
 
 transactionDate:receiptDate.value,
 
@@ -888,21 +2206,21 @@ createdAt:serverTimestamp()
 
 };
 
-/* =====================================
-SAVE RECEIPT
-===================================== */
+/* Save Receipt */
 
 await setDoc(
 
-doc(db,"receipts",trackingCode.value),
+doc(
+db,
+"receipts",
+trackingCode.value
+),
 
 receipt
 
 );
 
-/* =====================================
-SAVE TRACKING CODE
-===================================== */
+/* Save tracking locally */
 
 localStorage.setItem(
 
@@ -912,12 +2230,12 @@ trackingCode.value
 
 );
 
-/* =====================================
-GO TO RECEIPT
-===================================== */
+/* Redirect */
 
 window.location.href=
+
 "payment_receipt_style.html?tracking="+
+
 encodeURIComponent(trackingCode.value);
 
 }catch(error){
@@ -925,14 +2243,18 @@ encodeURIComponent(trackingCode.value);
 console.error(error);
 
 alert(
-"Failed to create receipt.\n\n"+
+
+"Unable to create receipt.\n\n"+
+
 error.message
+
 );
 
 createReceiptBtn.disabled=false;
 
 createReceiptBtn.innerHTML=
-'<i class="fa-solid fa-plus"></i> Generate Receipt';
+
+'<i class="fa-solid fa-circle-check"></i> Generate Receipt';
 
 }
 
