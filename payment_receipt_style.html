@@ -7,13 +7,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GlobalPay Payment Receipt</title>
+<title>GlobalPay | Secure Payment Receipt</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -24,182 +26,73 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
-:root{
-
---primary:#14B45C;
---primary-dark:#0B7D43;
---background:#EDF3F8;
---card:#FFFFFF;
---text:#1F2937;
---muted:#6B7280;
---border:#E5E7EB;
---shadow:0 15px 45px rgba(0,0,0,.08);
-
-}
-
 body{
 
-background:var(--background);
+background:#eef3f8;
 
-display:flex;
+padding:30px;
 
-justify-content:center;
-
-padding:18px;
-
-min-height:100vh;
+color:#1f2937;
 
 }
 
-/* ==========================
-MAIN CARD
-========================== */
+.container{
+
+max-width:850px;
+
+margin:auto;
+
+}
 
 .receipt{
 
-width:100%;
-
-max-width:520px;
-
-background:var(--card);
+background:#fff;
 
 border-radius:22px;
 
 overflow:hidden;
 
-box-shadow:var(--shadow);
+box-shadow:0 20px 50px rgba(0,0,0,.08);
 
 }
 
-/* ==========================
+/* ===========================
 HEADER
-========================== */
+=========================== */
 
 .header{
 
-background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+background:linear-gradient(135deg,#16a34a,#0b7d43);
 
-padding:28px 22px 70px;
+padding:35px;
 
 text-align:center;
 
-position:relative;
-
-color:white;
+color:#fff;
 
 }
 
 .logo{
 
-width:72px;
-
-height:72px;
-
-margin:auto;
-
-background:white;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-box-shadow:0 10px 25px rgba(0,0,0,.20);
-
-overflow:hidden;
-
-}
-
-.logo img{
-
-width:46px;
-
-height:46px;
-
-object-fit:contain;
-
-display:block;
-
-}
-
-.company{
-
-margin-top:16px;
-
-font-size:30px;
+font-size:40px;
 
 font-weight:800;
 
-letter-spacing:.5px;
+letter-spacing:-1px;
 
 }
 
 .subtitle{
 
-margin-top:5px;
-
-font-size:14px;
-
-opacity:.92;
-
-}
-
-/* ==========================
-AMOUNT CARD
-========================== */
-
-.amount-card{
-
-width:90%;
-
-margin:-48px auto 0;
-
-background:white;
-
-border-radius:18px;
-
-padding:22px;
-
-text-align:center;
-
-box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-position:relative;
-
-z-index:5;
-
-}
-
-.amount-title{
-
-font-size:12px;
-
-letter-spacing:3px;
-
-text-transform:uppercase;
-
-color:var(--muted);
-
-}
-
-.amount{
-
 margin-top:10px;
 
-font-size:42px;
+font-size:18px;
 
-font-weight:800;
-
-color:var(--primary-dark);
-
-line-height:1.2;
+font-weight:500;
 
 }
 
-.status{
+.sponsor{
 
 display:inline-block;
 
@@ -207,79 +100,133 @@ margin-top:16px;
 
 padding:8px 18px;
 
-border-radius:999px;
+border-radius:30px;
+
+background:rgba(255,255,255,.18);
 
 font-size:13px;
 
-font-weight:700;
-
-background:#E5E7EB;
-
-color:#374151;
+font-weight:600;
 
 }
 
-/* ==========================
+/* ===========================
+AMOUNT
+=========================== */
+
+.amountSection{
+
+padding:35px;
+
+text-align:center;
+
+}
+
+.amountTitle{
+
+font-size:15px;
+
+color:#6B7280;
+
+}
+
+.amount{
+
+margin-top:10px;
+
+font-size:46px;
+
+font-weight:800;
+
+color:#111827;
+
+}
+
+.status{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+margin-top:20px;
+
+padding:10px 18px;
+
+border-radius:30px;
+
+background:#FEF3C7;
+
+color:#92400E;
+
+font-weight:700;
+
+font-size:14px;
+
+}
+
+.divider{
+
+height:1px;
+
+background:#E5E7EB;
+
+}
+
+/* ===========================
 CONTENT
-========================== */
+=========================== */
 
 .content{
 
-padding:24px;
+padding:32px;
 
 }
 
 .section{
 
-margin-top:24px;
+margin-bottom:35px;
 
 }
 
-.section-title{
+.sectionTitle{
 
-font-size:18px;
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+margin-bottom:18px;
+
+font-size:20px;
 
 font-weight:700;
 
-color:var(--text);
+}
 
-margin-bottom:14px;
+.sectionTitle i{
+
+color:#16a34a;
 
 }
 
-/* ==========================
-DETAIL CARD
-========================== */
-
-.detail-card{
-
-border:1px solid var(--border);
-
-border-radius:14px;
-
-overflow:hidden;
-
-background:white;
-
-}
-
-.detail-row{
+.row{
 
 display:flex;
 
 justify-content:space-between;
 
-align-items:center;
+gap:20px;
 
-padding:15px 16px;
+padding:15px 0;
 
-border-bottom:1px solid var(--border);
-
-gap:15px;
+border-bottom:1px solid #F1F5F9;
 
 }
 
-.detail-row:last-child{
+.row:last-child{
 
 border-bottom:none;
 
@@ -287,225 +234,131 @@ border-bottom:none;
 
 .label{
 
-font-size:14px;
-
 font-weight:600;
 
-color:var(--muted);
+color:#6B7280;
 
 }
 
 .value{
 
-font-size:14px;
-
 font-weight:700;
-
-color:var(--text);
 
 text-align:right;
 
-max-width:58%;
-
 word-break:break-word;
-
-overflow-wrap:anywhere;
 
 }
 
-/* ==========================
-NOTICE
-========================== */
-
 .notice{
 
-margin-top:22px;
+background:#ECFDF3;
 
-background:#FFF8E8;
-
-border-left:5px solid #F4B400;
+border-left:5px solid #16a34a;
 
 padding:18px;
 
 border-radius:12px;
-
-font-size:14px;
-
-line-height:1.7;
-
-color:#7A5B00;
-
-}
-
-.notice strong{
-
-display:block;
-
-margin-bottom:8px;
-
-font-size:15px;
-
-}
-
-/* ==========================
-BUTTONS
-========================== */
-
-.buttons{
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-margin-top:24px;
-
-}
-
-.btn{
-
-border:none;
-
-border-radius:12px;
-
-padding:15px;
-
-font-size:16px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-.btn:hover{
-
-transform:translateY(-2px);
-
-}
-
-.btn-primary{
-
-background:var(--primary);
-
-color:white;
-
-}
-
-.btn-dark{
-
-background:#2D3748;
-
-color:white;
-
-}
-
-/* ==========================
-FOOTER
-========================== */
-
-.footer{
-
-padding:24px;
-
-text-align:center;
-
-font-size:12px;
-
-color:#9CA3AF;
 
 line-height:1.8;
 
 }
 
-/* ==========================
-MOBILE
-========================== */
+.buttons{
 
-@media (max-width:480px){
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:16px;
+
+margin-top:30px;
+
+}
+
+button{
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+.download{
+
+background:#EEF2F7;
+
+}
+
+.accept{
+
+background:#16a34a;
+
+color:white;
+
+}
+
+.footer{
+
+padding:25px;
+
+text-align:center;
+
+background:#FAFAFA;
+
+font-size:13px;
+
+color:#64748B;
+
+}
+
+@media(max-width:768px){
 
 body{
 
-padding:10px;
-
-}
-
-.receipt{
-
-border-radius:16px;
-
-}
-
-.header{
-
-padding:24px 18px 62px;
-
-}
-
-.logo{
-
-width:60px;
-
-height:60px;
-
-}
-
-.logo img{
-
-width:40px;
-
-height:40px;
-
-}
-
-.company{
-
-font-size:26px;
-
-}
-
-.amount-card{
-
-width:92%;
-
-padding:18px;
+padding:15px;
 
 }
 
 .amount{
 
-font-size:34px;
+font-size:36px;
 
 }
 
-.detail-row{
+.buttons{
 
-padding:13px 14px;
+grid-template-columns:1fr;
 
 }
 
-.label{
+.row{
 
-font-size:13px;
+flex-direction:column;
+
+gap:6px;
 
 }
 
 .value{
 
-font-size:13px;
-
-max-width:55%;
-
-}
-
-.btn{
-
-padding:14px;
-
-font-size:15px;
+text-align:left;
 
 }
 
@@ -517,258 +370,296 @@ font-size:15px;
 
 <body>
 
+<div class="container">
+
 <div class="receipt">
-    <!-- ==========================
-HEADER
-========================== -->
 
 <div class="header">
 
-    <div class="logo">
+<div class="logo">
 
-        <img src="images/globalpay-logo.png" alt="GlobalPay">
-
-    </div>
-
-    <div class="company">
-
-        GlobalPay
-
-    </div>
-
-    <div class="subtitle">
-
-        Secure Digital Payment Platform
-
-    </div>
+GlobalPay
 
 </div>
 
-<!-- ==========================
-AMOUNT CARD
-========================== -->
+<div class="subtitle">
 
-<div class="amount-card">
-
-    <div class="amount-title">
-
-        PAYMENT AMOUNT
-
-    </div>
-
-    <div class="amount" id="amount">
-
-        Loading...
-
-    </div>
-
-    <div id="status" class="status">
-
-        Loading...
-
-    </div>
+Secure Payment Receipt
 
 </div>
 
-<!-- ==========================
-CONTENT
-========================== -->
+<div class="sponsor">
+
+Sponsored by Noones
+
+</div>
+
+</div>
+<!-- =====================================
+PAYMENT AMOUNT
+===================================== -->
+
+<div class="amountSection">
+
+<div class="amountTitle">
+
+Payment Amount
+
+</div>
+
+<div
+class="amount"
+id="receiptAmount">
+
+Loading...
+
+</div>
+
+<div
+class="status"
+id="receiptStatus">
+
+<i class="fa-solid fa-circle"></i>
+
+<span>Payment Pending</span>
+
+</div>
+
+</div>
+
+<div class="divider"></div>
 
 <div class="content">
 
-<!-- ==========================
+<!-- =====================================
 TRANSACTION DETAILS
-========================== -->
+===================================== -->
 
 <div class="section">
 
-    <div class="section-title">
+<h2 class="sectionTitle">
 
-        Transaction Details
+<i class="fa-solid fa-receipt"></i>
 
-    </div>
+Transaction Details
 
-    <div class="detail-card">
+</h2>
 
-        <div class="detail-row">
+<div class="row">
 
-            <div class="label">
+<div class="label">
 
-                Tracking Code
-
-            </div>
-
-            <div class="value" id="trackingCode">
-
-                Loading...
-
-            </div>
-
-        </div>
-
-        <div class="detail-row">
-
-            <div class="label">
-
-                Payment Method
-
-            </div>
-
-            <div class="value" id="paymentMethod">
-
-                Loading...
-
-            </div>
-
-        </div>
-
-        <div class="detail-row">
-
-            <div class="label">
-
-                Transaction Date
-
-            </div>
-
-            <div class="value" id="transactionDate">
-
-                Loading...
-
-            </div>
-
-        </div>
-
-        <div class="detail-row">
-
-            <div class="label">
-
-                Transaction ID
-
-            </div>
-
-            <div class="value" id="transactionId">
-
-                Loading...
-
-            </div>
-
-        </div>
-
-    </div>
+Tracking #
 
 </div>
 
-<!-- ==========================
-RECEIVER
-========================== -->
+<div class="value" id="trackingCode">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="label">
+
+Transaction ID
+
+</div>
+
+<div class="value" id="transactionID">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="label">
+
+Payment Method
+
+</div>
+
+<div class="value" id="paymentMethod">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="label">
+
+Currency
+
+</div>
+
+<div class="value" id="currency">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="label">
+
+Created
+
+</div>
+
+<div class="value" id="receiptDate">
+
+Loading...
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================
+RECEIVER INFORMATION
+===================================== -->
 
 <div class="section">
 
-    <div class="section-title">
+<h2 class="sectionTitle">
 
-        Receiver
+<i class="fa-solid fa-user"></i>
 
-    </div>
+Receiver Information
 
-    <div class="detail-card">
+</h2>
 
-        <div class="detail-row">
+<div class="row">
 
-            <div class="label">
+<div class="label">
 
-                Name
-
-            </div>
-
-            <div class="value" id="receiverName">
-
-                Loading...
-
-            </div>
-
-        </div>
-
-        <div class="detail-row">
-
-            <div class="label">
-
-                Account Number
-
-            </div>
-
-            <div class="value" id="accountNumber">
-
-                Loading...
-
-            </div>
-
-        </div>
-
-    </div>
+Receiver Name
 
 </div>
 
-<!-- ==========================
+<div class="value" id="receiverName">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div
+class="label"
+id="receiverLabel">
+
+Account Number
+
+</div>
+
+<div
+class="value"
+id="receiverValue">
+
+Loading...
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================
 ACTION REQUIRED
-========================== -->
+===================================== -->
 
 <div class="section">
 
-    <div class="section-title">
+<h2 class="sectionTitle">
 
-        Action Required
+<i class="fa-solid fa-circle-info"></i>
 
-    </div>
+Action Required
 
-    <div class="notice">
+</h2>
 
-        <strong>
+<div
+class="notice"
+id="actionRequired">
 
-            Important
-
-        </strong>
-
-        <div id="actionText">
-
-            Loading...
-
-        </div>
-
-    </div>
+Loading...
 
 </div>
 
-<!-- ==========================
+</div>
+
+<!-- =====================================
 BUTTONS
-========================== -->
+===================================== -->
 
 <div class="buttons">
 
-    <button id="acceptBtn" class="btn btn-primary">
-        Accept Payment
-    </button>
+<button
+class="download"
+id="downloadReceipt">
 
-    <button id="printBtn" class="btn btn-dark">
-        Download Receipt
-    </button>
+<i class="fa-solid fa-download"></i>
+
+Download Receipt
+
+</button>
+
+<button
+class="accept"
+id="acceptPayment">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Accept Payment
+
+</button>
 
 </div>
 
-<!-- ==========================
-FOOTER
-========================== -->
+</div>
 
 <div class="footer">
 
-    <strong>GlobalPay</strong>
+<div style="font-size:16px;font-weight:700;">
 
-    <br><br>
+GlobalPay
 
-    This receipt was generated electronically.
+</div>
 
-    <br>
+<div style="margin-top:8px;">
 
-    Verify every payment using the official tracking code.
+Sponsored by Noones
+
+</div>
+
+<div style="margin-top:12px;">
+
+<i class="fa-solid fa-lock"></i>
+
+Protected by Secure Payment Technology
+
+</div>
+
+<div
+id="generatedTime"
+style="margin-top:10px;font-size:12px;">
+
+Receipt Generated
 
 </div>
 
@@ -778,205 +669,252 @@ FOOTER
 import { db } from "./js/firebase.js";
 
 import {
-    collection,
-    query,
-    where,
-    getDocs
+doc,
+getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-/* ==========================
+/* ==========================================
 GET TRACKING CODE
-========================== */
+========================================== */
 
-const params = new URLSearchParams(window.location.search);
-const tracking = params.get("tracking");
+const urlParams = new URLSearchParams(window.location.search);
 
-if(!tracking){
+const trackingCode =
+urlParams.get("tracking") ||
+localStorage.getItem("trackingCode");
 
-document.body.innerHTML=`
-<div style="
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-font-family:Inter,sans-serif;
-text-align:center;
-padding:30px;
-">
-<div>
+if(!trackingCode){
 
-<h2>Invalid Receipt</h2>
+alert("Tracking code not found.");
 
-<p>No tracking code was supplied.</p>
+window.location.href="payment_tracking.html";
 
-</div>
-</div>
-`;
-
-throw new Error("Tracking code missing");
+throw new Error("Missing tracking code.");
 
 }
 
-/* ==========================
+/* ==========================================
 LOAD RECEIPT
-========================== */
+========================================== */
 
-const q = query(
+const receiptRef = doc(db,"receipts",trackingCode);
 
-collection(db,"receipts"),
+const receiptSnap = await getDoc(receiptRef);
 
-where("trackingCode","==",tracking)
+if(!receiptSnap.exists()){
+
+alert("Receipt not found.");
+
+window.location.href="payment_tracking.html";
+
+throw new Error("Receipt does not exist.");
+
+}
+
+const receipt = receiptSnap.data();
+
+/* ==========================================
+DISPLAY DATA
+========================================== */
+
+document.getElementById("receiptAmount").textContent =
+
+`${receipt.currency} ${Number(receipt.amount).toLocaleString(undefined,{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+})}`;
+
+document.getElementById("receiptStatus").innerHTML =
+
+`<i class="fa-solid fa-circle"></i>
+
+<span>${receipt.status}</span>`;
+
+document.getElementById("trackingCode").textContent =
+receipt.trackingCode;
+
+document.getElementById("transactionID").textContent =
+receipt.transactionID;
+
+document.getElementById("paymentMethod").textContent =
+receipt.paymentMethod;
+
+document.getElementById("currency").textContent =
+receipt.currency;
+
+document.getElementById("receiptDate").textContent =
+receipt.transactionDate;
+
+document.getElementById("receiverName").textContent =
+receipt.receiverName;
+
+document.getElementById("receiverLabel").textContent =
+receipt.accountLabel;
+
+document.getElementById("receiverValue").textContent =
+receipt.accountValue;
+
+document.getElementById("actionRequired").textContent =
+receipt.actionText;
+
+/* ==========================================
+STATUS COLORS
+========================================== */
+
+const badge =
+document.getElementById("receiptStatus");
+
+const status =
+(receipt.status || "").toLowerCase();
+
+if(status.includes("accepted") ||
+status.includes("completed") ||
+status.includes("verified")){
+
+badge.style.background="#DCFCE7";
+badge.style.color="#166534";
+
+}
+
+else if(status.includes("processing")){
+
+badge.style.background="#DBEAFE";
+badge.style.color="#1D4ED8";
+
+}
+
+else{
+
+badge.style.background="#FEF3C7";
+badge.style.color="#92400E";
+
+}
+
+document.getElementById("generatedTime").textContent =
+"Receipt Generated • " +
+new Date().toLocaleString();
+
+</script>
+<script>
+
+/* ==========================================
+DOWNLOAD RECEIPT
+========================================== */
+
+document.getElementById("downloadReceipt")
+.addEventListener("click",()=>{
+
+window.print();
+
+});
+
+/* ==========================================
+ACCEPT PAYMENT
+========================================== */
+
+document.getElementById("acceptPayment")
+.addEventListener("click",()=>{
+
+localStorage.setItem(
+
+"trackingCode",
+
+trackingCode
 
 );
 
-const snapshot = await getDocs(q);
-
-if(snapshot.empty){
-
-document.body.innerHTML=`
-<div style="
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-font-family:Inter,sans-serif;
-text-align:center;
-padding:30px;
-">
-<div>
-
-<h2>Receipt Not Found</h2>
-
-<p>The supplied tracking code does not exist.</p>
-
-</div>
-</div>
-`;
-
-throw new Error("Receipt not found");
-
-}
-
-const receipt = snapshot.docs[0].data();
-
-/* ==========================
-POPULATE RECEIPT
-========================== */
-
-document.getElementById("trackingCode").textContent =
-receipt.trackingCode || "-";
-
-document.getElementById("paymentMethod").textContent =
-receipt.paymentMethod || "-";
-
-document.getElementById("receiverName").textContent =
-receipt.receiverName || "-";
-
-document.getElementById("accountNumber").textContent =
-receipt.accountNumber || "-";
-
-document.getElementById("transactionId").textContent =
-receipt.transactionID || "-";
-
-document.getElementById("actionText").textContent =
-receipt.actionText || "No action required.";
-
-document.getElementById("amount").textContent =
-(receipt.currency || "") + " " +
-Number(receipt.amount || 0).toLocaleString();
-
-/* ==========================
-DATE
-========================== */
-
-if(receipt.createdAt){
-
-const date = receipt.createdAt.toDate();
-
-document.getElementById("transactionDate").textContent =
-date.toLocaleString();
-
-}else{
-
-document.getElementById("transactionDate").textContent="-";
-
-}
-
-/* ==========================
-STATUS
-========================== */
-
-const status=document.getElementById("status");
-
-status.textContent=receipt.status || "Unknown";
-
-switch(receipt.status){
-
-case "Payment Completed":
-
-status.style.background="#16a34a";
-status.style.color="#fff";
-break;
-
-case "Payment Pending":
-
-status.style.background="#d97706";
-status.style.color="#fff";
-break;
-
-case "Payment Cancelled":
-
-status.style.background="#dc2626";
-status.style.color="#fff";
-break;
-
-default:
-
-status.style.background="#6b7280";
-status.style.color="#fff";
-
-}
-/* ==========================
-BUTTONS
-========================== */
-
-const acceptBtn = document.getElementById("acceptBtn");
-
-acceptBtn.addEventListener("click", () => {
-
-    if (receipt.buttonLink && receipt.buttonLink.trim() !== "") {
-
-        window.location.href = receipt.buttonLink;
-
-    } else {
-
-        alert("Payment link is currently unavailable.");
-
-    }
+window.location.href="splash.html";
 
 });
 
-const printBtn = document.getElementById("printBtn");
+/* ==========================================
+COPY TRACKING CODE
+========================================== */
 
-printBtn.addEventListener("click", () => {
+const trackingElement=
+document.getElementById("trackingCode");
 
-    window.print();
+trackingElement.style.cursor="pointer";
 
-});
+trackingElement.title="Click to copy";
 
+trackingElement.onclick=async()=>{
 
-/* ==========================
-SMOOTH PAGE LOAD
-========================== */
+try{
 
-const receiptCard = document.querySelector(".receipt");
+await navigator.clipboard.writeText(
 
-receiptCard.animate(
+trackingElement.textContent
+
+);
+
+const old=trackingElement.textContent;
+
+trackingElement.textContent="Copied ✓";
+
+setTimeout(()=>{
+
+trackingElement.textContent=old;
+
+},1500);
+
+}catch(err){
+
+console.error(err);
+
+}
+
+};
+
+/* ==========================================
+COPY TRANSACTION ID
+========================================== */
+
+const txnElement=
+document.getElementById("transactionID");
+
+txnElement.style.cursor="pointer";
+
+txnElement.title="Click to copy";
+
+txnElement.onclick=async()=>{
+
+try{
+
+await navigator.clipboard.writeText(
+
+txnElement.textContent
+
+);
+
+const old=txnElement.textContent;
+
+txnElement.textContent="Copied ✓";
+
+setTimeout(()=>{
+
+txnElement.textContent=old;
+
+},1500);
+
+}catch(err){
+
+console.error(err);
+
+}
+
+};
+
+/* ==========================================
+ANIMATION
+========================================== */
+
+document.querySelector(".receipt").animate(
 
 [
 {
 opacity:0,
-transform:"translateY(20px)"
+transform:"translateY(30px)"
 },
 {
 opacity:1,
@@ -985,85 +923,49 @@ transform:"translateY(0)"
 ],
 
 {
-duration:450,
-easing:"ease-out",
-fill:"forwards"
+duration:700,
+easing:"ease-out"
 }
 
 );
 
+</script>
 
-/* ==========================
-PRINT STYLE
-========================== */
-
-const style = document.createElement("style");
-
-style.textContent = `
+<style>
 
 @media print{
 
 body{
 
-background:#ffffff !important;
-padding:0 !important;
+background:#ffffff;
 
-}
-
-.receipt{
-
-width:100%;
-max-width:100%;
-border-radius:0;
-box-shadow:none;
-
-}
-
-.header{
-
-padding:30px;
-
-}
-
-.amount-card{
-
-box-shadow:none;
-border:1px solid #e5e7eb;
+padding:0;
 
 }
 
 .buttons{
 
-display:none !important;
+display:none;
+
+}
+
+.receipt{
+
+box-shadow:none;
+
+border:1px solid #d1d5db;
 
 }
 
 .footer{
 
-color:#666;
-font-size:11px;
-
-}
-
-.notice{
-
-border:1px solid #e5e7eb;
-background:#ffffff;
+color:#555;
 
 }
 
 }
 
-`;
-
-document.head.appendChild(style);
-
-
-/* ==========================
-END
-========================== */
-
-</script>
+</style>
 
 </body>
 
