@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GlobalPay | Secure Payment Receipt</title>
+<title>NoOnes Receipt</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -26,21 +24,33 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 
-background:#eef3f8;
+background:#eef2f7;
 
-padding:30px;
+padding:20px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+min-height:100vh;
 
 color:#1f2937;
 
 }
 
-.container{
+.receiptWrapper{
 
-max-width:850px;
+width:100%;
 
-margin:auto;
+max-width:760px;
 
 }
 
@@ -48,101 +58,129 @@ margin:auto;
 
 background:#fff;
 
-border-radius:22px;
+border-radius:20px;
 
 overflow:hidden;
 
-box-shadow:0 20px 50px rgba(0,0,0,.08);
+box-shadow:0 15px 45px rgba(0,0,0,.08);
+
+animation:fadeIn .5s ease;
 
 }
 
-/* ===========================
-HEADER
-=========================== */
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
 
 .header{
 
-background:linear-gradient(135deg,#16a34a,#0b7d43);
+padding:34px;
 
-padding:35px;
+background:#ffffff;
 
-text-align:center;
+border-bottom:1px solid #ECECEC;
 
-color:#fff;
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-start;
+
+gap:20px;
 
 }
 
-.logo{
+.brand{
 
-font-size:40px;
+display:flex;
+
+flex-direction:column;
+
+}
+
+.brand h1{
+
+font-size:34px;
 
 font-weight:800;
 
 letter-spacing:-1px;
 
-}
-
-.subtitle{
-
-margin-top:10px;
-
-font-size:18px;
-
-font-weight:500;
+color:#16a34a;
 
 }
 
-.sponsor{
+.brand small{
 
-display:inline-block;
-
-margin-top:16px;
-
-padding:8px 18px;
-
-border-radius:30px;
-
-background:rgba(255,255,255,.18);
+margin-top:4px;
 
 font-size:13px;
 
 font-weight:600;
 
-}
-
-/* ===========================
-AMOUNT
-=========================== */
-
-.amountSection{
-
-padding:35px;
-
-text-align:center;
+color:#64748b;
 
 }
 
-.amountTitle{
+.brand span{
 
-font-size:15px;
+margin-top:2px;
 
-color:#6B7280;
+font-size:12px;
+
+color:#9ca3af;
 
 }
 
-.amount{
+.receiptTitle{
 
-margin-top:10px;
+text-align:right;
 
-font-size:46px;
+}
+
+.receiptTitle h2{
+
+font-size:34px;
 
 font-weight:800;
 
 color:#111827;
 
+letter-spacing:-1px;
+
 }
 
-.status{
+.receiptNo{
+
+margin-top:8px;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#6b7280;
+
+word-break:break-all;
+
+}
+
+.statusBadge{
 
 display:inline-flex;
 
@@ -150,177 +188,401 @@ align-items:center;
 
 gap:8px;
 
-margin-top:20px;
+padding:9px 18px;
 
-padding:10px 18px;
+border-radius:999px;
 
-border-radius:30px;
+background:#DCFCE7;
 
-background:#FEF3C7;
+color:#166534;
 
-color:#92400E;
-
-font-weight:700;
-
-font-size:14px;
-
-}
-
-.divider{
-
-height:1px;
-
-background:#E5E7EB;
-
-}
-
-/* ===========================
-CONTENT
-=========================== */
-
-.content{
-
-padding:32px;
-
-}
-
-.section{
-
-margin-bottom:35px;
-
-}
-
-.sectionTitle{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-margin-bottom:18px;
-
-font-size:20px;
+font-size:13px;
 
 font-weight:700;
 
-}
-
-.sectionTitle i{
-
-color:#16a34a;
+margin-top:18px;
 
 }
 
-.row{
+.summary{
 
-display:flex;
+display:grid;
 
-justify-content:space-between;
+grid-template-columns:repeat(3,1fr);
 
-gap:20px;
-
-padding:15px 0;
-
-border-bottom:1px solid #F1F5F9;
+border-bottom:1px solid #ECECEC;
 
 }
 
-.row:last-child{
+.summaryBox{
 
-border-bottom:none;
+padding:24px;
 
-}
-
-.label{
-
-font-weight:600;
-
-color:#6B7280;
+border-right:1px solid #ECECEC;
 
 }
 
-.value{
+.summaryBox:last-child{
+
+border-right:none;
+
+}
+
+.summaryLabel{
+
+font-size:12px;
 
 font-weight:700;
 
-text-align:right;
+text-transform:uppercase;
+
+letter-spacing:.08em;
+
+color:#94A3B8;
+
+margin-bottom:10px;
+
+}
+
+.summaryValue{
+
+font-size:16px;
+
+font-weight:700;
+
+color:#111827;
 
 word-break:break-word;
 
 }
 
-.notice{
+.main{
 
-background:#ECFDF3;
+padding:32px;
 
-border-left:5px solid #16a34a;
+}
+.section{
 
-padding:18px;
-
-border-radius:12px;
-
-line-height:1.8;
+margin-top:34px;
 
 }
 
-.buttons{
+.sectionHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:18px;
+
+}
+
+.sectionTitle{
+
+font-size:18px;
+
+font-weight:800;
+
+color:#111827;
+
+}
+
+.infoGrid{
 
 display:grid;
 
 grid-template-columns:1fr 1fr;
 
-gap:16px;
+gap:24px;
 
-margin-top:30px;
+margin-bottom:30px;
 
 }
 
-button{
+.infoCard{
 
-padding:16px;
+background:#FAFAFA;
 
-border:none;
+border:1px solid #ECECEC;
 
-border-radius:12px;
+border-radius:14px;
+
+padding:20px;
+
+}
+
+.infoLabel{
+
+font-size:12px;
+
+font-weight:700;
+
+text-transform:uppercase;
+
+letter-spacing:.08em;
+
+color:#94A3B8;
+
+margin-bottom:12px;
+
+}
+
+.infoValue{
 
 font-size:15px;
 
 font-weight:700;
 
-cursor:pointer;
+color:#111827;
 
-transition:.2s;
+line-height:1.7;
 
-}
-
-button:hover{
-
-transform:translateY(-2px);
+word-break:break-word;
 
 }
 
-.download{
+.table{
 
-background:#EEF2F7;
+width:100%;
 
-}
+border-collapse:collapse;
 
-.accept{
-
-background:#16a34a;
-
-color:white;
+margin-top:12px;
 
 }
 
-.footer{
+.table thead tr{
 
-padding:25px;
+background:#F8FAFC;
 
-text-align:center;
+}
 
-background:#FAFAFA;
+.table th{
+
+padding:15px;
+
+text-align:left;
+
+font-size:13px;
+
+font-weight:700;
+
+color:#64748B;
+
+border-bottom:1px solid #E5E7EB;
+
+}
+
+.table td{
+
+padding:18px 15px;
+
+font-size:15px;
+
+font-weight:600;
+
+border-bottom:1px solid #F1F5F9;
+
+color:#111827;
+
+}
+
+.table th:last-child,
+
+.table td:last-child{
+
+text-align:right;
+
+}
+
+.totalArea{
+
+display:flex;
+
+justify-content:flex-end;
+
+margin-top:25px;
+
+}
+
+.totalBox{
+
+width:320px;
+
+}
+
+.totalRow{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:10px 0;
+
+font-size:15px;
+
+font-weight:600;
+
+}
+
+.totalRow.final{
+
+margin-top:8px;
+
+padding-top:18px;
+
+border-top:3px solid #16a34a;
+
+font-size:22px;
+
+font-weight:800;
+
+color:#111827;
+
+}
+
+.paymentSuccess{
+
+margin-top:28px;
+
+background:#ECFDF5;
+
+border:1px solid #BBF7D0;
+
+padding:18px 20px;
+
+border-radius:14px;
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+.paymentSuccess i{
+
+font-size:24px;
+
+color:#16A34A;
+
+}
+
+.paymentSuccess div{
+
+line-height:1.6;
+
+}
+
+.paymentSuccess strong{
+
+display:block;
+
+font-size:16px;
+
+color:#166534;
+
+}
+
+.paymentSuccess span{
+
+font-size:14px;
+
+color:#166534;
+
+}
+.notesBox{
+
+margin-top:32px;
+
+background:#F8FAFC;
+
+border:1px solid #E2E8F0;
+
+border-radius:16px;
+
+padding:22px;
+
+}
+
+.notesTitle{
+
+font-size:15px;
+
+font-weight:800;
+
+margin-bottom:12px;
+
+color:#111827;
+
+}
+
+.notesText{
+
+font-size:14px;
+
+line-height:1.8;
+
+color:#475569;
+
+}
+
+.verifySection{
+
+margin-top:34px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:25px;
+
+padding:22px;
+
+border:1px dashed #CBD5E1;
+
+border-radius:16px;
+
+}
+
+.verifyInfo{
+
+flex:1;
+
+}
+
+.verifyTitle{
+
+font-size:18px;
+
+font-weight:800;
+
+margin-bottom:10px;
+
+color:#111827;
+
+}
+
+.verifyCode{
+
+font-size:15px;
+
+font-weight:700;
+
+color:#16A34A;
+
+word-break:break-all;
+
+margin-bottom:10px;
+
+}
+
+.verifyLink{
 
 font-size:13px;
 
@@ -328,211 +590,527 @@ color:#64748B;
 
 }
 
+.qrBox{
+
+width:120px;
+
+height:120px;
+
+background:#fff;
+
+border:1px solid #E5E7EB;
+
+border-radius:10px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+}
+
+.qrBox canvas,
+
+.qrBox img{
+
+width:100%;
+
+height:100%;
+
+object-fit:contain;
+
+}
+
+.actionButtons{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:15px;
+
+margin-top:35px;
+
+}
+
+.actionButtons button{
+
+height:52px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:700;
+
+transition:.25s;
+
+}
+
+.actionButtons button:hover{
+
+transform:translateY(-2px);
+
+}
+
+.shareBtn{
+
+background:#16A34A;
+
+color:#fff;
+
+}
+
+.downloadBtn{
+
+background:#EEF2F7;
+
+color:#111827;
+
+}
+
+.acceptBtn{
+
+background:#111827;
+
+color:#fff;
+
+}
+
+.footer{
+
+margin-top:34px;
+
+padding:24px;
+
+background:#FAFAFA;
+
+border-top:1px solid #ECECEC;
+
+text-align:center;
+
+}
+
+.footerLogo{
+
+font-size:20px;
+
+font-weight:800;
+
+color:#16A34A;
+
+}
+
+.footerSmall{
+
+margin-top:5px;
+
+font-size:13px;
+
+color:#64748B;
+
+}
+
+.footerTime{
+
+margin-top:14px;
+
+font-size:12px;
+
+color:#94A3B8;
+
+}
+/* ===========================
+   MOBILE
+=========================== */
+
 @media (max-width:768px){
 
 body{
-    padding:10px;
-    background:#eef3f8;
-}
 
-.container{
-    max-width:100%;
+padding:10px;
+
+background:#eef2f7;
+
 }
 
 .receipt{
-    border-radius:18px;
+
+border-radius:16px;
+
 }
 
 .header{
-    padding:28px 20px;
-}
 
-.logo{
-    font-size:34px;
-}
+padding:22px;
 
-.subtitle{
-    font-size:16px;
-}
+flex-direction:column;
 
-.sponsor{
-    font-size:12px;
-}
-
-.amountSection{
-    padding:25px 18px;
-}
-
-.amount{
-    font-size:42px;
-    line-height:1.15;
-    word-break:break-word;
-}
-
-.status{
-    font-size:13px;
-    padding:8px 16px;
-}
-
-.content{
-    padding:22px 18px;
-}
-
-.sectionTitle{
-    font-size:18px;
-}
-
-.row{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-    padding:14px 0;
-}
-
-.label{
-    width:42%;
-    font-size:13px;
-}
-
-.value{
-    width:58%;
-    text-align:right;
-    word-break:break-word;
-    overflow-wrap:anywhere;
-}
-
-.notice{
-    padding:16px;
-    font-size:14px;
-}
-
-.buttons{
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-button{
-    padding:14px;
-    font-size:14px;
-}
+gap:18px;
 
 }
+
+.receiptTitle{
+
+text-align:left;
+
+width:100%;
+
+}
+
+.receiptTitle h2{
+
+font-size:28px;
+
+}
+
+.brand h1{
+
+font-size:28px;
+
+}
+
+.summary{
+
+grid-template-columns:1fr;
+
+}
+
+.summaryBox{
+
+border-right:none;
+
+border-bottom:1px solid #ECECEC;
+
+padding:18px 22px;
+
+}
+
+.summaryBox:last-child{
+
+border-bottom:none;
+
+}
+
+.main{
+
+padding:22px;
+
+}
+
+.infoGrid{
+
+grid-template-columns:1fr;
+
+gap:16px;
+
+}
+
+.infoCard{
+
+padding:18px;
+
+}
+
+.table{
+
+display:block;
+
+overflow-x:auto;
+
+white-space:nowrap;
+
+}
+
+.table th{
+
+padding:14px;
+
+font-size:13px;
+
+}
+
+.table td{
+
+padding:15px 14px;
+
+font-size:14px;
+
+}
+
+.totalArea{
+
+justify-content:stretch;
+
+}
+
+.totalBox{
+
+width:100%;
+
+}
+
+.verifySection{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.qrBox{
+
+width:140px;
+
+height:140px;
+
+align-self:center;
+
+}
+
+.actionButtons{
+
+grid-template-columns:1fr;
+
+}
+
+.actionButtons button{
+
+width:100%;
+
+}
+
+.footer{
+
+padding:20px;
+
+}
+
+}
+
+/* ===========================
+   EXTRA SMALL PHONES
+=========================== */
 
 @media (max-width:430px){
 
-.amount{
-    font-size:34px;
-}
+.header{
 
-.buttons{
-    grid-template-columns:1fr;
-}
-
-.row{
-    flex-direction:column;
-    gap:6px;
-}
-
-.label,
-.value{
-    width:100%;
-    text-align:left;
-}
+padding:18px;
 
 }
 
+.brand h1{
+
+font-size:25px;
+
+}
+
+.receiptTitle h2{
+
+font-size:24px;
+
+}
+
+.receiptNo{
+
+font-size:12px;
+
+}
+
+.summaryValue{
+
+font-size:15px;
+
+}
+
+.infoValue{
+
+font-size:14px;
+
+}
+
+.totalRow.final{
+
+font-size:20px;
+
+}
+
+.paymentSuccess{
+
+padding:16px;
+
+}
+
+.verifyTitle{
+
+font-size:16px;
+
+}
+
+.qrBox{
+
+width:120px;
+
+height:120px;
+
+}
+
+}
+
+/* ===========================
+   PRINT / PDF
+=========================== */
+
+@media print{
+
+body{
+
+background:#fff;
+
+padding:0;
+
+}
+
+.receiptWrapper{
+
+max-width:100%;
+
+width:100%;
+
+}
+
+.receipt{
+
+box-shadow:none;
+
+border-radius:0;
+
+border:none;
+
+}
+
+.actionButtons{
+
+display:none;
+
+}
+
+.footer{
+
+background:#fff;
+
+border-top:1px solid #ddd;
+
+}
+
+.notesBox{
+
+break-inside:avoid;
+
+}
+
+.verifySection{
+
+break-inside:avoid;
+
+}
+
+.paymentSuccess{
+
+break-inside:avoid;
+
+}
+
+}
 </style>
 
 </head>
 
 <body>
 
-<div class="container">
+<div class="receiptWrapper">
 
 <div class="receipt">
 
+<!-- =====================================
+HEADER
+===================================== -->
+
 <div class="header">
 
-<div class="logo">
+<div class="brand">
 
-GlobalPay
+<h1>NoOnes</h1>
 
-</div>
+<small>SMART TRANSACTS PLATFORM</small>
 
-<div class="subtitle">
-
-Secure Payment Receipt
+<span>Powered by GlobalPay</span>
 
 </div>
 
-<div class="sponsor">
+<div class="receiptTitle">
 
-Sponsored by Noones
+<h2>RECEIPT</h2>
 
-</div>
+<div class="receiptNo">
 
-</div>
-<!-- =====================================
-PAYMENT AMOUNT
-===================================== -->
+Receipt No.
 
-<div class="amountSection">
-
-<div class="amountTitle">
-
-Payment Amount
-
-</div>
-
-<div
-class="amount"
-id="receiptAmount">
+<span id="trackingCode">
 
 Loading...
 
+</span>
+
 </div>
 
 <div
-class="status"
+
+class="statusBadge"
+
 id="receiptStatus">
 
-<i class="fa-solid fa-circle"></i>
+<i class="fa-solid fa-circle-check"></i>
 
-<span>Payment Pending</span>
+<span>
+
+Loading...
+
+</span>
 
 </div>
 
 </div>
 
-<div class="divider"></div>
-
-<div class="content">
+</div>
 
 <!-- =====================================
-TRANSACTION DETAILS
+SUMMARY
 ===================================== -->
 
-<div class="section">
+<div class="summary">
 
-<h2 class="sectionTitle">
+<div class="summaryBox">
 
-<i class="fa-solid fa-receipt"></i>
+<div class="summaryLabel">
 
-Transaction Details
-
-</h2>
-
-<div class="row">
-
-<div class="label">
-
-Tracking #
+Issue Date
 
 </div>
 
-<div class="value" id="trackingCode">
+<div
+
+class="summaryValue"
+
+id="receiptDate">
 
 Loading...
 
@@ -540,31 +1118,19 @@ Loading...
 
 </div>
 
-<div class="row">
+<div class="summaryBox">
 
-<div class="label">
-
-Transaction ID
-
-</div>
-
-<div class="value" id="transactionID">
-
-Loading...
-
-</div>
-
-</div>
-
-<div class="row">
-
-<div class="label">
+<div class="summaryLabel">
 
 Payment Method
 
 </div>
 
-<div class="value" id="paymentMethod">
+<div
+
+class="summaryValue"
+
+id="paymentMethod">
 
 Loading...
 
@@ -572,31 +1138,19 @@ Loading...
 
 </div>
 
-<div class="row">
+<div class="summaryBox">
 
-<div class="label">
+<div class="summaryLabel">
 
-Currency
-
-</div>
-
-<div class="value" id="currency">
-
-Loading...
+Status
 
 </div>
 
-</div>
+<div
 
-<div class="row">
+class="summaryValue"
 
-<div class="label">
-
-Created
-
-</div>
-
-<div class="value" id="receiptDate">
+id="statusText">
 
 Loading...
 
@@ -607,28 +1161,26 @@ Loading...
 </div>
 
 <!-- =====================================
-RECEIVER INFORMATION
+MAIN CONTENT
 ===================================== -->
 
-<div class="section">
+<div class="main">
 
-<h2 class="sectionTitle">
+<div class="infoGrid">
 
-<i class="fa-solid fa-user"></i>
+<div class="infoCard">
 
-Receiver Information
+<div class="infoLabel">
 
-</h2>
-
-<div class="row">
-
-<div class="label">
-
-Receiver Name
+Billed To
 
 </div>
 
-<div class="value" id="receiverName">
+<div
+
+class="infoValue"
+
+id="receiverName">
 
 Loading...
 
@@ -636,21 +1188,25 @@ Loading...
 
 </div>
 
-<div class="row">
+<div class="infoCard">
 
-<div
-class="label"
-id="receiverLabel">
+<div class="infoLabel">
 
-Account Number
+Issued By
 
 </div>
 
-<div
-class="value"
-id="receiverValue">
+<div class="infoValue">
 
-Loading...
+NoOnes
+
+<br>
+
+<span style="font-size:13px;color:#64748B;font-weight:500;">
+
+Powered by GlobalPay
+
+</span>
 
 </div>
 
@@ -659,21 +1215,152 @@ Loading...
 </div>
 
 <!-- =====================================
-ACTION REQUIRED
+TRANSACTION TABLE
 ===================================== -->
 
-<div class="section">
+<table class="table">
 
-<h2 class="sectionTitle">
+<thead>
 
-<i class="fa-solid fa-circle-info"></i>
+<tr>
 
-Action Required
+<th>
 
-</h2>
+Description
+
+</th>
+
+<th>
+
+Qty
+
+</th>
+
+<th>
+
+Amount
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+Payment Transfer
+
+</td>
+
+<td>
+
+1
+
+</td>
+
+<td
+
+id="receiptAmount">
+
+Loading...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+<!-- =====================================
+TOTAL
+===================================== -->
+
+<div class="totalArea">
+
+<div class="totalBox">
+
+<div class="totalRow">
+
+<span>Subtotal</span>
+
+<span id="subtotalAmount">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="totalRow">
+
+<span>Processing Fee</span>
+
+<span>0.00</span>
+
+</div>
+
+<div class="totalRow final">
+
+<span>Total</span>
+
+<span id="totalAmount">
+
+Loading...
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================
+PAYMENT STATUS
+===================================== -->
+
+<div class="paymentSuccess">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<div>
+
+<strong id="paymentHeadline">
+
+Payment Pending
+
+</strong>
+
+<span id="paymentDescription">
+
+Waiting for confirmation...
+
+</span>
+
+</div>
+
+</div>
+
+<!-- =====================================
+NOTES
+===================================== -->
+
+<div class="notesBox">
+
+<div class="notesTitle">
+
+Notes
+
+</div>
 
 <div
-class="notice"
+
+class="notesText"
+
 id="actionRequired">
 
 Loading...
@@ -683,74 +1370,151 @@ Loading...
 </div>
 
 <!-- =====================================
-BUTTONS
+VERIFICATION
 ===================================== -->
 
-<div class="buttons">
+<div class="verifySection">
 
-<button
-class="download"
-id="downloadReceipt">
+<div class="verifyInfo">
 
-<i class="fa-solid fa-download"></i>
+<div class="verifyTitle">
 
-Download Receipt
-
-</button>
-
-<button
-class="accept"
-id="acceptPayment">
-
-<i class="fa-solid fa-circle-check"></i>
-
-Accept Payment
-
-</button>
-
-</div>
-
-</div>
-
-<div class="footer">
-
-<div style="font-size:16px;font-weight:700;">
-
-GlobalPay
-
-</div>
-
-<div style="margin-top:8px;">
-
-Sponsored by Noones
-
-</div>
-
-<div style="margin-top:12px;">
-
-<i class="fa-solid fa-lock"></i>
-
-Protected by Secure Payment Technology
+Verification Code
 
 </div>
 
 <div
-id="generatedTime"
-style="margin-top:10px;font-size:12px;">
+
+class="verifyCode"
+
+id="transactionID">
+
+Loading...
+
+</div>
+
+<div class="verifyLink">
+
+Verify this receipt anytime on the
+official GlobalPay verification page.
+
+</div>
+
+</div>
+
+<div class="qrBox">
+
+<div id="qrcode"></div>
+
+</div>
+
+</div>
+
+<!-- =====================================
+BUTTONS
+===================================== -->
+
+<div class="actionButtons">
+
+<button
+
+class="shareBtn"
+
+id="shareReceipt">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+&nbsp;
+
+Share PDF
+
+</button>
+
+<button
+
+class="downloadBtn"
+
+id="downloadReceipt">
+
+<i class="fa-solid fa-download"></i>
+
+&nbsp;
+
+Download PDF
+
+</button>
+
+<button
+
+class="acceptBtn"
+
+id="acceptPayment">
+
+<i class="fa-solid fa-circle-check"></i>
+
+&nbsp;
+
+Accept
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================
+FOOTER
+===================================== -->
+
+<div class="footer">
+
+<div class="footerLogo">
+
+NoOnes
+
+</div>
+
+<div class="footerSmall">
+
+Powered securely by GlobalPay
+
+</div>
+
+<div
+
+class="footerTime"
+
+id="generatedTime">
 
 Receipt Generated
 
 </div>
 
 </div>
-<script type="module">
 
-import { db } from "./js/firebase.js";
+</div>
+
+</div>
+
+<!-- =====================================
+LIBRARIES
+===================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script type="module">
+    import { db } from "./js/firebase.js";
 
 import {
 doc,
 getDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 /* ==========================================
 GET TRACKING CODE
@@ -768,7 +1532,7 @@ alert("Tracking code not found.");
 
 window.location.href="payment_tracking.html";
 
-throw new Error("Missing tracking code.");
+throw new Error("Tracking code missing.");
 
 }
 
@@ -776,9 +1540,11 @@ throw new Error("Missing tracking code.");
 LOAD RECEIPT
 ========================================== */
 
-const receiptRef = doc(db,"receipts",trackingCode);
+const receiptRef =
+doc(db,"receipts",trackingCode);
 
-const receiptSnap = await getDoc(receiptRef);
+const receiptSnap =
+await getDoc(receiptRef);
 
 if(!receiptSnap.exists()){
 
@@ -786,28 +1552,37 @@ alert("Receipt not found.");
 
 window.location.href="payment_tracking.html";
 
-throw new Error("Receipt does not exist.");
+throw new Error("Receipt not found.");
 
 }
 
-const receipt = receiptSnap.data();
+const receipt =
+receiptSnap.data();
 
 /* ==========================================
-DISPLAY DATA
+AMOUNT
 ========================================== */
 
-document.getElementById("receiptAmount").textContent =
+const formattedAmount =
 
-`${receipt.currency} ${Number(receipt.amount).toLocaleString(undefined,{
+`${receipt.currency} ${Number(receipt.amount)
+.toLocaleString(undefined,{
 minimumFractionDigits:2,
 maximumFractionDigits:2
 })}`;
 
-document.getElementById("receiptStatus").innerHTML =
+document.getElementById("receiptAmount").textContent =
+formattedAmount;
 
-`<i class="fa-solid fa-circle"></i>
+document.getElementById("subtotalAmount").textContent =
+formattedAmount;
 
-<span>${receipt.status}</span>`;
+document.getElementById("totalAmount").textContent =
+formattedAmount;
+
+/* ==========================================
+TRANSACTION DETAILS
+========================================== */
 
 document.getElementById("trackingCode").textContent =
 receipt.trackingCode;
@@ -818,40 +1593,61 @@ receipt.transactionID;
 document.getElementById("paymentMethod").textContent =
 receipt.paymentMethod;
 
-document.getElementById("currency").textContent =
-receipt.currency;
-
 document.getElementById("receiptDate").textContent =
 receipt.transactionDate;
 
 document.getElementById("receiverName").textContent =
 receipt.receiverName;
 
-document.getElementById("receiverLabel").textContent =
-receipt.accountLabel;
-
-document.getElementById("receiverValue").textContent =
-receipt.accountValue;
-
 document.getElementById("actionRequired").textContent =
 receipt.actionText;
 
 /* ==========================================
-STATUS COLORS
+STATUS
 ========================================== */
 
 const badge =
 document.getElementById("receiptStatus");
 
-const status =
-(receipt.status || "").toLowerCase();
+const badgeText =
+badge.querySelector("span");
 
-if(status.includes("accepted") ||
+const statusText =
+document.getElementById("statusText");
+
+badgeText.textContent =
+receipt.status;
+
+statusText.textContent =
+receipt.status;
+
+const headline =
+document.getElementById("paymentHeadline");
+
+const description =
+document.getElementById("paymentDescription");
+
+const status =
+(receipt.status || "")
+.toLowerCase();
+/* ==========================================
+STATUS COLORS
+========================================== */
+
+if(
+status.includes("accepted") ||
 status.includes("completed") ||
-status.includes("verified")){
+status.includes("paid") ||
+status.includes("verified")
+){
 
 badge.style.background="#DCFCE7";
 badge.style.color="#166534";
+
+headline.textContent="Payment Completed";
+
+description.textContent=
+`Payment received successfully via ${receipt.paymentMethod}.`;
 
 }
 
@@ -860,6 +1656,11 @@ else if(status.includes("processing")){
 badge.style.background="#DBEAFE";
 badge.style.color="#1D4ED8";
 
+headline.textContent="Payment Processing";
+
+description.textContent=
+"Your payment is currently being processed.";
+
 }
 
 else{
@@ -867,23 +1668,259 @@ else{
 badge.style.background="#FEF3C7";
 badge.style.color="#92400E";
 
+headline.textContent="Payment Pending";
+
+description.textContent=
+"Waiting for payment confirmation.";
+
 }
 
-document.getElementById("generatedTime").textContent =
-"Receipt Generated • " +
-new Date().toLocaleString();
-
-</script>
-<script>
-
 /* ==========================================
-DOWNLOAD RECEIPT
+GENERATED TIME
 ========================================== */
 
-document.getElementById("downloadReceipt")
-.addEventListener("click",()=>{
+document.getElementById("generatedTime").textContent=
 
-window.print();
+"Receipt Generated • " +
+
+new Date().toLocaleString();
+
+/* ==========================================
+QR CODE
+========================================== */
+
+new QRCode(
+
+document.getElementById("qrcode"),
+
+{
+
+text:
+
+window.location.origin +
+
+"/payment_tracking.html?tracking=" +
+
+receipt.trackingCode,
+
+width:120,
+
+height:120,
+
+colorDark:"#000000",
+
+colorLight:"#ffffff",
+
+correctLevel:QRCode.CorrectLevel.H
+
+}
+
+);
+
+</script>
+
+<script>
+
+const receiptCard=
+
+document.querySelector(".receipt");
+
+const shareButton=
+
+document.getElementById("shareReceipt");
+
+const downloadButton=
+
+document.getElementById("downloadReceipt");
+
+const acceptButton=
+
+document.getElementById("acceptPayment");
+
+/* ==========================================
+CREATE PDF
+========================================== */
+
+async function createPDF(){
+
+const canvas=
+
+await html2canvas(receiptCard,{
+
+scale:2,
+
+useCORS:true,
+
+backgroundColor:"#ffffff"
+
+});
+
+const imgData=
+
+canvas.toDataURL("image/png");
+
+const{
+
+jsPDF
+
+}=window.jspdf;
+
+const pdf=
+
+new jsPDF({
+
+orientation:"portrait",
+
+unit:"mm",
+
+format:"a4"
+
+});
+
+const pdfWidth=
+
+210;
+
+const pageHeight=
+
+297;
+
+const imgWidth=
+
+pdfWidth;
+
+const imgHeight=
+
+canvas.height*
+
+imgWidth/
+
+canvas.width;
+
+pdf.addImage(
+
+imgData,
+
+"PNG",
+
+0,
+
+0,
+
+imgWidth,
+
+Math.min(imgHeight,pageHeight)
+
+);
+
+return pdf;
+
+}
+/* ==========================================
+SHARE PDF
+========================================== */
+
+shareButton.addEventListener(
+
+"click",
+
+async()=>{
+
+try{
+
+const pdf=
+
+await createPDF();
+
+const blob=
+
+pdf.output("blob");
+
+const file=
+
+new File(
+
+[blob],
+
+`Receipt-${trackingCode}.pdf`,
+
+{
+
+type:"application/pdf"
+
+}
+
+);
+
+if(
+
+navigator.canShare &&
+
+navigator.canShare({
+
+files:[file]
+
+})
+
+){
+
+await navigator.share({
+
+title:"Payment Receipt",
+
+text:"GlobalPay Payment Receipt",
+
+files:[file]
+
+});
+
+}
+
+else{
+
+pdf.save(
+
+`Receipt-${trackingCode}.pdf`
+
+);
+
+}
+
+}catch(err){
+
+console.error(err);
+
+alert(
+
+"Unable to share receipt."
+
+);
+
+}
+
+}
+
+/* ==========================================
+DOWNLOAD PDF
+========================================== */
+
+);
+
+downloadButton.addEventListener(
+
+"click",
+
+async()=>{
+
+const pdf=
+
+await createPDF();
+
+pdf.save(
+
+`Receipt-${trackingCode}.pdf`
+
+);
 
 });
 
@@ -891,8 +1928,11 @@ window.print();
 ACCEPT PAYMENT
 ========================================== */
 
-document.getElementById("acceptPayment")
-.addEventListener("click",()=>{
+acceptButton.addEventListener(
+
+"click",
+
+()=>{
 
 localStorage.setItem(
 
@@ -902,7 +1942,9 @@ trackingCode
 
 );
 
-window.location.href="splash.html";
+window.location.href=
+
+"splash.html";
 
 });
 
@@ -911,13 +1953,24 @@ COPY TRACKING CODE
 ========================================== */
 
 const trackingElement=
-document.getElementById("trackingCode");
 
-trackingElement.style.cursor="pointer";
+document.getElementById(
 
-trackingElement.title="Click to copy";
+"trackingCode"
 
-trackingElement.onclick=async()=>{
+);
+
+trackingElement.style.cursor=
+
+"pointer";
+
+trackingElement.title=
+
+"Click to copy";
+
+trackingElement.onclick=
+
+async()=>{
 
 try{
 
@@ -927,13 +1980,19 @@ trackingElement.textContent
 
 );
 
-const old=trackingElement.textContent;
+const old=
 
-trackingElement.textContent="Copied ✓";
+trackingElement.textContent;
+
+trackingElement.textContent=
+
+"Copied ✓";
 
 setTimeout(()=>{
 
-trackingElement.textContent=old;
+trackingElement.textContent=
+
+old;
 
 },1500);
 
@@ -949,30 +2008,47 @@ console.error(err);
 COPY TRANSACTION ID
 ========================================== */
 
-const txnElement=
-document.getElementById("transactionID");
+const transactionElement=
 
-txnElement.style.cursor="pointer";
+document.getElementById(
 
-txnElement.title="Click to copy";
+"transactionID"
 
-txnElement.onclick=async()=>{
+);
+
+transactionElement.style.cursor=
+
+"pointer";
+
+transactionElement.title=
+
+"Click to copy";
+
+transactionElement.onclick=
+
+async()=>{
 
 try{
 
 await navigator.clipboard.writeText(
 
-txnElement.textContent
+transactionElement.textContent
 
 );
 
-const old=txnElement.textContent;
+const old=
 
-txnElement.textContent="Copied ✓";
+transactionElement.textContent;
+
+transactionElement.textContent=
+
+"Copied ✓";
 
 setTimeout(()=>{
 
-txnElement.textContent=old;
+transactionElement.textContent=
+
+old;
 
 },1500);
 
@@ -985,66 +2061,62 @@ console.error(err);
 };
 
 /* ==========================================
-ANIMATION
+OPEN QR VERIFICATION
 ========================================== */
 
-document.querySelector(".receipt").animate(
+document.getElementById(
+
+"qrcode"
+
+).onclick=()=>{
+
+window.open(
+
+`payment_tracking.html?tracking=${trackingCode}`,
+
+"_blank"
+
+);
+
+};
+
+/* ==========================================
+ENTRY ANIMATION
+========================================== */
+
+receiptCard.animate(
 
 [
+
 {
+
 opacity:0,
+
 transform:"translateY(30px)"
+
 },
+
 {
+
 opacity:1,
+
 transform:"translateY(0)"
+
 }
+
 ],
 
 {
-duration:700,
+
+duration:600,
+
 easing:"ease-out"
+
 }
 
 );
 
 </script>
-
-<style>
-
-@media print{
-
-body{
-
-background:#ffffff;
-
-padding:0;
-
-}
-
-.buttons{
-
-display:none;
-
-}
-
-.receipt{
-
-box-shadow:none;
-
-border:1px solid #d1d5db;
-
-}
-
-.footer{
-
-color:#555;
-
-}
-
-}
-
-</style>
 
 </body>
 
