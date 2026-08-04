@@ -1606,6 +1606,8 @@ throw new Error("Receipt not found.");
 const receipt =
 receiptSnap.data();
 
+try {
+
 /* ==========================================
 AMOUNT
 ========================================== */
@@ -1732,13 +1734,31 @@ document.getElementById("generatedTime").textContent=
 
 new Date().toLocaleString();
 
+} catch (fieldErr) {
+
+console.error("Error populating receipt fields:", fieldErr);
+
+}
+
 /* ==========================================
 QR CODE
 ========================================== */
 
+try {
+
+if (typeof QRCode === "undefined") {
+
+throw new Error("QRCode library did not load (check the qrcodejs <script> tag / network access).");
+
+}
+
+const qrTarget = document.getElementById("qrcode");
+
+qrTarget.innerHTML = "";
+
 new QRCode(
 
-document.getElementById("qrcode"),
+qrTarget,
 
 {
 
@@ -1763,6 +1783,14 @@ correctLevel:QRCode.CorrectLevel.H
 }
 
 );
+
+} catch (qrErr) {
+
+console.error("QR code generation failed:", qrErr);
+
+document.getElementById("qrcode").textContent = "QR unavailable";
+
+}
 
 </script>
 
