@@ -1613,6 +1613,8 @@ throw new Error("Receipt not found.");
 
 const receipt =
 receiptSnap.data();
+   window.receipt = receipt;
+window.trackingCode = trackingCode;
 
 try {
 
@@ -1825,6 +1827,13 @@ PROFESSIONAL VECTOR PDF
 ========================================== */
 
 async function createPDF(){
+
+    const receipt = window.receipt;
+    const trackingCode = window.trackingCode;
+
+    if (!receipt) {
+        throw new Error("Receipt data not loaded.");
+    }
 
     await document.fonts.ready;
 
