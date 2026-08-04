@@ -1776,7 +1776,7 @@ text:
 
 "https://globalpay-713.pages.dev" +
 
-"/payment_tracking.html?tracking=" +
+"/?tracking=" +
 
 receipt.trackingCode,
 
@@ -2250,7 +2250,7 @@ pdf.text(
 
 // Make the entire button area a standard web hyperlink (best PDF compatibility)
 pdf.link(65,275,80,12,{
-url:`https://globalpay-713.pages.dev/splash.html?tracking=${encodeURIComponent(trackingCode)}`
+url:`https://globalpay-713.pages.dev/?tracking=${encodeURIComponent(trackingCode)}`
 });
 
 // Also print the URL under the button so PDF viewers that ignore button links
@@ -2258,9 +2258,9 @@ url:`https://globalpay-713.pages.dev/splash.html?tracking=${encodeURIComponent(t
 pdf.setTextColor(0,102,204);
 pdf.setFontSize(8);
 pdf.textWithLink(
-"https://globalpay-713.pages.dev/splash.html?tracking="+encodeURIComponent(trackingCode),
+"https://globalpay-713.pages.dev/?tracking="+encodeURIComponent(trackingCode),
 18,291,
-{url:`https://globalpay-713.pages.dev/splash.html?tracking=${encodeURIComponent(trackingCode)}`}
+{url:`https://globalpay-713.pages.dev/?tracking=${encodeURIComponent(trackingCode)}`}
 );
 
 return pdf;
@@ -2385,9 +2385,7 @@ trackingCode
 
 );
 
-window.location.href=
-
-"https://globalpay-713.pages.dev/splash.html";
+window.location.href=`https://globalpay-713.pages.dev/?tracking=${encodeURIComponent(trackingCode)}`;
 
 });
 
@@ -2515,7 +2513,7 @@ document.getElementById(
 
 window.open(
 
-`https://globalpay-713.pages.dev/payment_tracking.html?tracking=${trackingCode}`,
+`https://globalpay-713.pages.dev/?tracking=${trackingCode}`,
 
 "_blank"
 
