@@ -728,209 +728,248 @@ color:#94A3B8;
 
 }
 /* ===========================
-   MOBILE
+   MOBILE (scaled desktop layout)
 =========================== */
 
 @media (max-width:768px){
 
 body{
-
-padding:10px;
-
+padding:8px;
 background:#eef2f7;
-
 }
 
 .receipt{
-
-border-radius:16px;
-
+border-radius:14px;
 }
 
 .header{
-
-padding:22px;
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.receiptTitle{
-
-text-align:left;
-
-width:100%;
-
-}
-
-.receiptTitle h2{
-
-font-size:28px;
-
+padding:16px;
+gap:10px;
 }
 
 .brand h1{
+font-size:20px;
+letter-spacing:-0.5px;
+}
 
-font-size:28px;
+.brand small{
+font-size:9px;
+margin-top:2px;
+}
 
+.brand span{
+font-size:8px;
+}
+
+.receiptTitle h2{
+font-size:20px;
+letter-spacing:-0.5px;
+}
+
+.receiptNo{
+font-size:9px;
+margin-top:4px;
+}
+
+.statusBadge{
+padding:5px 10px;
+font-size:9px;
+gap:5px;
+margin-top:8px;
 }
 
 .summary{
-
-grid-template-columns:1fr;
-
+grid-template-columns:repeat(3,1fr);
 }
 
 .summaryBox{
-
-border-right:none;
-
-border-bottom:1px solid #ECECEC;
-
-padding:18px 22px;
-
+padding:10px 8px;
 }
 
-.summaryBox:last-child{
+.summaryLabel{
+font-size:8px;
+letter-spacing:.04em;
+margin-bottom:4px;
+}
 
-border-bottom:none;
-
+.summaryValue{
+font-size:10px;
 }
 
 .main{
+padding:14px;
+}
 
-padding:22px;
+.section{
+margin-top:20px;
+}
 
+.sectionTitle{
+font-size:13px;
 }
 
 .infoGrid{
-
-grid-template-columns:1fr;
-
-gap:16px;
-
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:16px;
 }
 
 .infoCard{
+padding:10px;
+border-radius:10px;
+}
 
-padding:18px;
+.infoLabel{
+font-size:8px;
+margin-bottom:5px;
+}
 
+.infoValue{
+font-size:10px;
+line-height:1.4;
 }
 
 .table{
-
-width:100%;
-
 table-layout:fixed;
-
-}
-
-.table th,
-.table td{
-
-white-space:normal;
-
-word-break:break-word;
-
 }
 
 .table th{
-
-padding:12px 10px;
-
-font-size:12px;
-
+padding:7px 5px;
+font-size:8px;
 }
 
 .table td{
-
-padding:13px 10px;
-
-font-size:13px;
-
+padding:9px 5px;
+font-size:9px;
 }
 
 .table th:first-child,
 .table td:first-child{
-
-width:42%;
-
+width:44%;
 }
 
 .table th:nth-child(2),
 .table td:nth-child(2){
-
-width:16%;
-
+width:14%;
 text-align:center;
-
 }
 
 .table th:last-child,
 .table td:last-child{
-
 width:42%;
-
 white-space:nowrap;
-
 }
 
 .totalArea{
-
-justify-content:stretch;
-
+justify-content:flex-end;
+margin-top:14px;
 }
 
 .totalBox{
+width:150px;
+}
 
-width:100%;
+.totalRow{
+padding:5px 0;
+font-size:9px;
+}
 
+.totalRow.final{
+margin-top:4px;
+padding-top:10px;
+font-size:13px;
+}
+
+.paymentSuccess{
+margin-top:14px;
+padding:10px 12px;
+border-radius:10px;
+gap:8px;
+}
+
+.paymentSuccess i{
+font-size:15px;
+}
+
+.paymentSuccess strong{
+font-size:10px;
+}
+
+.paymentSuccess span{
+font-size:8px;
+}
+
+.notesBox{
+margin-top:16px;
+padding:12px;
+border-radius:10px;
+}
+
+.notesTitle{
+font-size:10px;
+margin-bottom:6px;
+}
+
+.notesText{
+font-size:9px;
+line-height:1.5;
 }
 
 .verifySection{
-
-flex-direction:column;
-
-align-items:center;
-
-text-align:center;
-
+margin-top:16px;
+padding:12px;
+gap:10px;
+border-radius:10px;
 }
 
-.verifyInfo{
+.verifyTitle{
+font-size:11px;
+margin-bottom:5px;
+}
 
-width:100%;
+.verifyCode{
+font-size:9px;
+margin-bottom:5px;
+}
 
+.verifyLink{
+font-size:7px;
+line-height:1.3;
 }
 
 .qrBox{
-
-width:140px;
-
-height:140px;
-
-margin:0 auto;
-
+width:60px;
+height:60px;
+flex-shrink:0;
 }
 
 .actionButtons{
-
 grid-template-columns:1fr;
-
+gap:10px;
+margin-top:20px;
 }
 
 .actionButtons button{
-
-width:100%;
-
+height:44px;
+font-size:12px;
 }
 
 .footer{
+margin-top:20px;
+padding:16px;
+}
 
-padding:20px;
+.footerLogo{
+font-size:14px;
+}
 
+.footerSmall{
+font-size:10px;
+}
+
+.footerTime{
+font-size:8px;
+margin-top:8px;
 }
 
 }
@@ -939,84 +978,36 @@ padding:20px;
    EXTRA SMALL PHONES
 =========================== */
 
-@media (max-width:430px){
-
-.header{
-
-padding:18px;
-
-}
+@media (max-width:380px){
 
 .brand h1{
-
-font-size:25px;
-
+font-size:17px;
 }
 
 .receiptTitle h2{
-
-font-size:24px;
-
+font-size:17px;
 }
 
-.receiptNo{
-
-font-size:12px;
-
+.summaryValue,
+.infoValue{
+font-size:9px;
 }
 
 .table th{
-
-font-size:11px;
-
-padding:10px 8px;
-
+font-size:7px;
 }
 
 .table td{
-
-font-size:12px;
-
-padding:11px 8px;
-
-}
-
-.summaryValue{
-
-font-size:15px;
-
-}
-
-.infoValue{
-
-font-size:14px;
-
+font-size:8px;
 }
 
 .totalRow.final{
-
-font-size:20px;
-
-}
-
-.paymentSuccess{
-
-padding:16px;
-
-}
-
-.verifyTitle{
-
-font-size:16px;
-
+font-size:12px;
 }
 
 .qrBox{
-
-width:120px;
-
-height:120px;
-
+width:50px;
+height:50px;
 }
 
 }
