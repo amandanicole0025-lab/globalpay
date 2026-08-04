@@ -2297,38 +2297,22 @@ type:"application/pdf"
 
 );
 
-if(
-
-navigator.canShare &&
-
-navigator.canShare({
-
-files:[file]
-
-})
-
-){
-
-await navigator.share({
-
-title:"Payment Receipt",
-
-text:"GlobalPay Payment Receipt",
-
-files:[file]
-
-});
-
+const filename=`GlobalPay_Receipt_${trackingCode}_${Date.now()}.pdf`;
+try{
+if(navigator.share){
+await navigator.share({title:"Payment Receipt",text:"GlobalPay Payment Receipt",files:[file]});
+}else{throw new Error("fallback");}
+}catch(err){
+if(err.name!=="AbortError"){
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;
+a.download=filename;
+document.body.appendChild(a);
+a.click();
+a.remove();
+URL.revokeObjectURL(url);
 }
-
-else{
-
-pdf.save(
-
-`Receipt-${trackingCode}.pdf`
-
-);
-
 }
 
 }catch(err){
@@ -2357,15 +2341,24 @@ downloadButton.addEventListener(
 
 async()=>{
 
-const pdf=
-
-await createPDF();
-
-pdf.save(
-
-`Receipt-${trackingCode}.pdf`
-
-);
+downloadButton.disabled=true;
+downloadButton.innerHTML='<i class="fa fa-spinner fa-spin"></i> Generating...';
+try{
+const pdf=await createPDF();
+const filename=`GlobalPay_Receipt_${trackingCode}_${Date.now()}.pdf`;
+const blob=pdf.output("blob");
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;
+a.download=filename;
+document.body.appendChild(a);
+a.click();
+a.remove();
+URL.revokeObjectURL(url);
+}finally{
+downloadButton.disabled=false;
+downloadButton.innerHTML='<i class="fa-solid fa-download"></i> &nbsp; Download PDF';
+}
 
 });
 
