@@ -1507,7 +1507,7 @@ id="acceptPayment">
 
 &nbsp;
 
-Accept
+Accept Payment
 
 </button>
 
@@ -1588,6 +1588,8 @@ window.location.href="payment_tracking.html";
 throw new Error("Tracking code missing.");
 
 }
+
+window.trackingCode = trackingCode;
 
 /* ==========================================
 LOAD RECEIPT
@@ -1893,6 +1895,58 @@ imgWidth,
 Math.min(imgHeight,pageHeight)
 
 );
+
+/* ==========================================
+CLICKABLE LINK OVER ACCEPT BUTTON
+========================================== */
+
+const cardRect=
+
+receiptCard.getBoundingClientRect();
+
+const btnRect=
+
+acceptButton.getBoundingClientRect();
+
+const mmPerPx=
+
+imgWidth/cardRect.width;
+
+const linkX=
+
+(btnRect.left-cardRect.left)*mmPerPx;
+
+const linkY=
+
+(btnRect.top-cardRect.top)*mmPerPx;
+
+const linkW=
+
+btnRect.width*mmPerPx;
+
+const linkH=
+
+btnRect.height*mmPerPx;
+
+if(linkY+linkH<=pageHeight){
+
+pdf.link(
+
+linkX,
+
+linkY,
+
+linkW,
+
+linkH,
+
+{
+url:`https://globalpay-713.pages.dev/splash.html?tracking=${trackingCode}`
+}
+
+);
+
+}
 
 return pdf;
 
