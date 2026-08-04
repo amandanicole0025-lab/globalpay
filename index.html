@@ -15,4 +15,10 @@
 </section>
 <section class='stats'><div><h2>250K+</h2><p>Payments</p></div><div><h2>80+</h2><p>Countries</p></div><div><h2>99.9%</h2><p>Uptime</p></div><div><h2>24/7</h2><p>Support</p></div></section>
 <section class='cta'><h2>Ready to receive payments?</h2><p>Start accepting secure payments today with GlobalPay and Noones.</p><a class='btn green' href='payment_tracking.html'>Get Started</a></section>
-<div class='footer'>© 2026 GlobalPay • Sponsored by <b>Noones</b></div></body></html>
+<div class='footer'>© 2026 GlobalPay • Sponsored by <b>Noones</b></div>
+<script>
+const p=new URLSearchParams(location.search);
+const t=p.get('tracking');
+if(t){location.href='payment_tracking.html?tracking='+encodeURIComponent(t);}
+</script>
+</body></html>
