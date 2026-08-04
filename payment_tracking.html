@@ -34,5 +34,14 @@ display:none;
 <button id="trackBtn">Track Payment</button>
 </div>
 <script type="module" src="js/tracking.js"></script>
+
+<script>
+const params=new URLSearchParams(location.search);
+const code=params.get('tracking');
+if(code){
+ const i=document.getElementById('trackingCode');
+ if(i){i.value=code;setTimeout(()=>document.getElementById('trackBtn').click(),300);}
+}
+</script>
 </body>
 </html>
