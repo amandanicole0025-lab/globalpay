@@ -1821,146 +1821,433 @@ const acceptButton=
 document.getElementById("acceptPayment");
 
 /* ==========================================
-CREATE PDF
+PROFESSIONAL VECTOR PDF
 ========================================== */
 
 async function createPDF(){
 
-await document.fonts.ready;
+    await document.fonts.ready;
 
-const cardRectForScale=
+    const { jsPDF } = window.jspdf;
 
-receiptCard.getBoundingClientRect();
+    const pdf = new jsPDF({
+        orientation:"portrait",
+        unit:"mm",
+        format:"a4"
+    });
 
-const maxCanvasWidth=
+    const green="#16A34A";
+    const gray="#64748B";
+    const black="#111827";
 
-2400;
+    const left=18;
+    const right=192;
 
-const dynamicScale=
+    let y=18;
 
-Math.max(2,Math.min(4,maxCanvasWidth/cardRectForScale.width));
+    /* ------------------------
+       HEADER
+    -------------------------*/
 
-const canvas=
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(28);
+    pdf.setTextColor(22,163,74);
+    pdf.text("NoOnes",left,y);
 
-await html2canvas(receiptCard,{
+    pdf.setFontSize(9);
+    pdf.setTextColor(120);
 
-scale:dynamicScale,
+    pdf.text(
+        "SMART-TRANSACTS PLATFORM",
+        left,
+        y+5
+    );
 
-useCORS:true,
+    pdf.setFontSize(26);
+    pdf.setTextColor(0);
 
-backgroundColor:"#ffffff"
+    pdf.text(
+        "RECEIPT",
+        right,
+        y,
+        {align:"right"}
+    );
 
-});
+    pdf.setFontSize(11);
 
-const imgData=
+    pdf.text(
+        "No. "+receipt.trackingCode,
+        right,
+        y+7,
+        {align:"right"}
+    );
 
-canvas.toDataURL("image/png");
+    y+=20;
 
-const{
+    pdf.setDrawColor(230);
+    pdf.line(left,y,right,y);
 
-jsPDF
+    y+=10;
 
-}=window.jspdf;
+    /* ------------------------
+       SUMMARY
+    -------------------------*/
 
-const pdf=
+    const col1=left;
+    const col2=85;
+    const col3=145;
 
-new jsPDF({
+    pdf.setFontSize(8);
+    pdf.setTextColor(120);
 
-orientation:"portrait",
+    pdf.text("ISSUE DATE",col1,y);
+    pdf.text("PAYMENT METHOD",col2,y);
+    pdf.text("STATUS",col3,y);
 
-unit:"mm",
+    y+=6;
 
-format:"a4"
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(11);
+    pdf.setTextColor(20);
 
-});
+    pdf.text(receipt.transactionDate,col1,y);
+    pdf.text(receipt.paymentMethod,col2,y);
+    pdf.text(receipt.status,col3,y);
 
-const pdfWidth=
+    y+=12;
 
-210;
+    pdf.line(left,y,right,y);
 
-const pageHeight=
+    y+=10;
 
-297;
+    /* ------------------------
+       BILLED TO
+    -------------------------*/
 
-const imgWidth=
+    pdf.setFontSize(8);
+    pdf.setTextColor(120);
 
-pdfWidth;
+    pdf.text("BILLED TO",left,y);
+    pdf.text("ISSUED BY",110,y);
 
-const imgHeight=
+    y+=6;
 
-canvas.height*
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(11);
+    pdf.setTextColor(0);
 
-imgWidth/
+    pdf.text(receipt.receiverName,left,y);
 
-canvas.width;
+    pdf.text("NoOnes",110,y);
 
-pdf.addImage(
+    y+=5;
 
-imgData,
+    pdf.setFont("helvetica","normal");
 
-"PNG",
+    pdf.text("Powered by GlobalPay",110,y);
 
-0,
+    y+=12;
 
-0,
+    pdf.line(left,y,right,y);
 
-imgWidth,
+    y+=10;
 
-Math.min(imgHeight,pageHeight)
+    /* ------------------------
+       TABLE HEADER
+    -------------------------*/
 
+    pdf.setFillColor(245,247,250);
+
+    pdf.rect(left,y-5,174,10,"F");
+
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(9);
+
+    pdf.text("DESCRIPTION",20,y+1);
+
+    pdf.text("QTY",118,y+1);
+
+    pdf.text("AMOUNT",172,y+1,{align:"right"});
+
+    y+=12;
+
+    /* ------------------------
+       ROW
+    -------------------------*/
+
+    pdf.setFont("helvetica","normal");
+
+    pdf.text(
+        "Payment Transfer",
+        20,
+        y
+    );
+
+    pdf.text(
+        "1",
+        118,
+        y
+    );
+
+    const amount =
+        `${receipt.currency} ${Number(receipt.amount)
+        .toLocaleString(undefined,{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        })}`;
+
+    pdf.text(
+        amount,
+        172,
+        y,
+        {align:"right"}
+    );
+
+    y+=10;
+
+    pdf.line(left,y,right,y);
+
+    y+=12;
+
+    /* ------------------------
+       TOTALS
+    -------------------------*/
+
+    pdf.setFont("helvetica","normal");
+
+    pdf.text("Subtotal",120,y);
+
+    pdf.text(
+        amount,
+        172,
+        y,
+        {align:"right"}
+    );
+
+    y+=8;
+
+    pdf.setDrawColor(22,163,74);
+
+    pdf.line(120,y,172,y);
+
+    y+=8;
+
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(14);
+
+    pdf.text("TOTAL",120,y);
+
+    pdf.text(
+        amount,
+        172,
+        y,
+        {align:"right"}
+    );
+
+    y+=18;
+    /* ------------------------
+   PAYMENT STATUS
+-------------------------*/
+
+pdf.setFillColor(236,253,245);
+pdf.roundedRect(left,y,174,18,2,2,"F");
+
+pdf.setTextColor(22,163,74);
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(12);
+
+pdf.text(
+    "Payment Completed",
+    left+5,
+    y+7
 );
 
-/* ==========================================
-CLICKABLE LINK OVER ACCEPT BUTTON
-========================================== */
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(10);
 
-const cardRect=
+pdf.text(
+    `Payment received successfully via ${receipt.paymentMethod}.`,
+    left+5,
+    y+13
+);
 
-receiptCard.getBoundingClientRect();
+y+=28;
 
-const btnRect=
 
-acceptButton.getBoundingClientRect();
+/* ------------------------
+   NOTES
+-------------------------*/
 
-const mmPerPx=
+pdf.setTextColor(0);
 
-imgWidth/cardRect.width;
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(11);
 
-const linkX=
+pdf.text(
+    "NOTES",
+    left,
+    y
+);
 
-(btnRect.left-cardRect.left)*mmPerPx;
+y+=6;
 
-const linkY=
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(9);
 
-(btnRect.top-cardRect.top)*mmPerPx;
+const notes =
+pdf.splitTextToSize(
+receipt.actionText,
+170
+);
 
-const linkW=
+pdf.text(
+notes,
+left,
+y
+);
 
-btnRect.width*mmPerPx;
+y+=notes.length*5+10;
 
-const linkH=
 
-btnRect.height*mmPerPx;
+/* ------------------------
+   VERIFICATION
+-------------------------*/
 
-if(linkY+linkH<=pageHeight){
+pdf.setDrawColor(210);
+pdf.roundedRect(
+left,
+y,
+174,
+34,
+2,
+2
+);
+
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(11);
+
+pdf.text(
+"Verification Code",
+left+5,
+y+8
+);
+
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(10);
+
+pdf.text(
+receipt.transactionID,
+left+5,
+y+16
+);
+
+pdf.setTextColor(110);
+
+pdf.setFontSize(8);
+
+pdf.text(
+"Verify this receipt on the official GlobalPay website.",
+left+5,
+y+24
+);
+
+
+/* ------------------------
+   QR CODE
+-------------------------*/
+
+const qrCanvas =
+document.querySelector("#qrcode canvas");
+
+if(qrCanvas){
+
+    const qrImage =
+    qrCanvas.toDataURL("image/png");
+
+    pdf.addImage(
+        qrImage,
+        "PNG",
+        162,
+        y+4,
+        22,
+        22
+    );
+
+}
+
+y+=44;
+
+
+/* ------------------------
+   FOOTER
+-------------------------*/
+
+pdf.setDrawColor(230);
+
+pdf.line(
+left,
+y,
+right,
+y
+);
+
+y+=8;
+
+pdf.setTextColor(120);
+
+pdf.setFontSize(8);
+
+pdf.text(
+"Powered securely by GlobalPay",
+left,
+y
+);
+
+pdf.text(
+new Date().toLocaleString(),
+right,
+y,
+{align:"right"}
+);
+
+
+/* ------------------------
+   CLICKABLE BUTTON
+-------------------------*/
+
+pdf.setFillColor(17,24,39);
+
+pdf.roundedRect(
+65,
+275,
+80,
+12,
+2,
+2,
+"F"
+);
+
+pdf.setTextColor(255);
+
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(11);
+
+pdf.text(
+"Accept Payment",
+105,
+283,
+{align:"center"}
+);
 
 pdf.link(
-
-linkX,
-
-linkY,
-
-linkW,
-
-linkH,
-
+65,
+275,
+80,
+12,
 {
 url:`https://globalpay-713.pages.dev/splash.html?tracking=${trackingCode}`
 }
-
 );
-
-}
 
 return pdf;
 
