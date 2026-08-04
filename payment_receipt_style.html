@@ -1507,7 +1507,7 @@ id="acceptPayment">
 
 &nbsp;
 
-Accept
+Accept Payment
 
 </button>
 
@@ -1770,8 +1770,7 @@ qrTarget,
 
 text:
 
-window.location.origin +
-
+OFFICIAL_URL +
 "/payment_tracking.html?tracking=" +
 
 receipt.trackingCode,
@@ -2153,7 +2152,7 @@ document.getElementById(
 
 window.open(
 
-`payment_tracking.html?tracking=${trackingCode}`,
+`${OFFICIAL_URL}/payment_tracking.html?tracking=${trackingCode}`,
 
 "_blank"
 
