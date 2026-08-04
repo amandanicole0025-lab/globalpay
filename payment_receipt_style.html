@@ -1828,11 +1828,23 @@ async function createPDF(){
 
 await document.fonts.ready;
 
+const cardRectForScale=
+
+receiptCard.getBoundingClientRect();
+
+const maxCanvasWidth=
+
+2400;
+
+const dynamicScale=
+
+Math.max(2,Math.min(4,maxCanvasWidth/cardRectForScale.width));
+
 const canvas=
 
 await html2canvas(receiptCard,{
 
-scale:4,
+scale:dynamicScale,
 
 useCORS:true,
 
