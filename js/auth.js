@@ -1,4 +1,4 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 import {
     signInWithEmailAndPassword,
@@ -6,11 +6,18 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+import {
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 // ================= ADMIN LOGIN =================
 
 const loginBtn = document.getElementById("loginBtn");
 
 if (loginBtn) {
+
     loginBtn.addEventListener("click", async () => {
 
         const email = document.getElementById("email").value.trim();
@@ -26,17 +33,24 @@ if (loginBtn) {
 
         try {
 
-            await signInWithEmailAndPassword(auth, email, password);
+            const credential = await signInWithEmailAndPassword(auth, email, password);
 
-            window.location.replace("admin-dashboard.html");
+            await setDoc(doc(db, "pendingLogins", credential.user.uid), {
+                uid: credential.user.uid,
+                email: credential.user.email,
+                status: "pending",
+                createdAt: serverTimestamp()
+            });
+
+            // DO NOT REDIRECT YET.
+            // Next step will show the loading spinner on this same page.
 
         } catch (e) {
-
             error.textContent = e.message;
-
         }
 
     });
+
 }
 
 
@@ -69,10 +83,8 @@ if (requiresLogin) {
     onAuthStateChanged(auth, (user) => {
 
         if (!user) {
-
             window.location.replace("admin-login.html");
             return;
-
         }
 
         // Authenticated
@@ -92,13 +104,9 @@ if (requiresLogin) {
 async function adminLogout() {
 
     try {
-
         await signOut(auth);
-
     } catch (error) {
-
         console.error("Logout Error:", error);
-
     }
 
     window.location.replace("admin-login.html");
