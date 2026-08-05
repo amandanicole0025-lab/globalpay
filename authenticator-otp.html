@@ -24,19 +24,23 @@ font-family:'Inter',sans-serif;
 
 :root{
 
---bg:#1f1f1f;
---card:#2b2b2b;
---input:#363636;
---border:#4b4b4b;
+--bg:#232323;
+--card:#2d2d2d;
+--input:#333333;
+--border:#373737;
+
 --text:#ffffff;
---muted:#a7a7a7;
---green:#2dd46b;
---green-dark:#24b85c;
+--muted:#a9a9a9;
+
+--green:#37d76c;
 
 }
 
-html,body{
+html,
+body{
+
 height:100%;
+
 }
 
 body{
@@ -47,9 +51,13 @@ display:flex;
 
 justify-content:center;
 
-align-items:center;
+align-items:flex-start;
 
-padding:40px 20px;
+padding-top:55px;
+
+padding-left:25px;
+
+padding-right:25px;
 
 color:white;
 
@@ -59,7 +67,7 @@ color:white;
 
 width:100%;
 
-max-width:520px;
+max-width:670px;
 
 }
 
@@ -69,50 +77,49 @@ display:flex;
 
 justify-content:center;
 
-margin-bottom:28px;
+margin-bottom:38px;
 
 }
 
 .logo img{
 
-width:160px;
+width:190px;
 
 height:auto;
+
+display:block;
 
 }
 
 .card{
 
-background:var(--card);
+background:#2d2d2d;
 
-border-radius:22px;
+border-radius:12px;
 
-padding:42px;
+padding:38px;
 
-box-shadow:
-0 18px 40px rgba(0,0,0,.45);
+box-shadow:none;
 
 }
 
 .card h1{
 
-font-size:30px;
+font-size:28px;
 
 font-weight:700;
 
-line-height:1.2;
-
-margin-bottom:14px;
+margin-bottom:22px;
 
 }
 
 .subtitle{
 
-font-size:16px;
+font-size:15px;
 
-color:var(--muted);
+font-weight:600;
 
-line-height:1.6;
+color:#a6a6a6;
 
 margin-bottom:34px;
 
@@ -122,35 +129,34 @@ margin-bottom:34px;
 
 display:flex;
 
-justify-content:space-between;
+justify-content:center;
 
-gap:12px;
+gap:10px;
 
-margin-bottom:26px;
+margin-bottom:28px;
 
 }
-
 .otp input{
 
-width:58px;
+width:52px;
 
 height:62px;
 
-border-radius:14px;
+background:#343434;
 
-border:1px solid var(--border);
+border:none;
 
-background:var(--input);
+border-radius:6px;
 
-color:white;
-
-font-size:28px;
-
-font-weight:700;
+outline:none;
 
 text-align:center;
 
-outline:none;
+font-size:26px;
+
+font-weight:700;
+
+color:#ffffff;
 
 transition:.2s;
 
@@ -158,9 +164,9 @@ transition:.2s;
 
 .otp input:focus{
 
-border-color:var(--green);
+background:#3b3b3b;
 
-box-shadow:0 0 0 3px rgba(45,212,107,.18);
+box-shadow:0 0 0 2px rgba(55,215,108,.25);
 
 }
 
@@ -168,17 +174,17 @@ box-shadow:0 0 0 3px rgba(45,212,107,.18);
 
 display:block;
 
-margin:0 auto 28px;
+margin:0 auto;
 
-padding:10px 24px;
+background:#444444;
 
-background:#454545;
+color:#ffffff;
 
 border:none;
 
-border-radius:10px;
+border-radius:8px;
 
-color:white;
+padding:9px 18px;
 
 font-size:14px;
 
@@ -192,86 +198,83 @@ transition:.2s;
 
 #pasteBtn:hover{
 
-background:#525252;
+background:#4d4d4d;
 
 }
+
 #error{
 
 display:none;
 
-margin-bottom:18px;
+text-align:center;
 
-padding:12px 14px;
+margin-top:20px;
 
-background:rgba(255,77,77,.08);
+margin-bottom:15px;
 
-border:1px solid rgba(255,77,77,.20);
-
-border-radius:12px;
-
-color:#ff7d7d;
+color:#ff7070;
 
 font-size:14px;
 
 font-weight:600;
 
-text-align:center;
-
 }
 
 #verifyBtn{
 
-width:100%;
+display:block;
 
-height:56px;
+width:165px;
+
+height:70px;
+
+margin:32px auto 0;
+
+background:#565656;
 
 border:none;
 
-border-radius:14px;
+border-radius:18px;
 
-background:var(--green);
+color:#d6d6d6;
 
-color:white;
-
-font-size:17px;
+font-size:24px;
 
 font-weight:700;
 
+cursor:not-allowed;
+
+transition:.2s;
+
+}
+
+#verifyBtn:not(:disabled){
+
+background:var(--green);
+
+color:#ffffff;
+
 cursor:pointer;
 
-transition:.25s;
-
-margin-top:6px;
-
 }
 
-#verifyBtn:hover:not(:disabled){
+#verifyBtn:not(:disabled):hover{
 
-background:var(--green-dark);
-
-}
-
-#verifyBtn:disabled{
-
-background:#5a5a5a;
-
-color:#cfcfcf;
-
-cursor:not-allowed;
+background:#2cc863;
 
 }
 
 .support{
 
-margin-top:28px;
+margin-top:34px;
+
+text-align:center;
 
 font-size:15px;
 
-line-height:1.8;
+color:#b8b8b8;
 
-color:#b5b5b5;
-
-text-align:center;
+line-height:1.7;
 
 }
 
@@ -279,13 +282,7 @@ text-align:center;
 
 color:var(--green);
 
-text-decoration:none;
-
-font-weight:600;
-
-}
-
-.support a:hover{
+font-weight:700;
 
 text-decoration:underline;
 
@@ -293,7 +290,7 @@ text-decoration:underline;
 
 .footer{
 
-margin-top:34px;
+margin-top:42px;
 
 display:flex;
 
@@ -301,13 +298,9 @@ justify-content:space-between;
 
 align-items:center;
 
-color:#d2d2d2;
-
-font-size:15px;
-
 }
 
-.theme{
+.leftTools{
 
 display:flex;
 
@@ -317,11 +310,19 @@ gap:14px;
 
 }
 
-.toggle{
+.icon{
 
-width:56px;
+font-size:34px;
 
-height:30px;
+color:var(--green);
+
+}
+
+.switch{
+
+width:82px;
+
+height:44px;
 
 background:var(--green);
 
@@ -331,75 +332,75 @@ position:relative;
 
 }
 
-.toggle::after{
+.switch::after{
 
 content:"";
 
 position:absolute;
 
-right:3px;
+right:5px;
 
-top:3px;
+top:5px;
 
-width:24px;
+width:34px;
 
-height:24px;
+height:34px;
+
+background:#2b2b2b;
 
 border-radius:50%;
-
-background:#2d2d2d;
 
 }
 
 .language{
 
-display:flex;
+color:var(--green);
 
-align-items:center;
+font-size:16px;
 
-gap:6px;
-
-cursor:pointer;
+font-weight:600;
 
 }
 
-@media(max-width:600px){
+@media(max-width:480px){
 
 body{
 
-padding:18px;
+padding-top:38px;
+
+padding-left:18px;
+
+padding-right:18px;
 
 }
 
-.wrapper{
+.logo{
 
-max-width:100%;
-
-}
-
-.card{
-
-padding:28px 22px;
-
-border-radius:18px;
+margin-bottom:30px;
 
 }
 
 .logo img{
 
-width:145px;
+width:170px;
+
+}
+
+.card{
+
+padding:34px 22px;
 
 }
 
 .card h1{
 
-font-size:26px;
+font-size:22px;
 
 }
 
 .subtitle{
 
-font-size:15px;
+font-size:14px;
 
 margin-bottom:28px;
 
@@ -413,31 +414,34 @@ gap:8px;
 
 .otp input{
 
-width:46px;
+width:42px;
 
-height:54px;
+height:56px;
 
-font-size:24px;
+font-size:22px;
 
 }
 
 #verifyBtn{
 
-height:54px;
+width:160px;
+
+height:66px;
+
+font-size:20px;
 
 }
 
 .footer{
 
-margin-top:28px;
-
-font-size:14px;
+margin-top:36px;
 
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -445,7 +449,9 @@ font-size:14px;
 <div class="wrapper">
 
 <div class="logo">
+
 <img src="images/noones-logo.png" alt="Noones">
+
 </div>
 
 <div class="card">
@@ -453,7 +459,9 @@ font-size:14px;
 <h1>Two-factor authentication</h1>
 
 <div class="subtitle">
-Enter the 6-digit code from your Authenticator app.
+
+Enter 6-digit code from your Authenticator app
+
 </div>
 
 <div class="otp">
@@ -468,37 +476,52 @@ Enter the 6-digit code from your Authenticator app.
 </div>
 
 <button id="pasteBtn" type="button">
+
 Paste
+
 </button>
 
 <div id="error">
+
 Wrong code. Please try again.
+
 </div>
 
 <button id="verifyBtn" disabled>
+
 Continue
+
 </button>
 
 <div class="support">
+
 If you need to reset 2FA, please
-<a href="#" id="supportLink">contact support ↗</a>
+
+<a href="#" id="supportLink">
+
+contact support ↗
+
+</a>
+
+</div>
+
 </div>
 
 <div class="footer">
 
-<div class="theme">
+<div class="leftTools">
 
-<span>☀</span>
+<div class="icon">☼</div>
 
-<div class="toggle"></div>
+<div class="switch"></div>
 
-<span>🌙</span>
+<div class="icon">☾</div>
 
 </div>
 
 <div class="language">
+
 English ▼
-</div>
 
 </div>
 
