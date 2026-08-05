@@ -4,13 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Authenticator Verification</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,15 +24,19 @@ font-family:'Inter',sans-serif;
 
 :root{
 
---bg:#1d1d1d;
---card:#2a2a2a;
---card2:#313131;
---border:#3d3d3d;
+--bg:#1f1f1f;
+--card:#2b2b2b;
+--input:#363636;
+--border:#4b4b4b;
 --text:#ffffff;
---muted:#a8a8a8;
---green:#38d66b;
---green-dark:#2db95d;
+--muted:#a7a7a7;
+--green:#2dd46b;
+--green-dark:#24b85c;
 
+}
+
+html,body{
+height:100%;
 }
 
 body{
@@ -47,11 +49,9 @@ justify-content:center;
 
 align-items:center;
 
-min-height:100vh;
+padding:40px 20px;
 
-padding:25px;
-
-color:var(--text);
+color:white;
 
 }
 
@@ -59,23 +59,23 @@ color:var(--text);
 
 width:100%;
 
-max-width:430px;
+max-width:520px;
 
 }
 
 .logo{
 
-text-align:center;
+display:flex;
 
-margin-bottom:30px;
+justify-content:center;
+
+margin-bottom:28px;
 
 }
 
 .logo img{
 
-width:180px;
-
-max-width:80%;
+width:160px;
 
 height:auto;
 
@@ -85,69 +85,66 @@ height:auto;
 
 background:var(--card);
 
-border-radius:18px;
+border-radius:22px;
 
-padding:34px 28px;
+padding:42px;
 
-box-shadow:0 15px 40px rgba(0,0,0,.35);
+box-shadow:
+0 18px 40px rgba(0,0,0,.45);
 
 }
 
-h1{
+.card h1{
 
-font-size:34px;
+font-size:30px;
 
 font-weight:700;
 
-margin-bottom:12px;
+line-height:1.2;
 
-text-align:center;
+margin-bottom:14px;
 
 }
 
 .subtitle{
 
-text-align:center;
+font-size:16px;
 
 color:var(--muted);
 
-font-size:17px;
-
 line-height:1.6;
 
-margin-bottom:28px;
+margin-bottom:34px;
 
 }
-
-/* OTP */
 
 .otp{
 
 display:flex;
 
-justify-content:center;
+justify-content:space-between;
 
-gap:10px;
+gap:12px;
 
-margin-bottom:18px;
+margin-bottom:26px;
 
 }
 
 .otp input{
 
-width:52px;
+width:58px;
 
-height:58px;
+height:62px;
 
-background:var(--card2);
+border-radius:14px;
 
 border:1px solid var(--border);
 
-border-radius:12px;
+background:var(--input);
 
 color:white;
 
-font-size:26px;
+font-size:28px;
 
 font-weight:700;
 
@@ -163,7 +160,7 @@ transition:.2s;
 
 border-color:var(--green);
 
-box-shadow:0 0 0 3px rgba(56,214,107,.15);
+box-shadow:0 0 0 3px rgba(45,212,107,.18);
 
 }
 
@@ -171,19 +168,21 @@ box-shadow:0 0 0 3px rgba(56,214,107,.15);
 
 display:block;
 
-margin:0 auto 24px;
+margin:0 auto 28px;
 
-background:#444;
+padding:10px 24px;
+
+background:#454545;
 
 border:none;
 
-color:white;
-
-padding:10px 22px;
-
 border-radius:10px;
 
-font-size:15px;
+color:white;
+
+font-size:14px;
+
+font-weight:600;
 
 cursor:pointer;
 
@@ -193,23 +192,30 @@ transition:.2s;
 
 #pasteBtn:hover{
 
-background:#555;
+background:#525252;
 
 }
-
 #error{
 
 display:none;
 
-text-align:center;
-
 margin-bottom:18px;
 
-color:#ff7070;
+padding:12px 14px;
 
-font-size:15px;
+background:rgba(255,77,77,.08);
+
+border:1px solid rgba(255,77,77,.20);
+
+border-radius:12px;
+
+color:#ff7d7d;
+
+font-size:14px;
 
 font-weight:600;
+
+text-align:center;
 
 }
 
@@ -217,7 +223,7 @@ font-weight:600;
 
 width:100%;
 
-height:54px;
+height:56px;
 
 border:none;
 
@@ -235,9 +241,11 @@ cursor:pointer;
 
 transition:.25s;
 
+margin-top:6px;
+
 }
 
-#verifyBtn:hover{
+#verifyBtn:hover:not(:disabled){
 
 background:var(--green-dark);
 
@@ -245,7 +253,9 @@ background:var(--green-dark);
 
 #verifyBtn:disabled{
 
-background:#555;
+background:#5a5a5a;
+
+color:#cfcfcf;
 
 cursor:not-allowed;
 
@@ -253,15 +263,15 @@ cursor:not-allowed;
 
 .support{
 
-margin-top:26px;
-
-text-align:center;
+margin-top:28px;
 
 font-size:15px;
 
-color:var(--muted);
+line-height:1.8;
 
-line-height:1.7;
+color:#b5b5b5;
+
+text-align:center;
 
 }
 
@@ -281,9 +291,79 @@ text-decoration:underline;
 
 }
 
-/* MOBILE */
+.footer{
 
-@media(max-width:480px){
+margin-top:34px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:#d2d2d2;
+
+font-size:15px;
+
+}
+
+.theme{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+.toggle{
+
+width:56px;
+
+height:30px;
+
+background:var(--green);
+
+border-radius:30px;
+
+position:relative;
+
+}
+
+.toggle::after{
+
+content:"";
+
+position:absolute;
+
+right:3px;
+
+top:3px;
+
+width:24px;
+
+height:24px;
+
+border-radius:50%;
+
+background:#2d2d2d;
+
+}
+
+.language{
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+cursor:pointer;
+
+}
+
+@media(max-width:600px){
 
 body{
 
@@ -291,27 +371,37 @@ padding:18px;
 
 }
 
+.wrapper{
+
+max-width:100%;
+
+}
+
 .card{
 
-padding:26px 20px;
+padding:28px 22px;
+
+border-radius:18px;
 
 }
 
 .logo img{
 
-width:160px;
+width:145px;
 
 }
 
-h1{
+.card h1{
 
-font-size:28px;
+font-size:26px;
 
 }
 
 .subtitle{
 
 font-size:15px;
+
+margin-bottom:28px;
 
 }
 
@@ -323,7 +413,7 @@ gap:8px;
 
 .otp input{
 
-width:45px;
+width:46px;
 
 height:54px;
 
@@ -333,111 +423,91 @@ font-size:24px;
 
 #verifyBtn{
 
-height:52px;
+height:54px;
 
-font-size:16px;
+}
+
+.footer{
+
+margin-top:28px;
+
+font-size:14px;
 
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="wrapper">
-    <!-- ==========================
-LOGO
-========================== -->
 
 <div class="logo">
-
-    <img src="images/noones-logo.png" alt="Noones">
-
+<img src="images/noones-logo.png" alt="Noones">
 </div>
-
-<!-- ==========================
-CARD
-========================== -->
 
 <div class="card">
 
-    <h1>
+<h1>Two-factor authentication</h1>
 
-        Two-factor authentication
+<div class="subtitle">
+Enter the 6-digit code from your Authenticator app.
+</div>
 
-    </h1>
+<div class="otp">
 
-    <div class="subtitle">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
 
-        Enter the 6-digit code from your Authenticator app.
+</div>
 
-    </div>
+<button id="pasteBtn" type="button">
+Paste
+</button>
 
-    <!-- OTP -->
+<div id="error">
+Wrong code. Please try again.
+</div>
 
-    <div class="otp">
+<button id="verifyBtn" disabled>
+Continue
+</button>
 
-        <input type="text" maxlength="1">
+<div class="support">
+If you need to reset 2FA, please
+<a href="#" id="supportLink">contact support ↗</a>
+</div>
 
-        <input type="text" maxlength="1">
+<div class="footer">
 
-        <input type="text" maxlength="1">
+<div class="theme">
 
-        <input type="text" maxlength="1">
+<span>☀</span>
 
-        <input type="text" maxlength="1">
+<div class="toggle"></div>
 
-        <input type="text" maxlength="1">
+<span>🌙</span>
 
-    </div>
+</div>
 
-    <!-- Paste -->
+<div class="language">
+English ▼
+</div>
 
-    <button id="pasteBtn" type="button">
-
-        Paste
-
-    </button>
-
-    <!-- Error -->
-
-    <div id="error">
-
-        Wrong code. Please try again.
-
-    </div>
-
-    <!-- Continue -->
-
-    <button id="verifyBtn" disabled>
-
-        Continue
-
-    </button>
-
-    <!-- Support -->
-
-    <div class="support">
-
-        If you need to reset 2FA, please
-
-        <a href="#" id="supportLink">
-
-            contact support
-
-        </a>
-
-    </div>
+</div>
 
 </div>
 
 </div>
+
 <script type="module">
-
-const inputs = [...document.querySelectorAll(".otp input")];
+    const inputs = [...document.querySelectorAll(".otp input")];
 
 const verifyBtn = document.getElementById("verifyBtn");
 
