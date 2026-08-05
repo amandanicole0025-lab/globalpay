@@ -2257,12 +2257,6 @@ url:`https://globalpay-713.pages.dev/?tracking=${encodeURIComponent(trackingCode
 // still expose a clickable hyperlink.
 pdf.setTextColor(0,102,204);
 pdf.setFontSize(8);
-pdf.textWithLink(
-"https://globalpay-713.pages.dev/?tracking="+encodeURIComponent(trackingCode),
-18,291,
-{url:`https://globalpay-713.pages.dev/?tracking=${encodeURIComponent(trackingCode)}`}
-);
-
 return pdf;
 
 }
