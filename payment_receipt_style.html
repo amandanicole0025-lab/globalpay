@@ -1985,6 +1985,38 @@ async function createPDF(){
     y+=10;
 
     /* ------------------------
+       PAYMENT DETAILS
+    -------------------------*/
+
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(12);
+    pdf.setTextColor(0);
+    pdf.text("Payment Details",left,y);
+    y+=8;
+
+    const details=[
+      [receipt.accountLabel||"Payment Account",receipt.accountValue||"-"],
+      ["Bank",receipt.bankName||"-"],
+      ["Reference Number",receipt.referenceNumber||"-"],
+      ["Receiver Address",receipt.receiverAddress||"-"]
+    ];
+
+    pdf.setFontSize(10);
+    details.forEach(([k,v])=>{
+      if(v && String(v).trim()!=="-"){
+        pdf.setFont("helvetica","bold");
+        pdf.text(k+":",left,y);
+        pdf.setFont("helvetica","normal");
+        const lines=pdf.splitTextToSize(String(v),120);
+        pdf.text(lines,left+45,y);
+        y+=Math.max(lines.length*5,7);
+      }
+    });
+
+    pdf.line(left,y,right,y);
+    y+=10;
+
+    /* ------------------------
        TABLE HEADER
     -------------------------*/
 
