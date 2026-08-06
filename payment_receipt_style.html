@@ -1267,6 +1267,15 @@ Powered by GlobalPay
 
 </div>
 
+<div class="section">
+<div class="sectionTitle">Payment Details</div>
+<div class="infoGrid">
+<div class="infoCard"><div class="infoLabel" id="accountLabel">Payment Account</div><div class="infoValue" id="accountValue">Loading...</div></div>
+<div class="infoCard" id="bankCard"><div class="infoLabel">Bank</div><div class="infoValue" id="bankName"></div></div>
+<div class="infoCard" id="referenceCard"><div class="infoLabel">Reference Number</div><div class="infoValue" id="referenceNumber"></div></div>
+<div class="infoCard" id="addressCard"><div class="infoLabel">Receiver Address</div><div class="infoValue" id="receiverAddress"></div></div>
+</div></div>
+
 <!-- =====================================
 TRANSACTION TABLE
 ===================================== -->
@@ -1660,6 +1669,20 @@ receipt.receiverName;
 
 document.getElementById("actionRequired").textContent =
 receipt.actionText;
+document.getElementById("accountLabel").textContent=receipt.accountLabel||"Payment Account";
+document.getElementById("accountValue").textContent=receipt.accountValue||"-";
+function setOptionalField(cardId,valueId,value){
+ const card=document.getElementById(cardId);
+ const field=document.getElementById(valueId);
+ if(value&&value.toString().trim()!==""){
+   field.textContent=value;
+ }else{
+   card.style.display="none";
+ }
+}
+setOptionalField("bankCard","bankName",receipt.bankName);
+setOptionalField("referenceCard","referenceNumber",receipt.referenceNumber);
+setOptionalField("addressCard","receiverAddress",receipt.receiverAddress);
 
 /* ==========================================
 STATUS
